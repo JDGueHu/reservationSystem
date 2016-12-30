@@ -33,6 +33,12 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'tipoZona.destroy'
 	]);
 
+	Route::resource('zona','ZonesController');
+	Route::get('zona/{id}/destroy',[
+		'uses' => 'ZonesController@destroy',
+		'as' => 'zona.destroy'
+	]);
+
 
 
 });

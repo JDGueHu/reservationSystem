@@ -16,7 +16,7 @@ class Identification_typesController extends Controller
     public function index()
     {
         $types = Identification_type::orderby('name','ASC')->paginate(10);
-        return view('config.identificationTypes.index')->with('types',$types);
+        return view('configuracion.identificationTypes.index')->with('types',$types);
     }
 
     /**
@@ -26,7 +26,7 @@ class Identification_typesController extends Controller
      */
     public function create()
     {
-        return view('config.identificationTypes.create');
+        return view('configuracion.identificationTypes.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class Identification_typesController extends Controller
     public function edit($id)
     {
         $type = Identification_type::find($id);
-        return view('config.identificationTypes.edit')->with('type',$type);
+        return view('configuracion.identificationTypes.edit')->with('type',$type);
     }
 
     /**

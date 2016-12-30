@@ -10,6 +10,6 @@ class Zone extends Model
     protected $fillable = ['initials','name'];
 
     public function zone_type(){
-    	return $this->belongsTo('App\Zone_type')
+    	return $this->belongsTo('App\Zone_type');
     }
 }

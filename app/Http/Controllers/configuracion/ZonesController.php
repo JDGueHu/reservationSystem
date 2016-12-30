@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Zone_type;
-use Laracasts\Flash\Flash;
+use App\Zone;
 
-class Zone_typesController extends Controller
+class ZonesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class Zone_typesController extends Controller
      */
     public function index()
     {
-        $types = Zone_type::orderby('name','ASC')->paginate(10);
-        return view('configuracion.zoneTypes.index')->with('types',$types);
+        $zones = Zone::orderby('name','ASC')->paginate(10);
+        return view('configuracion.zone.index')->with('zones',$zones);
     }
 
     /**
@@ -26,7 +25,7 @@ class Zone_typesController extends Controller
      */
     public function create()
     {
-        return view('configuracion.zoneTypes.create');
+        //
     }
 
     /**
@@ -37,13 +36,7 @@ class Zone_typesController extends Controller
      */
     public function store(Request $request)
     {
-        $type = new Zone_type();
-        $type->initials = $request->initials;
-        $type->name = $request->name;
-        $type->save();
-
-        flash('Tipo de zona '.$type->name.' se creó exitosamente', 'success')->important();
-        return redirect()->route('tipoZona.index');
+        //
     }
 
     /**
@@ -65,8 +58,7 @@ class Zone_typesController extends Controller
      */
     public function edit($id)
     {
-        $type = Zone_type::find($id);
-        return view('configuracion.zoneTypes.edit')->with('type',$type);
+        //
     }
 
     /**
@@ -78,13 +70,7 @@ class Zone_typesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $type = Zone_type::find($id);
-        $type->initials = $request->initials;
-        $type->name = $request->name;
-        $type->save();
-
-        flash('Tipo de zona '.$type->name.' se modificó exitosamente', 'warning')->important();
-        return redirect()->route('tipoZona.index');
+        //
     }
 
     /**
@@ -95,10 +81,6 @@ class Zone_typesController extends Controller
      */
     public function destroy($id)
     {
-        $type = Zone_type::find($id);
-        $type->delete();
-
-        flash('Tipo de zona '.$type->name.' se eliminó exitosamente', 'danger')->important();
-        return redirect()->route('tipoZona.index'); 
+        //
     }
 }

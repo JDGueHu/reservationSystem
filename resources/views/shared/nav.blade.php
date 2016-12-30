@@ -20,6 +20,7 @@
             <!--li role="separator" class="divider"></li-->
             <li><a href="{{ route('tipoIdentificacion.index') }}">Tipos de identificación</a></li>
             <li><a href="{{ route('tipoZona.index') }}">Tipos de zonas</a></li>
+            <li><a href="{{ route('zona.index') }}">Zonas</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>
