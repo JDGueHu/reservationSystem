@@ -15,7 +15,7 @@ class Zone_typesController extends Controller
      */
     public function index()
     {
-        $types = Zone_type::orderby('name','ASC')->paginate(10);
+        $types = Zone_type::orderby('priority','ASC')->paginate(10);
         return view('configuracion.zoneTypes.index')->with('types',$types);
     }
 
@@ -40,6 +40,7 @@ class Zone_typesController extends Controller
         $type = new Zone_type();
         $type->initials = $request->initials;
         $type->name = $request->name;
+        $type->priority = $request->priority;
         $type->save();
 
         flash('Tipo de zona '.$type->name.' se creó exitosamente', 'success')->important();
@@ -81,6 +82,7 @@ class Zone_typesController extends Controller
         $type = Zone_type::find($id);
         $type->initials = $request->initials;
         $type->name = $request->name;
+        $type->priority = $request->priority;
         $type->save();
 
         flash('Tipo de zona '.$type->name.' se modificó exitosamente', 'warning')->important();

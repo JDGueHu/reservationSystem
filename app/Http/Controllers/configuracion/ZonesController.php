@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Zone;
+use App\Zone_type;
 
 class ZonesController extends Controller
 {
@@ -25,7 +26,12 @@ class ZonesController extends Controller
      */
     public function create()
     {
-        //
+        $zones = Zone::orderby('name','ASC')->pluck('name','id');
+        $zoneTypes = Zone_type::orderby('name','ASC')->pluck('name','id');
+
+        return view('configuracion.zone.create')
+            ->with('zones',$zones)
+                ->with('zoneTypes',$zoneTypes);
     }
 
     /**
@@ -36,7 +42,16 @@ class ZonesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $zone = new Zone();
+        $zone->initials = $request->initials;
+        $zone->name = $request->name;
+        $zone->zone_type_id = $request->zone_type_id;
+        if($request->zone_id != null){ $zone->zone_id = $request->zone_id; }
+        else{ $zone->zone_id = null; }
+        $zone->save();
+
+        flash('Zona '.$zone->name.' se creó exitosamente', 'success')->important();
+        return redirect()->route('zona.index');
     }
 
     /**
@@ -58,7 +73,13 @@ class ZonesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $zone = Zone::find($id);
+        $zoneTypes = Zone_type::orderby('name','ASC')->pluck('name','id');
+        $zones = Zone::orderby('name','ASC')->pluck('name','id');
+        return view('configuracion.zone.edit')
+            ->with('zone',$zone)
+                ->with('zoneTypes',$zoneTypes)
+                    ->with('zones',$zones);
     }
 
     /**
@@ -70,7 +91,16 @@ class ZonesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $zone = Zone::find($id);
+        $zone->initials = $request->initials;
+        $zone->name = $request->name;
+        $zone->zone_type_id = $request->zone_type_id;
+        if($request->zone_id != null){ $zone->zone_id = $request->zone_id; }
+        else{ $zone->zone_id = null; }
+        $zone->save();
+
+        flash('Zona '.$zone->name.' se modificó exitosamente', 'warning')->important();
+        return redirect()->route('zona.index');
     }
 
     /**
@@ -81,6 +111,11 @@ class ZonesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $zone = Zone::find($id);
+        $zone->delete();
+
+
+        flash('Zona '.$zone->name.' se eliminó exitosamente', 'danger')->important();
+        return redirect()->route('zona.index'); 
     }
 }

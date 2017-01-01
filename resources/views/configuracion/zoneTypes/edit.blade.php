@@ -15,6 +15,11 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('priority','Prioridad')  !!}
+		{!! Form::text('priority',$type->priority,['class' => 'form-control', 'required','placeholder' => 'Prioridad'])  !!}
+	</div>
+
+	<div class="form-group">
 		<a style="text-decoration: none;" href="{{{ URL::route('tipoZona.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>

@@ -18,11 +18,17 @@
 				<tr>
 					<td>{{ $zone->initials }}</td>
 					<td>{{ $zone->name }}</td>
+					<td>{{ $zone->zone_type->name }}</td>
+					@if($zone->zone_id == null)
+						<td>{{ $zone->zone_id }}</td>
+					@else
+						<td>{{ $zone->zone->name }}</td>
+					@endif
 					<td>
-						<a href="{{ route('tipoIdentificacion.edit',$type->id) }}" class="btn btn-warning separate_left">
+						<a href="{{ route('zona.edit',$zone->id) }}" class="btn btn-warning separate_left">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</a>
-						<a href="{{ route('tipoIdentificacion.destroy',$type->id) }}" onclick="return confirm('¿Desea eliminar el tipo de identificación?')" class="btn btn-danger separate_left">
+						<a href="{{ route('zona.destroy',$zone->id) }}" onclick="return confirm('¿Desea eliminar la zona?')" class="btn btn-danger separate_left">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</a>
 					</td>

@@ -21,7 +21,7 @@ class AddZonesTable extends Migration
             $table->integer('zone_type_id')->unsigned();
             $table->foreign('zone_type_id')->references('id')->on('zone_types');
 
-            $table->integer('zone_id')->unsigned();
+            $table->integer('zone_id')->nullable()->unsigned();
             $table->foreign('zone_id')->references('id')->on('zones');
 
 

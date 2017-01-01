@@ -17,6 +17,7 @@ class AddZoneTypes extends Migration
             $table->increments('id');
             $table->string('initials')->unique();
             $table->string('name');
+            $table->integer('priority');
             $table->timestamps();
         });
     }

@@ -1,8 +1,8 @@
 @extends('shared.main')
-@section('title','Configuración/Tipo zona/Crear')
+@section('title','Configuración/Zona/Crear')
 
 @section('content')
-{!! Form::open(['route' => 'tipoZona.store', 'method' => 'POST']) !!}
+{!! Form::open(['route' => 'zona.store', 'method' => 'POST']) !!}
 
 	<div class="form-group">
 		{!! Form::label('initials','Iniciales')  !!}
@@ -15,12 +15,17 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('priority','Prioridad')  !!}
-		{!! Form::text('priority',null,['class' => 'form-control', 'required','placeholder' => 'Prioridad'])  !!}
+		{!! Form::label('zone_type_id','Tipo de zona')  !!}
+		{!! Form::select('zone_type_id', $zoneTypes, null, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione tipo de zona'])  !!}	
 	</div>
 
 	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('tipoZona.index') }}}">
+		{!! Form::label('zone_id','Zona padre')  !!}
+		{!! Form::select('zone_id', $zones, null, ['class' => 'form-control select_category', 'placeholder' => 'Seleccione zona padre'])  !!}	
+	</div>
+
+	<div class="form-group">
+		<a style="text-decoration: none;" href="{{{ URL::route('zona.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}

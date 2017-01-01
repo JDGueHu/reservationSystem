@@ -9,6 +9,7 @@
 		<thead>
 			<th>Iniciales</th>
 			<th>Nombre</th>
+			<th>Prioridad</th>
 			<th>Acciones</th>
 		</thead>
 		<tbody>
@@ -16,6 +17,7 @@
 				<tr>
 					<td>{{ $type->initials }}</td>
 					<td>{{ $type->name }}</td>
+					<td>{{ $type->priority }}</td>
 					<td>
 						<a href="{{ route('tipoZona.edit',$type->id) }}" class="btn btn-warning separate_left">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
