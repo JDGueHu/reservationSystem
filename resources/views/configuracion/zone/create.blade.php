@@ -2,6 +2,7 @@
 @section('title','Configuración/Zona/Crear')
 
 @section('content')
+
 {!! Form::open(['route' => 'zona.store', 'method' => 'POST']) !!}
 
 	<div class="form-group">
@@ -16,12 +17,12 @@
 
 	<div class="form-group">
 		{!! Form::label('zone_type_id','Tipo de zona')  !!}
-		{!! Form::select('zone_type_id', $zoneTypes, null, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione tipo de zona'])  !!}	
+		{!! Form::select('zone_type_id', $zoneTypes, null, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione tipo de zona','id'=>'zone_type_id'])  !!}	
 	</div>
 
 	<div class="form-group">
 		{!! Form::label('zone_id','Zona padre')  !!}
-		{!! Form::select('zone_id', $zones, null, ['class' => 'form-control select_category', 'placeholder' => 'Seleccione zona padre'])  !!}	
+		{!! Form::select('zone_id', $zones, null, ['class' => 'form-control select_category','id'=>'zone_id'])  !!}	
 	</div>
 
 	<div class="form-group">
@@ -32,6 +33,5 @@
 	</div>
 
 {!! Form::close() !!}
-
 
 @endsection

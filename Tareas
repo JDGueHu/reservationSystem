@@ -1,6 +1,0 @@
-Pendientes
-	Módulo Zonas
-		- Agregar restricción para asociación de registros, con base en las prioridades para evitar que un departamento sea padre de un pais
-		- Manejar errores para mostrar casos por ejemplo donde no puede eliminarse un registro asociado a otro
-	Sistema
-		- Agregar autenticación a la aplicación

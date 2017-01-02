@@ -26,7 +26,7 @@ class ZonesController extends Controller
      */
     public function create()
     {
-        $zones = Zone::orderby('name','ASC')->pluck('name','id');
+        $zones = [null => "Seleccione zona padre"];
         $zoneTypes = Zone_type::orderby('name','ASC')->pluck('name','id');
 
         return view('configuracion.zone.create')
@@ -118,4 +118,12 @@ class ZonesController extends Controller
         flash('Zona '.$zone->name.' se eliminó exitosamente', 'danger')->important();
         return redirect()->route('zona.index'); 
     }
+
+    public function getTypeZones(Request $request,$id){
+        if($request->ajax()){
+            $zones = Zone::getTypeZones($id);
+            return response()->json($zones);
+        }
+    }
+
 }

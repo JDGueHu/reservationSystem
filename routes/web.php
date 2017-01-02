@@ -38,6 +38,10 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'uses' => 'ZonesController@destroy',
 		'as' => 'zona.destroy'
 	]);
+	Route::get('zona/{id}/getZonas',[
+		'uses' => 'ZonesController@getTypeZones',
+		'as' => 'zona.getZonas'
+	]);
 
 
 

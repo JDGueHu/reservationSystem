@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Zone extends Model
@@ -19,6 +20,14 @@ class Zone extends Model
 
     public function zone(){
     	return $this->belongsTo('App\Zone');
+    }
+
+    public static function getTypeZones($priority){
+        return DB::table('zones')
+            ->join('zone_types','zones.zone_type_id','=','zone_types.id')
+                ->select('zones.id','zones.name')
+                    ->where('zone_types.priority','=',$priority -1)
+                        ->get();
     }
 
 

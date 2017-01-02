@@ -2,6 +2,7 @@
 @section('title','Configuración/Zona/Editar')
 
 @section('content')
+
 {!! Form::model($zone,['route' => ['zona.update',$zone->id], 'method' => 'PUT']) !!}
 
 	<div class="form-group">
@@ -31,8 +32,17 @@
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
+{!! Form::close() !!}
+
+{!! Form::model($zone,['route' => ['zona.getZonas',$zone->zone_type->priority], 'method' => 'GET']) !!}
 
 
+	<div class="form-group">
+		<a style="text-decoration: none;" href="{{{ URL::route('zona.index') }}}">
+			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
+		</a>
+		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
+	</div>
 
 {!! Form::close() !!}
 
