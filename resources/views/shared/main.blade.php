@@ -10,7 +10,6 @@
 
 	<script src="{{ asset('plugins/jquery/js/jquery-3.1.1.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
-	<script src="{{ asset('js/zone.js') }}"></script>
 	<!--script src="{{ asset('plugins/trumbowyg/trumbowyg.min.js') }}"></script-->
 
 </head>

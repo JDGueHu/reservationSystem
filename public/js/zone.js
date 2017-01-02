@@ -3,7 +3,7 @@ $( document ).ready(function() {
 	$("#zone_type_id").change(function(event){	
 
 		$.ajax({
-		  url: event.target.value+"/getZonas",
+		  url: "http://localhost:8000/reservationSystem/public/configuracion/zona/"+event.target.value+"/getZonas",
 		  type: 'GET',
 		  dataType: 'json'
 		}).done(function(response){

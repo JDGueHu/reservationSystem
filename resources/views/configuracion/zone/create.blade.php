@@ -35,3 +35,7 @@
 {!! Form::close() !!}
 
 @endsection
+
+@section('js')
+	<script src="{{ asset('js/zone.js') }}"></script>
+@endsection

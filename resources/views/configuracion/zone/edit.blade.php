@@ -17,12 +17,12 @@
 
 	<div class="form-group">
 		{!! Form::label('zone_type_id','Tipo de zona')  !!}
-		{!! Form::select('zone_type_id', $zoneTypes, $zone->zone_type_id, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione tipo de zona'])  !!}	
+		{!! Form::select('zone_type_id', $zoneTypes, $zone->zone_type_id, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione tipo de zona','id'=>'zone_type_id'])  !!}	
 	</div>
 
 	<div class="form-group">
 		{!! Form::label('zone_id','Zona padre')  !!}
-		{!! Form::select('zone_id', $zones, $zone->zone_id, ['class' => 'form-control select_category', 'placeholder' => 'Seleccione zona padre'])  !!}	
+		{!! Form::select('zone_id', $zones, $zone->zone_id, ['class' => 'form-control select_category', 'placeholder' => 'Seleccione zona padre','id'=>'zone_id'])  !!}	
 	</div>
 
 	<div class="form-group">
@@ -34,17 +34,8 @@
 
 {!! Form::close() !!}
 
-{!! Form::model($zone,['route' => ['zona.getZonas',$zone->zone_type->priority], 'method' => 'GET']) !!}
+@endsection
 
-
-	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('zona.index') }}}">
-			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
-		</a>
-		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
-	</div>
-
-{!! Form::close() !!}
-
-
+@section('js')
+	<script src="{{ asset('js/zone.js') }}"></script>
 @endsection
