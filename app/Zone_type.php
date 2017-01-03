@@ -12,4 +12,13 @@ class Zone_type extends Model
     public function zones(){
     	return $this->hasMany('App\Zone');
     }
+
+    public function scopeSearch($query,$data){
+
+    return $query
+        ->where('initials', 'LIKE', "%" . $data . "%")
+        ->orWhere('name', 'LIKE', "%" . $data . "%")
+        ->orWhere('priority', 'LIKE', "%" . $data . "%");
+
+    }
 }

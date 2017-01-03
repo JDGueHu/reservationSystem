@@ -32,6 +32,7 @@
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
+	<input type="hidden" name="zone_id_edit" value="{{ $zone->id }}" id="zone_id_edit">
 {!! Form::close() !!}
 
 @endsection

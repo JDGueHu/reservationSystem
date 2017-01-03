@@ -13,9 +13,9 @@ class ZonesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $zones = Zone::orderby('name','ASC')->paginate(10);
+        $zones = Zone::Search($request->search)->orderby('name','ASC')->paginate(10);
         return view('configuracion.zone.index')->with('zones',$zones);
     }
 
@@ -119,9 +119,10 @@ class ZonesController extends Controller
         return redirect()->route('zona.index'); 
     }
 
-    public function getTypeZones(Request $request,$id){
+    public function getTypeZones(Request $request,$zone_id,$zone_type_id){
         if($request->ajax()){
-            $zones = Zone::getTypeZones($id);
+            $zone = Zone_type::find($zone_type_id);
+            $zones = Zone::getTypeZones($zone_id,$zone->priority);
             return response()->json($zones);
         }
     }

@@ -13,9 +13,9 @@ class Identification_typesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $types = Identification_type::orderby('name','ASC')->paginate(10);
+        $types = Identification_type::Search($request->search)->orderby('name','ASC')->paginate(10);
         return view('configuracion.identificationTypes.index')->with('types',$types);
     }
 

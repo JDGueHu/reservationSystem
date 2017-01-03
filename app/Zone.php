@@ -22,12 +22,22 @@ class Zone extends Model
     	return $this->belongsTo('App\Zone');
     }
 
-    public static function getTypeZones($priority){
+    public static function getTypeZones($zone_id,$priority){
         return DB::table('zones')
             ->join('zone_types','zones.zone_type_id','=','zone_types.id')
-                ->select('zones.id','zones.name')
-                    ->where('zone_types.priority','=',$priority -1)
-                        ->get();
+            ->select('zones.id','zones.name')
+            ->where('zone_types.priority','=',$priority -1)
+            ->where('zones.id','!=',$zone_id)
+            ->get();
+    }
+
+    public function scopeSearch($query,$data){
+
+    return $query
+        ->where('initials', 'LIKE', "%" . $data . "%")
+        ->orWhere('name', 'LIKE', "%" . $data . "%")
+        ->orwhere('zone_type_id', 'LIKE', "%" . $data . "%");
+
     }
 
 
