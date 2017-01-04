@@ -15,7 +15,7 @@ class Zone_typesController extends Controller
      */
     public function index(Request $request)
     {
-        $types = Zone_type::Search($request->search)->orderby('priority','ASC')->paginate(10);
+        $types = Zone_type::orderby('priority','ASC')->get();;
         return view('configuracion.zoneTypes.index')->with('types',$types);
     }
 

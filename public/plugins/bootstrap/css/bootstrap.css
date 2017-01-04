@@ -1144,8 +1144,8 @@ img {
   border-radius: 50%;
 }
 hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: 0;
   border-top: 1px solid #eee;
 }
@@ -1245,7 +1245,7 @@ h5,
 .h5,
 h6,
 .h6 {
-  margin-top: 10px;
+  margin-top: -8px;
   margin-bottom: 10px;
 }
 h4 small,
@@ -1586,6 +1586,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 2%;
 }
 @media (min-width: 768px) {
   .container {
@@ -2265,6 +2266,7 @@ th {
   max-width: 100%;
   margin-bottom: 20px;
 }
+
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -6763,3 +6765,6 @@ button.close {
     margin-top: 3%;
   }
 }
+
+
+

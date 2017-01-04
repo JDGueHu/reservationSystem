@@ -15,7 +15,7 @@ class ZonesController extends Controller
      */
     public function index(Request $request)
     {
-        $zones = Zone::Search($request->search)->orderby('name','ASC')->paginate(10);
+        $zones = Zone::orderby('name','ASC')->get();
         return view('configuracion.zone.index')->with('zones',$zones);
     }
 

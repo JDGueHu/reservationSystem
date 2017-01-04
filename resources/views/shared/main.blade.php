@@ -6,12 +6,12 @@
 
 	<link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/chosen/chosen.css') }}">
-	<!-- link rel="stylesheet" href="{{ asset('plugins/trumbowyg/ui/trumbowyg.min.css') }}"-->
+	<link rel="stylesheet" href="{{ asset('plugins/data_table/css/dataTables.bootstrap4.css') }}">
 
 	<script src="{{ asset('plugins/jquery/js/jquery-3.1.1.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
-	<script src="{{ asset('plugins/chosen/chosen.jquery.js') }}"></script>
-	<!--script src="{{ asset('plugins/trumbowyg/trumbowyg.min.js') }}"></script-->
+	<script src="{{ asset('plugins/data_table/js/jquery.dataTables.js') }}"></script>
+	<script src="{{ asset('plugins/data_table/js/dataTables.bootstrap4.js') }}"></script>
 
 </head>
 <body>

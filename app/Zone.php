@@ -31,16 +31,4 @@ class Zone extends Model
             ->get();
     }
 
-    public function scopeSearch($query,$data){
-
-    return $query
-        ->where('initials', 'LIKE', "%" . $data . "%")
-        ->orWhere('name', 'LIKE', "%" . $data . "%")
-        ->orwhere('zone_type_id', 'LIKE', "%" . $data . "%");
-
-    }
-
-
-
-
 }
