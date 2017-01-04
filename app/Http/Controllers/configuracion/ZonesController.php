@@ -26,7 +26,7 @@ class ZonesController extends Controller
      */
     public function create()
     {
-        $zones = [null => "Seleccione zona padre"];
+        $zones = ["" => ""];
         $zoneTypes = Zone_type::orderby('name','ASC')->pluck('name','id');
 
         return view('configuracion.zone.create')

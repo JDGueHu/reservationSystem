@@ -22,7 +22,7 @@
 
 	<div class="form-group">
 		{!! Form::label('zone_id','Zona padre')  !!}
-		{!! Form::select('zone_id', $zones, null, ['class' => 'form-control select_category','id'=>'zone_id'])  !!}	
+		{!! Form::select('zone_id', $zones, null, ['class' => 'form-control select_category zone','id'=>'zone_id'])  !!}	
 	</div>
 
 	<div class="form-group">
@@ -38,5 +38,5 @@
 @endsection
 
 @section('js')
-	<script src="{{ asset('js/zone.js') }}"></script>
+	<script src="{{ asset('js/ajax.js') }}"></script>
 @endsection

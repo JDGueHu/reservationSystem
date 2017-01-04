@@ -26,7 +26,12 @@ class Zone_typesController extends Controller
      */
     public function create()
     {
-        return view('configuracion.zoneTypes.create');
+        $priority_ini = 1;
+        $priority_fin = Zone_type::orderby('priority','ASC')->pluck('priority')->last();
+        
+        return view('configuracion.zoneTypes.create')
+            ->with('priority_ini',$priority_ini)
+            ->with('priority_fin',$priority_fin+1);
     }
 
     /**
@@ -67,7 +72,12 @@ class Zone_typesController extends Controller
     public function edit($id)
     {
         $type = Zone_type::find($id);
-        return view('configuracion.zoneTypes.edit')->with('type',$type);
+        $priority_ini = 1;
+        $priority_fin = Zone_type::orderby('priority','ASC')->pluck('priority')->last();
+        return view('configuracion.zoneTypes.edit')
+            ->with('priority_ini',$priority_ini)
+            ->with('priority_fin',$priority_fin+1)
+            ->with('type',$type);
     }
 
     /**

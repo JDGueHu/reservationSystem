@@ -16,7 +16,7 @@
 
 	<div class="form-group">
 		{!! Form::label('priority','Prioridad')  !!}
-		{!! Form::text('priority',$type->priority,['class' => 'form-control', 'required','placeholder' => 'Prioridad'])  !!}
+		{!! Form::selectRange('priority', $priority_ini, $priority_fin, $type->priority,['class' => 'form-control', 'required','placeholder' => 'Prioridad']) !!}
 	</div>
 
 	<div class="form-group">
@@ -30,3 +30,4 @@
 
 
 @endsection
+ 
