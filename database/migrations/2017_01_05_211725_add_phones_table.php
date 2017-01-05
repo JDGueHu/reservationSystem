@@ -16,12 +16,11 @@ class AddPhonesTable extends Migration
         Schema::create('phones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('phone');
+            $table->string('owner');
+            $table->string('owner_id');
 
             $table->integer('phone_type_id')->unsigned();
             $table->foreign('phone_type_id')->references('id')->on('phone_types');
-
-            $table->integer('contact_phone_type_id')->unsigned();
-            $table->foreign('contact_phone_type_id')->references('id')->on('contact_phone_types');
 
             $table->timestamps();
         });

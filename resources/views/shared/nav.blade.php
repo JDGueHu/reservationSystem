@@ -15,13 +15,22 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <!--li role="separator" class="divider"></li-->
             <li><a href="{{ route('tipoIdentificacion.index') }}">Tipos de identificación</a></li>
             <li><a href="{{ route('tipoZona.index') }}">Tipos de zona</a></li>
             <li><a href="{{ route('zona.index') }}">Zonas</a></li>
             <li><a href="{{ route('tipoTelefono.index') }}">Tipos de teléfono</a></li>
+            <!--li role="separator" class="divider"></li-->                
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <!--li role="separator" class="divider"></li-->
+            <li><a href="{{ route('cliente.index') }}">Clientes</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>

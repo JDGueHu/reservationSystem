@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Tipo Zona')
+@section('title','Configuración/Tipos Zona')
 
 @section('content')
 	
@@ -28,8 +28,8 @@
 							<a title="Editar" href="{{ route('tipoZona.edit',$type->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="{{ route('tipoZona.destroy',$type->id) }}" class="btn btn-danger btn-xs">
-								<span class="glyphicon glyphicon-remove confirm" aria-hidden="true"></span>
+							<a title="Eliminar" href="{{ route('tipoZona.destroy',$type->id) }}" class="btn btn-danger btn-xs confirm">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>
 					</tr>

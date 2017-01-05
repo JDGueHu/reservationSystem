@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Zona')
+@section('title','Configuración/Zonas')
 
 @section('content')
 

@@ -21,6 +21,7 @@ Route::get('prueba',function(){
 
 Route::group(['prefix'=>'configuracion'],function(){
 
+
 	Route::resource('tipoIdentificacion','Identification_typesController');
 	Route::get('tipoIdentificacion/{id}/destroy',[
 		'uses' => 'Identification_typesController@destroy',
@@ -53,6 +54,12 @@ Route::group(['prefix'=>'configuracion'],function(){
 	Route::get('tipoTelefono/{id}/destroy',[
 		'uses' => 'phoneTypesController@destroy',
 		'as' => 'tipoTelefono.destroy'
+	]);
+
+	Route::resource('cliente','customersController');
+	Route::get('cliente/{id}/destroy',[
+		'uses' => 'customersController@destroy',
+		'as' => 'cliente.destroy'
 	]);
 
 
