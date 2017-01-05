@@ -62,7 +62,13 @@ class ZonesController extends Controller
      */
     public function show($id)
     {
-        //
+        $zone = Zone::find($id);
+        $zoneTypes = Zone_type::orderby('name','ASC')->pluck('name','id');
+        $zones = Zone::orderby('name','ASC')->pluck('name','id');
+        return view('configuracion.zone.show')
+            ->with('zone',$zone)
+                ->with('zoneTypes',$zoneTypes)
+                    ->with('zones',$zones);
     }
 
     /**

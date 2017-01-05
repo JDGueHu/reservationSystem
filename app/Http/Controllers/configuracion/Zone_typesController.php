@@ -60,7 +60,13 @@ class Zone_typesController extends Controller
      */
     public function show($id)
     {
-        //
+        $type = Zone_type::find($id);
+        $priority_ini = 1;
+        $priority_fin = Zone_type::orderby('priority','ASC')->pluck('priority')->last();
+        return view('configuracion.zoneTypes.show')
+            ->with('priority_ini',$priority_ini)
+            ->with('priority_fin',$priority_fin+1)
+            ->with('type',$type);
     }
 
     /**

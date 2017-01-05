@@ -55,7 +55,8 @@ class Identification_typesController extends Controller
      */
     public function show($id)
     {
-        //
+        $type = Identification_type::find($id);
+        return view('configuracion.identificationTypes.show')->with('type',$type);
     }
 
     /**

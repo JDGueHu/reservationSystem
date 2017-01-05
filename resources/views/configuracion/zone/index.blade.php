@@ -27,11 +27,14 @@
 						@else
 							<td>{{ $zone->zone->name }}</td>
 						@endif
-						<td>
-							<a href="{{ route('zona.edit',$zone->id) }}" class="btn btn-warning btn-xs">
+						<td>								
+							<a title="Consultar" href="{{ route('zona.show',$zone->id) }}" class="btn btn-default btn-xs">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</a>
+							<a title="Editar" href="{{ route('zona.edit',$zone->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a href="{{ route('zona.destroy',$zone->id) }}" onclick="return confirm('¿Desea eliminar la zona?')" class="btn btn-danger btn-xs">
+							<a title="Eliminar" href="{{ route('zona.destroy',$zone->id) }}" onclick="return confirm('¿Desea eliminar la zona?')" class="btn btn-danger btn-xs">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>

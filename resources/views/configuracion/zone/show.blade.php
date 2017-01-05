@@ -1,9 +1,9 @@
 @extends('shared.main')
-@section('title','Configuración/Zona/Editar')
+@section('title','Configuración/Zona/Consultar')
 
 @section('content')
 
-{!! Form::model($zone,['route' => ['zona.update',$zone->id], 'method' => 'PUT']) !!}
+{!! Form::model($zone) !!}
 
 	<div class="form-group">
 		{!! Form::label('initials','Iniciales')  !!}
@@ -29,7 +29,6 @@
 		<a style="text-decoration: none;" href="{{{ URL::route('zona.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
-		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
 	<input type="hidden" name="zone_id_edit" value="{{ $zone->id }}" id="zone_id_edit">
@@ -39,4 +38,5 @@
 
 @section('js')
 	<script src="{{ asset('js/zone/ajax.js') }}"></script>
+		<script src="{{ asset('js/zone/show.js') }}"></script>
 @endsection

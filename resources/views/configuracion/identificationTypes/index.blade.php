@@ -20,10 +20,13 @@
 						<td>{{ $type->initials }}</td>
 						<td>{{ $type->name }}</td>
 						<td>
-							<a href="{{ route('tipoIdentificacion.edit',$type->id) }}" class="btn btn-warning btn-xs">
+							<a title="Consultar" href="{{ route('tipoIdentificacion.show',$type->id) }}" class="btn btn-default btn-xs">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</a>
+							<a title="Editar" href="{{ route('tipoIdentificacion.edit',$type->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a href="{{ route('tipoIdentificacion.destroy',$type->id) }}" onclick="return confirm('¿Desea eliminar el tipo de identificación?')" class="btn btn-danger btn-xs">
+							<a title="Eliminar" href="{{ route('tipoIdentificacion.destroy',$type->id) }}" onclick="return confirm('¿Desea eliminar el tipo de identificación?')" class="btn btn-danger btn-xs">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>

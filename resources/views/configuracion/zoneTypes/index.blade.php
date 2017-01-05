@@ -22,10 +22,13 @@
 						<td>{{ $type->name }}</td>
 						<td>{{ $type->priority }}</td>
 						<td>
-							<a href="{{ route('tipoZona.edit',$type->id) }}" class="btn btn-warning btn-xs">
+							<a title="Consultar" href="{{ route('tipoZona.show',$type->id) }}" class="btn btn-default btn-xs">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</a>
+							<a title="Editar" href="{{ route('tipoZona.edit',$type->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a href="{{ route('tipoZona.destroy',$type->id) }}" onclick="return confirm('¿Desea eliminar el tipo de zona?')" class="btn btn-danger btn-xs">
+							<a title="Eliminar" href="{{ route('tipoZona.destroy',$type->id) }}" onclick="return confirm('¿Desea eliminar el tipo de zona?')" class="btn btn-danger btn-xs">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>
