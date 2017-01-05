@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Tipo identificación')
+@section('title','Configuración/Tipos identificación')
 
 @section('content')
 	
@@ -26,7 +26,7 @@
 							<a title="Editar" href="{{ route('tipoIdentificacion.edit',$type->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="{{ route('tipoIdentificacion.destroy',$type->id) }}" onclick="return confirm('¿Desea eliminar el tipo de identificación?')" class="btn btn-danger btn-xs">
+							<a title="Eliminar" href="{{ route('tipoIdentificacion.destroy',$type->id) }}" class="btn btn-danger btn-xs confirm">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>
@@ -39,4 +39,5 @@
 
 @section('js')
 	<script src="{{ asset('js/table.js') }}"></script>
+	<script src="{{ asset('js/index.js') }}"></script>
 @endsection

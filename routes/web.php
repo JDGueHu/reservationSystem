@@ -49,6 +49,12 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'zona.getZonas'
 	]);
 
+	Route::resource('tipoTelefono','phoneTypesController');
+	Route::get('tipoTelefono/{id}/destroy',[
+		'uses' => 'phoneTypesController@destroy',
+		'as' => 'tipoTelefono.destroy'
+	]);
+
 
 
 });

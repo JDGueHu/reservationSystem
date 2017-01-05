@@ -38,5 +38,5 @@
 
 @section('js')
 	<script src="{{ asset('js/zone/ajax.js') }}"></script>
-		<script src="{{ asset('js/zone/show.js') }}"></script>
+	<script src="{{ asset('js/zone/show.js') }}"></script>
 @endsection

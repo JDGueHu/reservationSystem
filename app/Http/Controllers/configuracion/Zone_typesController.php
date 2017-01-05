@@ -48,7 +48,7 @@ class Zone_typesController extends Controller
         $type->priority = $request->priority;
         $type->save();
 
-        flash('Tipo de zona '.$type->name.' se creó exitosamente', 'success')->important();
+        flash('Tipo de zona <b>'.$type->name.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('tipoZona.index');
     }
 
@@ -101,7 +101,7 @@ class Zone_typesController extends Controller
         $type->priority = $request->priority;
         $type->save();
 
-        flash('Tipo de zona '.$type->name.' se modificó exitosamente', 'warning')->important();
+        flash('Tipo de zona <b>'.$type->name.'</b> se modificó exitosamente', 'warning')->important();
         return redirect()->route('tipoZona.index');
     }
 
@@ -116,7 +116,7 @@ class Zone_typesController extends Controller
         $type = Zone_type::find($id);
         $type->delete();
 
-        flash('Tipo de zona '.$type->name.' se eliminó exitosamente', 'danger')->important();
+        flash('Tipo de zona <b>'.$type->name.'</b> se eliminó exitosamente', 'danger')->important();
         return redirect()->route('tipoZona.index'); 
     }
 }

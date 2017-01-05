@@ -7,7 +7,7 @@
 
 	<div class="form-group">
 		{!! Form::label('initials','Iniciales')  !!}
-		{!! Form::text('initials',null,['class' => 'form-control', 'required','placeholder' => 'Iniciales'])  !!}
+		{!! Form::text('initials',$zone->initials,['class' => 'form-control', 'required','placeholder' => 'Iniciales'])  !!}
 	</div>
 
 	<div class="form-group">

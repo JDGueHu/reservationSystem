@@ -50,7 +50,7 @@ class ZonesController extends Controller
         else{ $zone->zone_id = null; }
         $zone->save();
 
-        flash('Zona '.$zone->name.' se creó exitosamente', 'success')->important();
+        flash('Zona <b>'.$zone->name.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('zona.index');
     }
 
@@ -105,7 +105,7 @@ class ZonesController extends Controller
         else{ $zone->zone_id = null; }
         $zone->save();
 
-        flash('Zona '.$zone->name.' se modificó exitosamente', 'warning')->important();
+        flash('Zona <b>'.$zone->name.'</b> se modificó exitosamente', 'warning')->important();
         return redirect()->route('zona.index');
     }
 
@@ -121,7 +121,7 @@ class ZonesController extends Controller
         $zone->delete();
 
 
-        flash('Zona '.$zone->name.' se eliminó exitosamente', 'danger')->important();
+        flash('Zona <b>'.$zone->name.'</b> se eliminó exitosamente', 'danger')->important();
         return redirect()->route('zona.index'); 
     }
 

@@ -34,7 +34,7 @@
 							<a title="Editar" href="{{ route('zona.edit',$zone->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="{{ route('zona.destroy',$zone->id) }}" onclick="return confirm('¿Desea eliminar la zona?')" class="btn btn-danger btn-xs">
+							<a title="Eliminar" href="{{ route('zona.destroy',$zone->id) }}" class="btn btn-danger btn-xs confirm">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>
@@ -48,4 +48,5 @@
 
 @section('js')
 	<script src="{{ asset('js/table.js') }}"></script>
+	<script src="{{ asset('js/index.js') }}"></script>
 @endsection
