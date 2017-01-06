@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\phoneType;
 
-class phoneTypesController extends Controller
+class phonesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class phoneTypesController extends Controller
      */
     public function index()
     {
-        $types = phoneType::orderby("name","ASC")->get();
-        return view('configuracion.phoneTypes.index')->with('types',$types);
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class phoneTypesController extends Controller
      */
     public function create()
     {
-        return view('configuracion.phoneTypes.create');
+        //
     }
 
     /**
@@ -36,13 +34,7 @@ class phoneTypesController extends Controller
      */
     public function store(Request $request)
     {
-        $type = new phoneType();
-        $type->initials = $request->initials;
-        $type->name = $request->name;
-        $type->save();
-
-        flash('Tipo de teléfono <b>'.$type->name.'</b> se creó exitosamente', 'success')->important();
-        return redirect()->route('tipoTelefono.index');
+        //
     }
 
     /**
@@ -53,8 +45,7 @@ class phoneTypesController extends Controller
      */
     public function show($id)
     {
-        $phone = phoneType::find($id);
-        return view('configuracion.phoneTypes.show')->with("phone",$phone);
+        //
     }
 
     /**
@@ -65,8 +56,7 @@ class phoneTypesController extends Controller
      */
     public function edit($id)
     {
-        $phone = phoneType::find($id);
-        return view('configuracion.phoneTypes.edit')->with("phone",$phone);
+        //
     }
 
     /**
@@ -78,14 +68,7 @@ class phoneTypesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $phone = phoneType::find($id);
-        $phone->initials = $request->initials; 
-        $phone->name = $request->name; 
-        $phone->save();
-
-        flash('Tipo de teléfono <b>'.$phone->name.'</b> se modificó exitosamente', 'warning')->important();
-        return redirect()->route('tipoTelefono.index');
-
+        //
     }
 
     /**
@@ -96,11 +79,6 @@ class phoneTypesController extends Controller
      */
     public function destroy($id)
     {
-        $phone = phoneType::find($id);
-        $phone->delete();
-
-        flash('Tipo de teléfono <b>'.$phone->name.'</b> se eliminó exitosamente', 'danger')->important();
-        return redirect()->route('tipoTelefono.index'); 
-
+        //
     }
 }

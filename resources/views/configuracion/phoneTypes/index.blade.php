@@ -40,5 +40,5 @@
 
 @section('js')
 	<script src="{{ asset('js/table.js') }}"></script>
-	<script src="{{ asset('js/index.js') }}"></script>
+	<script src="{{ asset('js/shared.js') }}"></script>
 @endsection

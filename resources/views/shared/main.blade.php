@@ -11,7 +11,7 @@
 
 	<script src="{{ asset('plugins/jquery/js/jquery-3.1.1.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
-	<script src="{{ asset('plugins/data_table/js/jquery.dataTables.js') }}"></script>
+	<script src="{{ asset('plugins/data_table/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('plugins/data_table/js/dataTables.bootstrap4.js') }}"></script>
 	<script src="{{ asset('plugins/jquery_confirm/jquery.confirm.js') }}"></script>
 

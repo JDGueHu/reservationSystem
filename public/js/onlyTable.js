@@ -1,5 +1,9 @@
 $(document).ready(function() {
     $('#example').DataTable({
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "bFilter": false,
         "language": {
             lengthMenu: "Mostrar _MENU_ registros por página",
             zeroRecords: "No hay registros para mostrar",

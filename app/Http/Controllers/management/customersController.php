@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\customer;
 use App\Identification_type;
+use App\Zone_type;
+use App\Zone;
 
 class customersController extends Controller
 {
@@ -30,9 +33,15 @@ class customersController extends Controller
     public function create()
     {
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
+        $zones = DB::table('zones')
+                    ->join('zone_types', 'zones.zone_type_id', '=', 'zone_types.id')
+                    ->select('zones.name','zones.id')
+                    ->where('zone_types.name','=','CIUDAD')
+                        ->pluck('name','id');
 
         return view('management.customers.create')
-            ->with('identificationTypes',$identificationTypes);
+            ->with('identificationTypes',$identificationTypes)
+            ->with('zones',$zones);
     }
 
     /**
