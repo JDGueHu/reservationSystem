@@ -19,12 +19,7 @@ class AddCustomerTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('email');
-            $table->string('business_name');
-            $table->string('phone');
-            $table->string('cell_phone1');
-            $table->boolean('whats_app1')->default(0);
-            $table->string('cell_phone2')->nullable();
-            $table->boolean('whats_app2')->default(0);
+            $table->string('business_name'); 
 
             $table->integer('identification_type_id')->unsigned();
             $table->foreign('identification_type_id')->references('id')->on('identification_types');

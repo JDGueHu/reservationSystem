@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\customer;
-use App\Identification_type;
 use App\phoneType;
-use App\Zone;
 
-class customersController extends Controller
+class phoneTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +14,9 @@ class customersController extends Controller
      */
     public function index()
     {
-
-        $customers = customer::orderby('name','ASC')->get();
-
-        return view('management.customers.index')
-            ->with('customers',$customers);
+       $types = phoneType::orderby('name','ASC')->get();
+       return view('configuracion.phoneTypes.index')
+            ->with('types',$types);
     }
 
     /**
@@ -32,18 +26,7 @@ class customersController extends Controller
      */
     public function create()
     {
-        $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
-        $phoneTypes = phoneType::orderby('name','ASC')->pluck('name','id');
-        $zones = DB::table('zones')
-                    ->join('zone_types', 'zones.zone_type_id', '=', 'zone_types.id')
-                    ->select('zones.name','zones.id')
-                    ->where('zone_types.name','=','CIUDAD')
-                        ->pluck('name','id');
-
-        return view('management.customers.create')
-            ->with('identificationTypes',$identificationTypes)
-            ->with('zones',$zones)
-            ->with('phoneTypes',$phoneTypes);
+        return view('configuracion.phoneTypes.create');
     }
 
     /**
@@ -54,7 +37,13 @@ class customersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = new phoneType;
+        $type->initials = $request->initials;
+        $type->name = $request->name;
+        $type->save();
+
+        flash('Tipo de teléfono <b>'.$type->name.'</b> se creó exitosamente', 'success')->important();
+        return redirect()->route('tipoTelefono.index');
     }
 
     /**
@@ -65,7 +54,9 @@ class customersController extends Controller
      */
     public function show($id)
     {
-        //
+        $type = phoneType::find($id);
+        return view('configuracion.phoneTypes.show')
+            ->with('type',$type);
     }
 
     /**
@@ -76,7 +67,9 @@ class customersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $type = phoneType::find($id);
+        return view('configuracion.phoneTypes.edit')
+            ->with('type',$type);
     }
 
     /**
@@ -88,7 +81,13 @@ class customersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $type = phoneType::find($id);
+        $type->initials = $request->initials;
+        $type->name = $request->name;
+        $type->save();
+
+        flash('Tipo de teléfono <b>'.$type->name.'</b> se modificó exitosamente', 'warning')->important();
+        return redirect()->route('tipoTelefono.index');
     }
 
     /**
@@ -99,6 +98,10 @@ class customersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $type = phoneType::find($id);
+        $type->delete();
+
+        flash('Tipo de teléfono <b>'.$type->name.'</b> se eliminó exitosamente', 'danger')->important();
+        return redirect()->route('tipoTelefono.index'); 
     }
 }

@@ -17,6 +17,7 @@ class AddZonesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('initials')->unique();
+            $table->string('phone_code')->default(0);
 
             $table->integer('zone_type_id')->unsigned();
             $table->foreign('zone_type_id')->references('id')->on('zone_types');

@@ -42,30 +42,29 @@
 			{!! Form::label('email','Email')  !!}
 			{!! Form::email('email', null, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
 		</div>
-		<div class="col-md-6">		
-			{!! Form::label('phone','Teléfono fijo')  !!}
-			{!! Form::text('phone',null,['class' => 'form-control','placeholder' => 'Teléfono fijo','id'=>'phone'])  !!}
-		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">		
-			{!! Form::label('cellPhone1','Celular 1')  !!}
-			{!! Form::checkbox('cellPhone1', null)  !!}
-
-			{!! Form::label('whatsApp1','¿WhatsApp?')  !!}	
-			{!! Form::text('cellPhone1',null,['class' => 'form-control', 'required','placeholder' => 'Celular','id'=>'cellPhone1'])  !!}
+			{!! Form::label('phones','Teléfonos')  !!}
+			{!! Form::button('+',['class' => 'btn btn-success','data-toggle' => 'modal', 'data-target' => '#myModalNorm'])  !!}
 		</div>
-		<div class="col-md-6">			
-			{!! Form::label('cellPhone2','Celular 2')  !!}
+	</div>
 
-			{!! Form::checkbox('cellPhone2', null)  !!}
-			{!! Form::label('whatsApp1','¿WhatsApp?')  !!}	
+	<div class="table-responsive">
+		<table id="example" class="table table-condensed" cellspacing="0" width="100%">
+			<thead>
+		        <tr>
+					<th>Tipo</th>
+					<th>Número telefónico</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
 
-			{!! Form::text('cellPhone2',null,['class' => 'form-control','placeholder' => 'Celular','id'=>'cellPhone2'])  !!}
-		</div>
-	</div>	
-		
 	<div class="form-group">
 		<a style="text-decoration: none;" href="{{{ URL::route('cliente.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
@@ -74,6 +73,55 @@
 	</div>
 
 {!! Form::close() !!}
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" >
+    Launch Normal Form
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Cerrar</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Agregar teléfono
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                
+                <form role="form">
+                  <div class="form-group">
+                  	{!! Form::label('phoneType','Tipo')  !!}
+     				{!! Form::select('phoneType', $phoneTypes, null, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo','id'=>'phoneType'])  !!}	
+                  </div>
+                  <div class="form-group">
+                    {!! Form::label('phone','Número telefónico')  !!}
+                    {!! Form::text('phone',null,['class' => 'form-control', 'required','Número telefónico' => 'Dirección','id'=>'phone'])  !!}
+                  </div>
+                </form>
+                
+                
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 
