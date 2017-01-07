@@ -56,6 +56,12 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'tipoTelefono.destroy'
 	]);
 
+	Route::resource('telefono','phonesController');
+	Route::get('telefono/{id}/destroy',[
+		'uses' => 'phonesController@destroy',
+		'as' => 'telefono.destroy'
+	]);
+
 	Route::resource('cliente','customersController');
 	Route::get('cliente/{id}/destroy',[
 		'uses' => 'customersController@destroy',

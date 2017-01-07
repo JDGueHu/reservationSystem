@@ -32,9 +32,14 @@ class phonesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($data)
     {
-        //
+        if($request->ajax()){
+            echo $data[0];
+            //     $zone = Zone_type::find($zone_type_id);
+            //     $zones = Zone::getTypeZones($zone_id,$zone->priority);
+            // return response()->json($zones);
+        }
     }
 
     /**

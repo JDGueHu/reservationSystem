@@ -72,12 +72,10 @@
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
-{!! Form::close() !!}
+	<input type="hidden" name="_token" value="{{ csrf_token() }}"" id="token">
+	<input type="hidden" name="idView" value="{{ $idView }}"" id="idView">
 
-<!-- Button trigger modal -->
-<button class="btn btn-primary btn-lg" >
-    Launch Normal Form
-</button>
+{!! Form::close() !!}
 
 <!-- Modal -->
 <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
@@ -99,24 +97,24 @@
             <!-- Modal Body -->
             <div class="modal-body">
                 
-                <form role="form">
-                  <div class="form-group">
-                  	{!! Form::label('phoneType','Tipo')  !!}
-     				{!! Form::select('phoneType', $phoneTypes, null, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo','id'=>'phoneType'])  !!}	
-                  </div>
-                  <div class="form-group">
-                    {!! Form::label('phone','Número telefónico')  !!}
-                    {!! Form::text('phone',null,['class' => 'form-control', 'required','Número telefónico' => 'Dirección','id'=>'phone'])  !!}
-                  </div>
-                </form>
+                {!! Form::open(['id' => 'phoneForm']) !!}
+	              <div class="form-group">
+	              	{!! Form::label('phoneType','Tipo')  !!}
+	 				{!! Form::select('phoneType', $phoneTypes, null, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo','id'=>'phoneType'])  !!}	
+	              </div>
+	              <div class="form-group">
+	                {!! Form::label('phone','Número telefónico')  !!}
+	                {!! Form::text('phone',null,['class' => 'form-control', 'required','Número telefónico' => 'Dirección','id'=>'phone'])  !!}
+	              </div>
+
+                  <!-- Modal Footer -->
+	              <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	                <button type="submit" class="btn btn-primary">Agregar</button>
+	              </div>
+                {!! Form::close() !!}
                 
                 
-            </div>
-            
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Agregar</button>
             </div>
         </div>
     </div>

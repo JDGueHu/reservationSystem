@@ -32,6 +32,7 @@ class customersController extends Controller
      */
     public function create()
     {
+        $idView = DB::table('customers')->max('id') + rand(1, 1000000000);
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
         $phoneTypes = phoneType::orderby('name','ASC')->pluck('name','id');
         $zones = DB::table('zones')
@@ -43,7 +44,8 @@ class customersController extends Controller
         return view('management.customers.create')
             ->with('identificationTypes',$identificationTypes)
             ->with('zones',$zones)
-            ->with('phoneTypes',$phoneTypes);
+            ->with('phoneTypes',$phoneTypes)
+            ->with('idView',$idView);
     }
 
     /**
