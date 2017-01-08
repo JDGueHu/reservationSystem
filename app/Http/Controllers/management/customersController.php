@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\customer;
 use App\Identification_type;
 use App\phoneType;
+use App\phone;
 use App\Zone;
 
 class customersController extends Controller
@@ -20,6 +21,7 @@ class customersController extends Controller
     {
 
         $customers = customer::orderby('name','ASC')->get();
+        DB::table('phones')->where('add_tmp', '=', true)->delete();
 
         return view('management.customers.index')
             ->with('customers',$customers);
@@ -56,7 +58,21 @@ class customersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $customer = new customer();
+        $customer->identification_type_id = $request->identification_type_id;
+        $customer->identification = $request->identification;
+        $customer->name = $request->name;
+        $customer->business_name = $request->business_name;
+        $customer->zone_id = $request->zone_id;
+        $customer->address = $request->address;
+        $customer->email = $request->email;
+        $customer->save();
+
+        $telefonos = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);
+
+        flash('Cliente <b>'.$customer->name.'</b> se creó exitosamente', 'success')->important();
+        return redirect()->route('cliente.index');
+
     }
 
     /**

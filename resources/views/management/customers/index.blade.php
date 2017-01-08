@@ -20,7 +20,7 @@
 			<tbody>
  				@foreach($customers as $customer)
 					<tr>
-						<td>{{ $customer->identificaction }}</td>
+						<td>{{ $customer->identification }}</td>
 						<td>{{ $customer->name }}</td>
 						<td>{{ $customer->address }}</td>
 						<td>{{ $customer->email }}</td>

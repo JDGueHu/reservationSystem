@@ -109,7 +109,7 @@
                   <!-- Modal Footer -->
 	              <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	                <button type="button" id="ajaxButton" class="btn btn-primary">Agregar</button>
+	                <button type="button" id="ajaxButton" class="btn btn-primary phoneConfirm">Agregar</button>
 	              </div>               
             </div>
         </div>

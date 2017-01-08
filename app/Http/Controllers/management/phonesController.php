@@ -38,6 +38,7 @@ class phonesController extends Controller
        if($request->ajax()){
             $phone = new phone();
             $phone->phone = $request->phone;
+            $phone->owner = "Customer";
             $phone->owner_id = $request->owner_id;
             $phone->phone_type_id = $request->phone_type_id;
             $phone->add_tmp = true;
