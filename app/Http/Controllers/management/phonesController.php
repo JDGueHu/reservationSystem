@@ -34,12 +34,13 @@ class phonesController extends Controller
      */
     public function store($data)
     {
-        if($request->ajax()){
-            echo $data[0];
+        echo "hola";
+      //  if($request->ajax()){
+            //echo $data[0];
             //     $zone = Zone_type::find($zone_type_id);
             //     $zones = Zone::getTypeZones($zone_id,$zone->priority);
             // return response()->json($zones);
-        }
+       // }
     }
 
     /**

@@ -97,7 +97,6 @@
             <!-- Modal Body -->
             <div class="modal-body">
                 
-                {!! Form::open(['id' => 'phoneForm']) !!}
 	              <div class="form-group">
 	              	{!! Form::label('phoneType','Tipo')  !!}
 	 				{!! Form::select('phoneType', $phoneTypes, null, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo','id'=>'phoneType'])  !!}	
@@ -110,10 +109,8 @@
                   <!-- Modal Footer -->
 	              <div class="modal-footer">
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	                <button type="submit" class="btn btn-primary">Agregar</button>
-	              </div>
-                {!! Form::close() !!}
-                
+	                <button type="button" id="ajaxButton" class="btn btn-primary">Agregar</button>
+	              </div>               
                 
             </div>
         </div>

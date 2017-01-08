@@ -5,21 +5,27 @@ $( document ).ready(function() {
 		cancelButton: "Cancelar",
 	});
 
-	$( "#phoneForm" ).submit(function(){
-		alert("hola");
+	$( "#ajaxButton" ).click(function(){
+
 	  	var data = [
 	  		$("#phone").val(),
 	  		$("#idView").val(),
 	  		$("#phoneType").val()
 	  	];
 
+	  	alert(data);
+
 		$.ajax({
-		  url: 'configuracion/store',
+		  url: '../../configuracion/telefono',
 		  headers: {'X-CSRF-TOKEN': $('#token').val()},
 		  type: 'POST',
 		  data : data
+		}).done(function(response){
+
 		});
 
 	});
+
+
 	         
 });
