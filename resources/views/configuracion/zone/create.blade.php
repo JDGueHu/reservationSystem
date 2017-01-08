@@ -32,7 +32,7 @@
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
-	<input type="hidden" name="_token" value="{{ csrf_token() }}"" id="token">
+	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 {!! Form::close() !!}
 
 @endsection

@@ -14,6 +14,7 @@
 	<script src="{{ asset('plugins/data_table/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('plugins/data_table/js/dataTables.bootstrap4.js') }}"></script>
 	<script src="{{ asset('plugins/jquery_confirm/jquery.confirm.js') }}"></script>
+	<script src="{{ asset('plugins/jquery_validation/jquery.validate.js') }}"></script>
 
 </head>
 <body>

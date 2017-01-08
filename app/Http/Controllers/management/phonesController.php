@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\phone;
 
 class phonesController extends Controller
 {
@@ -32,15 +33,19 @@ class phonesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($data)
+    public function store(Request $request)
     {
-        echo "hola";
-      //  if($request->ajax()){
-            //echo $data[0];
-            //     $zone = Zone_type::find($zone_type_id);
-            //     $zones = Zone::getTypeZones($zone_id,$zone->priority);
-            // return response()->json($zones);
-       // }
+       if($request->ajax()){
+            $phone = new phone();
+            $phone->phone = $request->phone;
+            $phone->owner_id = $request->owner_id;
+            $phone->phone_type_id = $request->phone_type_id;
+            $phone->add_tmp = true;
+            $phone->save();
+
+            $phones = phone::where('owner_id','=',$request->owner_id)->get();
+            return response()->json($phones);
+        }
     }
 
     /**

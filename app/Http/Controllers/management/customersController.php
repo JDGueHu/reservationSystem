@@ -32,7 +32,7 @@ class customersController extends Controller
      */
     public function create()
     {
-        $idView = DB::table('customers')->max('id') + rand(1, 1000000000);
+        $idView = "tmp".rand(1, 1000000000);
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
         $phoneTypes = phoneType::orderby('name','ASC')->pluck('name','id');
         $zones = DB::table('zones')

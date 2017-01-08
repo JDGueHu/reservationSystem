@@ -72,8 +72,8 @@
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
-	<input type="hidden" name="_token" value="{{ csrf_token() }}"" id="token">
-	<input type="hidden" name="idView" value="{{ $idView }}"" id="idView">
+	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+	<input type="hidden" name="idView" value="{{ $idView }}" id="idView">
 
 {!! Form::close() !!}
 
@@ -95,8 +95,8 @@
             </div>
             
             <!-- Modal Body -->
-            <div class="modal-body">
-                
+
+            <div class="modal-body"> 
 	              <div class="form-group">
 	              	{!! Form::label('phoneType','Tipo')  !!}
 	 				{!! Form::select('phoneType', $phoneTypes, null, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo','id'=>'phoneType'])  !!}	
@@ -111,7 +111,6 @@
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 	                <button type="button" id="ajaxButton" class="btn btn-primary">Agregar</button>
 	              </div>               
-                
             </div>
         </div>
     </div>
