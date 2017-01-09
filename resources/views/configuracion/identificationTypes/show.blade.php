@@ -25,5 +25,5 @@
 @endsection
 
 @section('js')
-	<script src="{{ asset('js/identificationType/show.js') }}"></script>
+	<script src="{{ asset('js/identificationTypes/show.js') }}"></script>
 @endsection

@@ -44,7 +44,16 @@ class phonesController extends Controller
             $phone->add_tmp = true;
             $phone->save();
 
-            $phones = phone::where('owner_id','=',$request->owner_id)->get();
+            // $phones = DB::table('phones')
+            // ->join('phone_types', 'phones.phone_type_id', '=', 'phone_types.id')
+            // ->where('phones.owner_id','=',$request->owner_id)
+            // ->get();
+
+            $phones = phone::where('owner_id','=',$request->owner_id)
+                        ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                        ->select('phones.id','phone_types.name','phones.phone')
+                        ->get();
+
             return response()->json($phones);
         }
     }
@@ -89,8 +98,15 @@ class phonesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$tmpView)
     {
-        //
+        $phone = phone::find($id);
+        $phone->delete();
+
+        $phones = phone::where('owner_id','=',$tmpView)
+            ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+            ->get();
+
+        return response()->json($phones);
     }
 }

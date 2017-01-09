@@ -22,6 +22,10 @@ class Zone extends Model
     	return $this->belongsTo('App\Zone');
     }
 
+    public function customers(){
+        return $this->hasMany('App\customer');
+    }
+
     public static function getTypeZones($zone_id,$priority){
         return DB::table('zones')
             ->join('zone_types','zones.zone_type_id','=','zone_types.id')

@@ -9,27 +9,33 @@
 		<table id="example" class="table table-condensed" cellspacing="0" width="100%">
 			<thead>
 		        <tr>
+		        	<th>Tipo identificación</th>
 					<th>Identificación</th>
 					<th>Nombre</th>
+					<th>Razón social</th>
+					<th>Dirección</th>
+					<th>Ciudad</th>
 					<th>Dirección</th>
 					<th>email</th>
-					<th>business_name</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
  				@foreach($customers as $customer)
 					<tr>
+						<td>{{ $customer->identification_type->initials }}</td>
 						<td>{{ $customer->identification }}</td>
 						<td>{{ $customer->name }}</td>
+						<td>{{ $customer->business_name }}</td>
+						<td>{{ $customer->address }}</td>
+						<td>{{ $customer->zone->name }}</td>
 						<td>{{ $customer->address }}</td>
 						<td>{{ $customer->email }}</td>
-						<td>{{ $customer->business_name }}</td>
 						<td>								
-							<a title="Consultar" href="" class="btn btn-default btn-xs">
+							<a title="Ver" href="{{ route('cliente.show',$customer->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
-							<a title="Editar" href="" class="btn btn-warning btn-xs">
+							<a title="Editar" href="{{ route('cliente.edit',$customer->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
 							<a title="Eliminar" href="" class="btn btn-danger btn-xs confirm">

@@ -22,7 +22,7 @@
 						<td>{{ $type->name }}</td>
 						<td>{{ $type->priority }}</td>
 						<td>
-							<a title="Consultar" href="{{ route('tipoZona.show',$type->id) }}" class="btn btn-default btn-xs">
+							<a title="Ver" href="{{ route('tipoZona.show',$type->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
 							<a title="Editar" href="{{ route('tipoZona.edit',$type->id) }}" class="btn btn-warning btn-xs">

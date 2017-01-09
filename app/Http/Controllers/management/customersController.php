@@ -21,7 +21,6 @@ class customersController extends Controller
     {
 
         $customers = customer::orderby('name','ASC')->get();
-        DB::table('phones')->where('add_tmp', '=', true)->delete();
 
         return view('management.customers.index')
             ->with('customers',$customers);
@@ -68,7 +67,9 @@ class customersController extends Controller
         $customer->email = $request->email;
         $customer->save();
 
-        $telefonos = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);
+        $phones = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);
+
+        DB::table('phones')->where('add_tmp', '=', true)->delete();
 
         flash('Cliente <b>'.$customer->name.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('cliente.index');
@@ -83,7 +84,22 @@ class customersController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = customer::find($id);
+        $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
+        $phones = phone::where('owner_id','=',$customer->id)
+                    ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                    ->get();
+        $zones = DB::table('zones')
+            ->join('zone_types', 'zones.zone_type_id', '=', 'zone_types.id')
+            ->select('zones.name','zones.id')
+            ->where('zone_types.name','=','CIUDAD')
+                ->pluck('name','id');
+
+        return view('management.customers.show')
+                ->with('customer',$customer)
+                ->with('identificationTypes',$identificationTypes)
+                ->with('zones',$zones)
+                ->with('phones',$phones);
     }
 
     /**
@@ -94,7 +110,27 @@ class customersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = customer::find($id);
+        $idView = "tmp".rand(1, 1000000000);
+        $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
+        $phones = phone::where('owner_id','=',$customer->id)
+                    ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                    ->select('phone_types.name','phones.phone','phones.id')
+                    ->get();
+        $phoneTypes = phoneType::orderby('name','ASC')->pluck('name','id');
+        $zones = DB::table('zones')
+            ->join('zone_types', 'zones.zone_type_id', '=', 'zone_types.id')
+            ->select('zones.name','zones.id')
+            ->where('zone_types.name','=','CIUDAD')
+                ->pluck('name','id');
+
+        return view('management.customers.edit')
+                ->with('customer',$customer)
+                ->with('identificationTypes',$identificationTypes)
+                ->with('zones',$zones)
+                ->with('phones',$phones)
+                ->with('phoneTypes',$phoneTypes)
+                ->with('idView',$idView);
     }
 
     /**

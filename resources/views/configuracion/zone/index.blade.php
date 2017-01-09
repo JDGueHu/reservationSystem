@@ -28,7 +28,7 @@
 							<td>{{ $zone->zone->name }}</td>
 						@endif
 						<td>								
-							<a title="Consultar" href="{{ route('zona.show',$zone->id) }}" class="btn btn-default btn-xs">
+							<a title="Ver" href="{{ route('zona.show',$zone->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
 							<a title="Editar" href="{{ route('zona.edit',$zone->id) }}" class="btn btn-warning btn-xs">

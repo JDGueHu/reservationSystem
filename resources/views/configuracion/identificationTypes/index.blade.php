@@ -20,7 +20,7 @@
 						<td>{{ $type->initials }}</td>
 						<td>{{ $type->name }}</td>
 						<td>
-							<a title="Consultar" href="{{ route('tipoIdentificacion.show',$type->id) }}" class="btn btn-default btn-xs">
+							<a title="Ver" href="{{ route('tipoIdentificacion.show',$type->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
 							<a title="Editar" href="{{ route('tipoIdentificacion.edit',$type->id) }}" class="btn btn-warning btn-xs">
