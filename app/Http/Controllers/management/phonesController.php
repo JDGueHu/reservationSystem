@@ -98,12 +98,12 @@ class phonesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,$tmpView)
+    public function destroy($id)
     {
         $phone = phone::find($id);
         $phone->delete();
 
-        $phones = phone::where('owner_id','=',$tmpView)
+        $phones = phone::where('owner_id','=',$id)
             ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
             ->get();
 

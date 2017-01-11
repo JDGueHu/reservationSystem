@@ -69,7 +69,7 @@ class customersController extends Controller
 
         $phones = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);
 
-        DB::table('phones')->where('add_tmp', '=', true)->delete();
+        //DB::table('phones')->where('add_tmp', '=', true)->delete();
 
         flash('Cliente <b>'.$customer->name.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('cliente.index');
@@ -153,6 +153,12 @@ class customersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = customer::find($id);
+        $customer->delete();
+
+        DB::table('phones')->where('owner_id', '=', $id)->delete();
+
+        flash('Cliente <b>'.$customer->name.'</b> se eliminó exitosamente', 'danger')->important();
+        return redirect()->route('cliente.index'); 
     }
 }

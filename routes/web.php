@@ -67,7 +67,7 @@ Route::group(['prefix'=>'administracion'],function(){
 	]);
 
 	Route::resource('telefono','phonesController');
-	Route::get('telefono/{id}/{tmpView}/destroy',[
+	Route::get('telefono/{id}/destroy',[
 		'uses' => 'phonesController@destroy',
 		'as' => 'telefono.destroy'
 	]);

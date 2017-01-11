@@ -38,7 +38,7 @@
 							<a title="Editar" href="{{ route('cliente.edit',$customer->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="" class="btn btn-danger btn-xs confirm">
+							<a title="Eliminar" href="{{ route('cliente.destroy',$customer->id) }}" class="btn btn-danger btn-xs confirm">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>

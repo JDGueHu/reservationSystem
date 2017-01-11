@@ -120,7 +120,6 @@ class ZonesController extends Controller
         $zone = Zone::find($id);
         $zone->delete();
 
-
         flash('Zona <b>'.$zone->name.'</b> se eliminó exitosamente', 'danger')->important();
         return redirect()->route('zona.index'); 
     }
