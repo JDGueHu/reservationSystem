@@ -35,27 +35,27 @@ class phonesController extends Controller
      */
     public function store(Request $request)
     {
-       if($request->ajax()){
-            $phone = new phone();
-            $phone->phone = $request->phone;
-            $phone->owner = "Customer";
-            $phone->owner_id = $request->owner_id;
-            $phone->phone_type_id = $request->phone_type_id;
-            $phone->add_tmp = true;
-            $phone->save();
 
-            // $phones = DB::table('phones')
-            // ->join('phone_types', 'phones.phone_type_id', '=', 'phone_types.id')
-            // ->where('phones.owner_id','=',$request->owner_id)
-            // ->get();
+        $phone = new phone();
+        $phone->phone = $request->phone;
+        $phone->owner = "Customer";
+        $phone->owner_id = $request->idView;
+        $phone->phone_type_id = $request->phone_type_id;
+        $phone->add_tmp = true;
+        $phone->save();
 
-            $phones = phone::where('owner_id','=',$request->owner_id)
-                        ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
-                        ->select('phones.id','phone_types.name','phones.phone')
-                        ->get();
+        // $phones = DB::table('phones')
+        // ->join('phone_types', 'phones.phone_type_id', '=', 'phone_types.id')
+        // ->where('phones.owner_id','=',$request->owner_id)
+        // ->get();
 
-            return response()->json($phones);
-        }
+        $phones = phone::where('owner_id','=',$request->idView)
+                    ->orWhere('owner_id','=',$request->customerId)
+                    ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                    ->select('phones.id','phone_types.name','phones.phone')
+                    ->get();
+
+        return response()->json($phones);
     }
 
     /**
@@ -98,14 +98,28 @@ class phonesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($phoneId,$viewId,$operation,$customerId)
     {
-        $phone = phone::find($id);
+        $phone = phone::find($phoneId);
         $phone->delete();
 
-        $phones = phone::where('owner_id','=',$id)
+        if($operation == "edit"){
+
+            //retorna los registros de telefonos que tengan el mismo id de vista o el mismo id de cliente
+          $phones = phone::where('owner_id','=',$viewId)
+            ->orWhere('owner_id','=',$customerId)
+            ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+            ->select('phones.id','phone_types.name','phones.phone')
+            ->get();         
+
+        }
+        else{
+
+        $phones = phone::where('owner_id','=',$viewId)
             ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
             ->get();
+
+        }
 
         return response()->json($phones);
     }

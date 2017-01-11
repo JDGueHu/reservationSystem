@@ -142,7 +142,20 @@ class customersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = customer::find($id);
+        $customer->identification_type_id = $request->identification_type_id;
+        $customer->identification = $request->identification;
+        $customer->name = $request->name;
+        $customer->business_name = $request->business_name;
+        $customer->zone_id = $request->zone_id;
+        $customer->address = $request->address;
+        $customer->email = $request->email;
+        $customer->save();
+
+        $phones = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);
+
+        flash('Cliente <b>'.$customer->name.'</b> se modificó exitosamente', 'success')->important();
+        return redirect()->route('cliente.index');
     }
 
     /**

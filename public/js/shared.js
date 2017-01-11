@@ -7,7 +7,8 @@ $( document ).ready(function() {
 
 	$( "#ajaxButton" ).click(function(){
 	  	
-	  	var data = "phone="+$("#phone").val()+"&owner_id="+$("#idView").val()+"&phone_type_id="+$("#phoneType").val();
+	  	//Se envian todo los datos de la vista para creacion del registro de telefono asociado el cliente
+	  	var data = "phone="+$("#phone").val()+"&idView="+$("#idView").val()+"&phone_type_id="+$("#phoneType").val()+"&customerId="+$("#customerId").val();
 
 	  	var url;
 	  	var pathname = window.location.pathname;
@@ -63,11 +64,14 @@ function phoneDelete ($phoneId){
 	if(confirm("Va a eliminar un registro ¿Desea continuar?")){
 
 		var url;
+		var pathname = window.location.pathname;
 
+
+		//Se envian datos identificadores de vista, telefono y cliente para consulta luego de eliminacion de telefono
 	  	if(pathname.substring(pathname.length - 4, pathname.length) == "edit"){
-	  		url = '../../../administracion/telefono/'+$phoneId+'/destroy';
+	  		url = '../../../administracion/telefono/'+$phoneId+'/'+$("#idView").val()+'/edit/'+$("#customerId").val()+'/destroy';
 	  	}else{
-	  		url = '../../administracion/telefono/'+$phoneId+'/destroy';
+	  		url = '../../administracion/telefono/'+$phoneId+'/'+$("#idView").val()+'/create/'+$("#customerId").val()+'/destroy';
 	  	}
 
 		$.ajax({

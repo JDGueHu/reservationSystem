@@ -74,6 +74,7 @@
 
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 	<input type="hidden" name="idView" value="{{ $idView }}" id="idView">
+	<input type="hidden" name="idCustomer" value="-" id="idCustomer">
 
 {!! Form::close() !!}
 
