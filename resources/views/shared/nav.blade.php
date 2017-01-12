@@ -22,7 +22,6 @@
             <li><a href="{{ route('tipoZona.index') }}">Tipos de zona</a></li>
             <li><a href="{{ route('zona.index') }}">Zonas</a></li>
             <li><a href="{{ route('tipoTelefono.index') }}">Tipo de teléfonos</a></li>
-            <li><a href="{{ route('tipoTelefono.index') }}">Teléfonos</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>

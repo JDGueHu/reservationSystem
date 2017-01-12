@@ -15,7 +15,7 @@ class AddPhonesTable extends Migration
     {
         Schema::create('phones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phone')->unique();
+            $table->string('phone');
             $table->string('owner')->nullable();
             $table->string('owner_id')->nullable();
             $table->boolean('add_tmp')->default(false);

@@ -33,7 +33,7 @@ class customersController extends Controller
      */
     public function create()
     {
-        $idView = "tmp".rand(1, 1000000000);
+        $idView = phone::randomToken();
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
         $phoneTypes = phoneType::orderby('name','ASC')->pluck('name','id');
         $zones = DB::table('zones')
@@ -111,7 +111,7 @@ class customersController extends Controller
     public function edit($id)
     {
         $customer = customer::find($id);
-        $idView = "tmp".rand(1, 1000000000);
+        $idView = randomToken();
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
         $phones = phone::where('owner_id','=',$customer->id)
                     ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')

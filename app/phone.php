@@ -13,4 +13,16 @@ class phone extends Model
     	return $this->belongsTo('App\phoneType');
     }
 
+    public static function randomToken(){
+
+        $cadena = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $token = "";
+
+        for($i=0;$i<5;$i++){
+            $token .= $cadena[rand(0,strlen($cadena)-1)];
+        }
+
+        return $token.rand(1, 1000000000);
+    }
+
 }

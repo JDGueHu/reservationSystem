@@ -14,7 +14,7 @@ class phonesController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -35,27 +35,29 @@ class phonesController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->ajax()){
 
-        $phone = new phone();
-        $phone->phone = $request->phone;
-        $phone->owner = "Customer";
-        $phone->owner_id = $request->idView;
-        $phone->phone_type_id = $request->phone_type_id;
-        $phone->add_tmp = true;
-        $phone->save();
+            $phone = new phone();
+            $phone->phone = $request->phone;
+            $phone->owner = "Customer";
+            $phone->owner_id = $request->idView;
+            $phone->phone_type_id = $request->phone_type_id;
+            $phone->add_tmp = true;
+            $phone->save();
 
-        // $phones = DB::table('phones')
-        // ->join('phone_types', 'phones.phone_type_id', '=', 'phone_types.id')
-        // ->where('phones.owner_id','=',$request->owner_id)
-        // ->get();
+            // $phones = DB::table('phones')
+            // ->join('phone_types', 'phones.phone_type_id', '=', 'phone_types.id')
+            // ->where('phones.owner_id','=',$request->owner_id)
+            // ->get();
 
-        $phones = phone::where('owner_id','=',$request->idView)
-                    ->orWhere('owner_id','=',$request->customerId)
-                    ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
-                    ->select('phones.id','phone_types.name','phones.phone')
-                    ->get();
+            $phones = phone::where('owner_id','=',$request->idView)
+                        ->orWhere('owner_id','=',$request->customerId)
+                        ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                        ->select('phones.id','phone_types.name','phones.phone')
+                        ->get();
 
-        return response()->json($phones);
+            return response()->json($phones);
+        }
     }
 
     /**
@@ -98,29 +100,33 @@ class phonesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($phoneId,$viewId,$operation,$customerId)
+    public function destroy(Request $request)
     {
-        $phone = phone::find($phoneId);
-        $phone->delete();
 
-        if($operation == "edit"){
+        if($request->ajax()){
+
+            $phone = phone::find($request->phoneId);
+            $phone->delete();
+
+            if($request->operation == "edit"){
 
             //retorna los registros de telefonos que tengan el mismo id de vista o el mismo id de cliente
-          $phones = phone::where('owner_id','=',$viewId)
-            ->orWhere('owner_id','=',$customerId)
-            ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
-            ->select('phones.id','phone_types.name','phones.phone')
-            ->get();         
+            $phones = phone::where('owner_id','=',$request->idView)
+                ->orWhere('owner_id','=',$request->customerId)
+                ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                ->select('phones.id','phone_types.name','phones.phone')
+                ->get();         
 
+            }
+            else{
+
+            $phones = phone::where('owner_id','=',$request->idView)
+                ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                ->get();
+
+            }
+
+            return response()->json($phones);
         }
-        else{
-
-        $phones = phone::where('owner_id','=',$viewId)
-            ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
-            ->get();
-
-        }
-
-        return response()->json($phones);
     }
 }

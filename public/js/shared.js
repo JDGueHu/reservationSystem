@@ -65,20 +65,25 @@ function phoneDelete ($phoneId){
 
 		var url;
 		var pathname = window.location.pathname;
-
+		var operation;
 
 		//Se envian datos identificadores de vista, telefono y cliente para consulta luego de eliminacion de telefono
 	  	if(pathname.substring(pathname.length - 4, pathname.length) == "edit"){
-	  		url = '../../../administracion/telefono/'+$phoneId+'/'+$("#idView").val()+'/edit/'+$("#customerId").val()+'/destroy';
+	  		url = '../../../administracion/telefono/destroy';
+	  		operation = "edit";
 	  	}else{
-	  		url = '../../administracion/telefono/'+$phoneId+'/'+$("#idView").val()+'/create/'+$("#customerId").val()+'/destroy';
+	  		url = '../../administracion/telefono/destroy';
+	  		operation = "create";
 	  	}
+
+	  	var data = "phoneId="+$phoneId+"&idView="+$("#idView").val()+"&operation="+operation+"&customerId="+$("#customerId").val();
 
 		$.ajax({
 		  url: url,
 		  headers: {'X-CSRF-TOKEN': $('#token').val()},
-		  type: 'GET',
-		  datatype:'json'
+		  type: 'POST',
+		  datatype:'json',
+		  data : data
 		}).done(function(response){
 
 			$("#example").empty();
