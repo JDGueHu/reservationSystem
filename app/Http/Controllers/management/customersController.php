@@ -154,7 +154,7 @@ class customersController extends Controller
 
         $phones = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);
 
-        flash('Cliente <b>'.$customer->name.'</b> se modificó exitosamente', 'success')->important();
+        flash('Cliente <b>'.$customer->name.'</b> se modificó exitosamente', 'warning')->important();
         return redirect()->route('cliente.index');
     }
 

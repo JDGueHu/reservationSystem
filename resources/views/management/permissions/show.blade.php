@@ -10,6 +10,11 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('module_id','Módulo')  !!}
+		{!! Form::select('module_id', $modules, $permission->module_id, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione módulo','id'=>'module_id'])  !!}	
+	</div>
+
+	<div class="form-group">
 		{!! Form::label('name','Nombre')  !!}
 		{!! Form::text('name',$permission->name,['class' => 'form-control', 'required','placeholder' => 'Nombre', 'id' => 'name'])  !!}
 	</div>

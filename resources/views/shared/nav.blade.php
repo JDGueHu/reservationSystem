@@ -22,6 +22,7 @@
             <li><a href="{{ route('tipoZona.index') }}">Tipos de zona</a></li>
             <li><a href="{{ route('zona.index') }}">Zonas</a></li>
             <li><a href="{{ route('tipoTelefono.index') }}">Tipo de teléfonos</a></li>
+            <li><a href="{{ route('modulo.index') }}">Módulos</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>
@@ -32,6 +33,7 @@
             <!--li role="separator" class="divider"></li-->
             <li><a href="{{ route('cliente.index') }}">Clientes</a></li>
             <li><a href="{{ route('permiso.index') }}">Permisos</a></li>
+            <li><a href="{{ route('rol.index') }}">Roles</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>

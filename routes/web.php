@@ -56,6 +56,12 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'tipoTelefono.destroy'
 	]);
 
+	Route::resource('modulo','modulesController');
+	Route::get('modulo/{id}/destroy',[
+		'uses' => 'modulesController@destroy',
+		'as' => 'modulo.destroy'
+	]);
+
 });
 
 Route::group(['prefix'=>'administracion'],function(){
@@ -78,7 +84,15 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'permiso.destroy'
 	]);
 
-
+	Route::resource('rol','rolesController');
+	Route::get('rol/{id}/destroy',[
+		'uses' => 'rolesController@destroy',
+		'as' => 'rol.destroy'
+	]);
+	Route::get('rol/{id}/permissions',[
+		'uses' => 'rolesController@permissions',
+		'as' => 'rol.permissions'
+	]);
 
 });
 

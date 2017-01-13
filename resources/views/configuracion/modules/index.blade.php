@@ -1,34 +1,32 @@
 @extends('shared.main')
-@section('title','Administración/Permisos')
+@section('title','Configuración/Módulos')
 
 @section('content')
 
-	<a href="{{ route('permiso.create') }}" class="btn btn-primary">Crear</a>	
+	<a href="{{ route('modulo.create') }}" class="btn btn-primary">Crear</a>	
 	<hr>
 	<div class="table-responsive">
 		<table id="example" class="table table-condensed" cellspacing="0" width="100%">
 			<thead>
 		        <tr>
-		        	<th>Iniciales</th>
-					<th>Módulo</th>
-					<th>Nombre</th>
+		        	<th>Nombre tabla</th>
+					<th>Nombre módulo</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
- 				@foreach($permissions as $permission)
+ 				@foreach($modules as $module)
 					<tr>
-						<td>{{ $permission->initials }}</td>
-						<td>{{ $permission->module->name }}</td>
-						<td>{{ $permission->name }}</td>
+						<td>{{ $module->table }}</td>
+						<td>{{ $module->name }}</td>
 						<td>								
-							<a title="Ver" href="{{ route('permiso.show',$permission->id) }}" class="btn btn-default btn-xs">
+							<a title="Ver" href="{{ route('modulo.show',$module->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
-							<a title="Editar" href="{{ route('permiso.edit',$permission->id) }}" class="btn btn-warning btn-xs">
+							<a title="Editar" href="{{ route('modulo.edit',$module->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="{{ route('permiso.destroy',$permission->id) }}" class="btn btn-danger btn-xs confirm">
+							<a title="Eliminar" href="{{ route('modulo.destroy',$module->id) }}" class="btn btn-danger btn-xs confirm">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>

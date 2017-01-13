@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\permission;
+use App\module;
 
 class permissionsController extends Controller
 {
@@ -25,7 +26,8 @@ class permissionsController extends Controller
      */
     public function create()
     {
-        return view('management.permissions.create');
+        $modules = module::orderby("name",'ASC')->pluck('name','id');
+        return view('management.permissions.create')->with('modules',$modules);
     }
 
     /**
@@ -38,6 +40,7 @@ class permissionsController extends Controller
     {
         $permission = new permission();
         $permission->initials = $request->initials;
+        $permission->module_id = $request->module_id;
         $permission->name = $request->name;
         $permission->save();
 
@@ -54,8 +57,10 @@ class permissionsController extends Controller
     public function show($id)
     {
         $permission = permission::find($id);
-
-        return view('management.permissions.show')->with('permission',$permission);
+        $modules = module::orderby("name",'ASC')->pluck('name','id');
+        return view('management.permissions.show')   
+            ->with('permission',$permission)
+            ->with('modules',$modules);
     }
 
     /**
@@ -67,8 +72,10 @@ class permissionsController extends Controller
     public function edit($id)
     {
         $permission = permission::find($id);
-
-        return view('management.permissions.edit')->with('permission',$permission);
+        $modules = module::orderby("name",'ASC')->pluck('name','id');
+        return view('management.permissions.edit')
+            ->with('permission',$permission)
+            ->with('modules',$modules);
     }
 
     /**
@@ -82,10 +89,11 @@ class permissionsController extends Controller
     {
         $permission = permission::find($id);
         $permission->initials = $request->initials;
+        $permission->module_id = $request->module_id;
         $permission->name = $request->name;
         $permission->save();
 
-        flash('Permiso <b>'.$permission->name.'</b> se modificó exitosamente', 'success')->important();
+        flash('Permiso <b>'.$permission->name.'</b> se modificó exitosamente', 'warning')->important();
         return redirect()->route('permiso.index');
 
     }
