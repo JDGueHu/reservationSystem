@@ -72,6 +72,14 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'telefono.destroy'
 	]);
 
+	Route::resource('permiso','permissionsController');
+	Route::get('permiso/{id}/destroy',[
+		'uses' => 'permissionsController@destroy',
+		'as' => 'permiso.destroy'
+	]);
+
+
+
 });
 
 

@@ -31,6 +31,7 @@
           <ul class="dropdown-menu">
             <!--li role="separator" class="divider"></li-->
             <li><a href="{{ route('cliente.index') }}">Clientes</a></li>
+            <li><a href="{{ route('permiso.index') }}">Permisos</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>

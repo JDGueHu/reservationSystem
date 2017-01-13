@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Tipo Zona/Consultar')
+@section('title','Configuración/Tipo Zona/Ver')
 
 @section('content')
 {!! Form::model($type) !!}
