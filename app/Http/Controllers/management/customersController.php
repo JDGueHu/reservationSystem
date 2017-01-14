@@ -111,7 +111,7 @@ class customersController extends Controller
     public function edit($id)
     {
         $customer = customer::find($id);
-        $idView = randomToken();
+        $idView = phone::randomToken();
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
         $phones = phone::where('owner_id','=',$customer->id)
                     ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
