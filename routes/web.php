@@ -89,9 +89,20 @@ Route::group(['prefix'=>'administracion'],function(){
 		'uses' => 'rolesController@destroy',
 		'as' => 'rol.destroy'
 	]);
-	Route::get('rol/{id}/permissions',[
+
+	Route::get('rol/{roleId}/permissions',[
 		'uses' => 'rolesController@permissions',
 		'as' => 'rol.permissions'
+	]);
+
+	Route::post('rol/permissionsStore',[
+		'uses' => 'phonesController@permissionsStore',
+		'as' => 'rol.permissionsStore'
+	]);
+
+	Route::post('rol/permissionsDelete',[
+		'uses' => 'phonesController@permissionsDelete',
+		'as' => 'rol.permissionsDelete'
 	]);
 
 });

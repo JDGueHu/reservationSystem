@@ -10,7 +10,7 @@
 			@foreach($permissions as $permission)			
 				@if($module->id == $permission->module_id)
 					<div class="col-md-4">
-					{!! Form::checkbox('name', $permission->name,false,['id'=> $permission->id])  !!}
+					{!! Form::checkbox('name', $permission->name,false,['id'=> $permission->id,'class' => 'permission'])  !!}
 					{{Form::label('initials',$permission->name)}}	
 					</div>
 				@endif
@@ -26,7 +26,13 @@
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
+	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+	<input type="hidden" name="roleId" value="{{ $roleId }}" id="roleId">
+
 {!! Form::close() !!}
 
+@endsection
 
+@section('js')
+	<script src="{{ asset('js/roles/ajax.js') }}"></script>
 @endsection

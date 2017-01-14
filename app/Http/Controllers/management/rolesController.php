@@ -104,7 +104,7 @@ class rolesController extends Controller
         return redirect()->route('rol.index'); 
     }
 
-    public function permissions($id)
+    public function permissions($roleId)
     {
         $modules = DB::table('permissions')
             ->join('modules', 'permissions.module_id', '=', 'modules.id')
@@ -116,6 +116,17 @@ class rolesController extends Controller
 
         return view('management.roles.permissions')
             ->with('modules',$modules)
-            ->with('permissions',$permissions); 
+            ->with('permissions',$permissions)
+            ->with('roleId',$roleId); 
     }
+
+    public function permissionsStore(Request $request){
+
+    }
+
+    public function permissionsDelete(Request $request)){
+        
+    }
+
+
 }
