@@ -65,6 +65,7 @@ class customersController extends Controller
         $customer->zone_id = $request->zone_id;
         $customer->address = $request->address;
         $customer->email = $request->email;
+        $customer->domain = $request->domain;
         $customer->save();
 
         $phones = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);

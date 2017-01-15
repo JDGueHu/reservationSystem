@@ -6,4 +6,5 @@ $( document ).ready(function() {
 	$("#name").prop( "disabled", true );
 	$("#address").prop( "disabled", true );
 	$("#email").prop( "disabled", true );
+	$("#domain").prop( "disabled", true );
 });

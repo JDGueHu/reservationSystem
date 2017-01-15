@@ -7,41 +7,45 @@
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('identification_type_id','Tipo identificación')  !!}
-			{!! Form::select('identification_type_id', $identificationTypes, null, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo identificación','id'=>'identification_type_id'])  !!}	
+			{!! Form::select('identification_type_id', $identificationTypes, $customer->identification_type_id, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo identificación','id'=>'identification_type_id'])  !!}	
 		</div>
 		<div class="col-md-6">
 			{!! Form::label('identification','Nro. identificación')  !!}
-			{!! Form::text('identification',null,['class' => 'form-control', 'required','placeholder' => 'Nro. identificación','id'=>'identification'])  !!}
+			{!! Form::text('identification',$customer->identification,['class' => 'form-control', 'required','placeholder' => 'Nro. identificación','id'=>'identification'])  !!}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('name','Nombre')  !!}
-			{!! Form::text('name',null,['class' => 'form-control', 'required','placeholder' => 'Nombre','id'=>'name'])  !!}
+			{!! Form::text('name',$customer->name,['class' => 'form-control', 'required','placeholder' => 'Nombre','id'=>'name'])  !!}
 		</div>
 		<div class="col-md-6">
 			{!! Form::label('business_name','Razón social')  !!}
-			{!! Form::text('business_name',null,['class' => 'form-control', 'required','placeholder' => 'Razón social','id'=>'business_name'])  !!}
+			{!! Form::text('business_name',$customer->bussines_name,['class' => 'form-control', 'required','placeholder' => 'Razón social','id'=>'business_name'])  !!}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('zone_id','Ciudad')  !!}
-			{!! Form::select('zone_id', $zones, null, ['class' => 'form-control', 'required', 'placeholder' => 'Ciudad','id'=>'zone_id'])  !!}	
+			{!! Form::select('zone_id', $zones, $customer->zone_id, ['class' => 'form-control', 'required', 'placeholder' => 'Ciudad','id'=>'zone_id'])  !!}	
 		</div>
 		<div class="col-md-6">
 			{!! Form::label('address','Dirección')  !!}
-			{!! Form::text('address',null,['class' => 'form-control', 'required','placeholder' => 'Dirección','id'=>'address'])  !!}
+			{!! Form::text('address',$customer->address,['class' => 'form-control', 'required','placeholder' => 'Dirección','id'=>'address'])  !!}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('email','Email')  !!}
-			{!! Form::email('email', null, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
+			{!! Form::email('email', $customer->email, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
 		</div>
+		<div class="col-md-6">		
+			{!! Form::label('domain','Dominio')  !!}
+			{!! Form::text('domain', $customer->domain, ['class' => 'form-control','required','placeholder' => 'Dominio','id'=>'domain' ]) !!}
+		</div>	
 	</div>
 
 	<div class="row">

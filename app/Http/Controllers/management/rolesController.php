@@ -114,18 +114,50 @@ class rolesController extends Controller
 
         $permissions = permission::orderby('name','ASC')->get();
 
+        $permissions_x_rol = role::find($roleId)->permissions()->pluck('permissions.id');
+
         return view('management.roles.permissions')
             ->with('modules',$modules)
             ->with('permissions',$permissions)
-            ->with('roleId',$roleId); 
+            ->with('roleId',$roleId)
+            ->with('permissions_x_rol',$permissions_x_rol); 
     }
 
     public function permissionsStore(Request $request){
 
+        if($request->ajax()){
+
+            $role = role::find($request->roleId);
+            $role->permissions()->attach($request->permissionId);
+
+
+            $phones = "Permiso agregado";
+
+            return response()->json($phones);
+        }
+
     }
 
-    public function permissionsDelete(Request $request)){
+    public function permissionsDelete(Request $request){
+
+
+        if($request->ajax()){
+
+            $role = role::find($request->roleId);
+            $role->permissions()->detach($request->permissionId);
+
+            $phones = "Permiso eliminado";
+
+            return response()->json($phones);
+        }
         
+    }
+
+    public function permissionsSave(){
+
+        flash('Permisos <b>asignados</b> exitosamente', 'success')->important();
+        return redirect()->route('rol.index');
+
     }
 
 

@@ -13,9 +13,7 @@
 					<th>Identificación</th>
 					<th>Nombre</th>
 					<th>Razón social</th>
-					<th>Dirección</th>
 					<th>Ciudad</th>
-					<th>Dirección</th>
 					<th>email</th>
 					<th>Acciones</th>
 				</tr>
@@ -27,9 +25,7 @@
 						<td>{{ $customer->identification }}</td>
 						<td>{{ $customer->name }}</td>
 						<td>{{ $customer->business_name }}</td>
-						<td>{{ $customer->address }}</td>
 						<td>{{ $customer->zone->name }}</td>
-						<td>{{ $customer->address }}</td>
 						<td>{{ $customer->email }}</td>
 						<td>								
 							<a title="Ver" href="{{ route('cliente.show',$customer->id) }}" class="btn btn-default btn-xs">

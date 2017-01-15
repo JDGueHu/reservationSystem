@@ -42,6 +42,10 @@
 			{!! Form::label('email','Email')  !!}
 			{!! Form::email('email', $customer->email, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
 		</div>
+		<div class="col-md-6">		
+			{!! Form::label('domain','Dominio')  !!}
+			{!! Form::text('domain', $customer->domain, ['class' => 'form-control','required','placeholder' => 'Dominio','id'=>'domain' ]) !!}
+		</div>
 	</div>
 
 	<div class="row">

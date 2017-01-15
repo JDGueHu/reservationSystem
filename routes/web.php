@@ -96,13 +96,18 @@ Route::group(['prefix'=>'administracion'],function(){
 	]);
 
 	Route::post('rol/permissionsStore',[
-		'uses' => 'phonesController@permissionsStore',
+		'uses' => 'rolesController@permissionsStore',
 		'as' => 'rol.permissionsStore'
 	]);
 
 	Route::post('rol/permissionsDelete',[
-		'uses' => 'phonesController@permissionsDelete',
+		'uses' => 'rolesController@permissionsDelete',
 		'as' => 'rol.permissionsDelete'
+	]);
+
+	Route::post('rol/permissionsSave',[
+		'uses' => 'rolesController@permissionsSave',
+		'as' => 'rol.permissionsSave'
 	]);
 
 });

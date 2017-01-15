@@ -20,6 +20,7 @@ class AddCustomerTable extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('business_name'); 
+            $table->string('domain'); 
 
             $table->integer('identification_type_id')->unsigned();
             $table->foreign('identification_type_id')->references('id')->on('identification_types');
