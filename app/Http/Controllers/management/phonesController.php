@@ -39,19 +39,14 @@ class phonesController extends Controller
 
             $phone = new phone();
             $phone->phone = $request->phone;
-            $phone->owner = "Customer";
+            $phone->owner = $request->owner;
             $phone->owner_id = $request->idView;
             $phone->phone_type_id = $request->phone_type_id;
             $phone->add_tmp = true;
             $phone->save();
 
-            // $phones = DB::table('phones')
-            // ->join('phone_types', 'phones.phone_type_id', '=', 'phone_types.id')
-            // ->where('phones.owner_id','=',$request->owner_id)
-            // ->get();
-
             $phones = phone::where('owner_id','=',$request->idView)
-                        ->orWhere('owner_id','=',$request->customerId)
+                        ->orWhere('owner_id','=',$request->registerId)
                         ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
                         ->select('phones.id','phone_types.name','phones.phone')
                         ->get();
@@ -112,7 +107,7 @@ class phonesController extends Controller
 
             //retorna los registros de telefonos que tengan el mismo id de vista o el mismo id de cliente
             $phones = phone::where('owner_id','=',$request->idView)
-                ->orWhere('owner_id','=',$request->customerId)
+                ->orWhere('owner_id','=',$request->registerId)
                 ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
                 ->select('phones.id','phone_types.name','phones.phone')
                 ->get();         

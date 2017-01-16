@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Administración/Clientes/Crear')
+@section('title','Administración/Cliente/Crear')
 
 @section('content')
 {!! Form::open(['route' => 'cliente.store', 'method' => 'POST']) !!}
@@ -78,7 +78,8 @@
 
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 	<input type="hidden" name="idView" value="{{ $idView }}" id="idView">
-	<input type="hidden" name="customerId" value="-" id="customerId">
+	<input type="hidden" name="registerId" value="-" id="registerId">
+	<input type="hidden" name="owner" value="customer" id="owner">
 
 {!! Form::close() !!}
 

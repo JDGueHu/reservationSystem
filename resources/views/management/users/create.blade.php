@@ -1,51 +1,49 @@
 @extends('shared.main')
-@section('title','Administración/Cliente/Editar')
+@section('title','Administración/Usuario/Crear')
 
 @section('content')
-{!! Form::model($customer,['route' => ['cliente.update',$customer->id], 'method' => 'PUT']) !!}
+{!! Form::open(['route' => 'usuario.store', 'method' => 'POST']) !!}
 
 	<div class="row">
 		<div class="col-md-6">		
-			{!! Form::label('identification_type_id','Tipo identificación')  !!}
-			{!! Form::select('identification_type_id', $identificationTypes, $customer->identification_type_id, ['class' => 'form-control', 'required', 'placeholder' => 'Tipo identificación','id'=>'identification_type_id'])  !!}	
+			{!! Form::label('name','Nombres')  !!}
+			{!! Form::text('name',null,['class' => 'form-control', 'required','placeholder' => 'Nombres','id'=>'name'])  !!}
 		</div>
-		<div class="col-md-6">
-			{!! Form::label('identification','Nro. identificación')  !!}
-			{!! Form::text('identification',$customer->identification,['class' => 'form-control', 'required','placeholder' => 'Nro. identificación','id'=>'identification'])  !!}
-		</div>
-	</div>
-
-	<div class="row">
 		<div class="col-md-6">		
-			{!! Form::label('name','Nombre')  !!}
-			{!! Form::text('name',$customer->name,['class' => 'form-control', 'required','placeholder' => 'Nombre','id'=>'name'])  !!}
-		</div>
-		<div class="col-md-6">
-			{!! Form::label('business_name','Razón social')  !!}
-			{!! Form::text('business_name',$customer->bussines_name,['class' => 'form-control', 'required','placeholder' => 'Razón social','id'=>'business_name'])  !!}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-6">		
-			{!! Form::label('zone_id','Ciudad')  !!}
-			{!! Form::select('zone_id', $zones, $customer->zone_id, ['class' => 'form-control', 'required', 'placeholder' => 'Ciudad','id'=>'zone_id'])  !!}	
-		</div>
-		<div class="col-md-6">
-			{!! Form::label('address','Dirección')  !!}
-			{!! Form::text('address',$customer->address,['class' => 'form-control', 'required','placeholder' => 'Dirección','id'=>'address'])  !!}
+			{!! Form::label('last_name','Apellidos')  !!}
+			{!! Form::text('last_name',null,['class' => 'form-control', 'required','placeholder' => 'Apellidos','id'=>'last_name'])  !!}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('email','Email')  !!}
-			{!! Form::email('email', $customer->email, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
+			{!! Form::email('email', null, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
+		</div>
+		<div class="col-md-6">
+			{!! Form::label('password','Contraseña')  !!}
+			{{ Form::password('password', ['class' => 'form-control', 'required','placeholder' => 'Contraseña','id'=>'password']) }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">		
+		</div>
+		<div class="col-md-6">
+			{!! Form::label('password2','Repetir ontraseña')  !!}
+			{{ Form::password('password2', ['class' => 'form-control', 'required','placeholder' => 'Repetir ontraseña','id'=>'password2']) }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">		
+			{!! Form::label('role_id','Rol')  !!}
+			{!! Form::select('role_id', $roles, null, ['class' => 'form-control', 'required', 'placeholder' => 'Rol','id'=>'role_id'])  !!}	
 		</div>
 		<div class="col-md-6">		
-			{!! Form::label('domain','Dominio')  !!}
-			{!! Form::text('domain', $customer->domain, ['class' => 'form-control','required','placeholder' => 'Dominio','id'=>'domain' ]) !!}
-		</div>	
+			{!! Form::label('customer_id','Cliente')  !!}
+			{!! Form::select('customer_id', $customers, null, ['class' => 'form-control', 'required', 'placeholder' => 'Cliente','id'=>'customer_id'])  !!}	
+		</div>
 	</div>
 
 	<div class="row">
@@ -65,17 +63,6 @@
 				</tr>
 			</thead>
 			<tbody>
- 				@foreach($phones as $phone)
-					<tr>
-						<td>{{ $phone->name }}</td>
-						<td>{{ $phone->phone }}</td>
-						<td>
-							<a title="Eliminar" onclick="phoneDelete({{ $phone->id }})" class="btn btn-danger btn-xs">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							</a>
-						</td>
-					</tr>
-				@endforeach 
 			</tbody>
 		</table>
 	</div>
@@ -89,8 +76,8 @@
 
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 	<input type="hidden" name="idView" value="{{ $idView }}" id="idView">
-	<input type="hidden" name="registerId" value="{{ $customer->id }}" id="registerId">
-	<input type="hidden" name="owner" value="customer" id="owner">
+	<input type="hidden" name="registerId" value="-" id="registerId">
+	<input type="hidden" name="owner" value="user" id="owner">
 
 {!! Form::close() !!}
 
@@ -110,8 +97,6 @@
                     Agregar teléfono
                 </h4>
             </div>
-            
-            <!-- Modal Body -->
 
             <div class="modal-body"> 
 	              <div class="form-group">

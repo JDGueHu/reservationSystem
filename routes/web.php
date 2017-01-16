@@ -110,6 +110,12 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'rol.permissionsSave'
 	]);
 
+	Route::resource('usuario','usersController');
+	Route::get('usuario/{id}/destroy',[
+		'uses' => 'usersController@destroy',
+		'as' => 'usuario.destroy'
+	]);
+
 });
 
 

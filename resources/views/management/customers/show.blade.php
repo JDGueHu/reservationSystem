@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Administración/Clientes/Ver')
+@section('title','Administración/Cliente/Ver')
 
 @section('content')
 {!! Form::open() !!}

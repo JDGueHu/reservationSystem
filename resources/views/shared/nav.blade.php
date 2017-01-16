@@ -34,6 +34,7 @@
             <li><a href="{{ route('cliente.index') }}">Clientes</a></li>
             <li><a href="{{ route('permiso.index') }}">Permisos</a></li>
             <li><a href="{{ route('rol.index') }}">Roles</a></li>
+            <li><a href="{{ route('usuario.index') }}">Usuarios</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>

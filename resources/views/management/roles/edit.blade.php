@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Tipo Zona/Editar')
+@section('title','Administración/Rol/Editar')
 
 @section('content')
 {!! Form::model($role,['route' => ['rol.update',$role->id], 'method' => 'PUT']) !!}

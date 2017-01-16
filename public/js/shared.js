@@ -8,7 +8,7 @@ $( document ).ready(function() {
 	$( "#ajaxButton" ).click(function(){
 	  	
 	  	//Se envian todo los datos de la vista para creacion del registro de telefono asociado el cliente
-	  	var data = "phone="+$("#phone").val()+"&idView="+$("#idView").val()+"&phone_type_id="+$("#phoneType").val()+"&customerId="+$("#customerId").val();
+	  	var data = "phone="+$("#phone").val()+"&idView="+$("#idView").val()+"&phone_type_id="+$("#phoneType").val()+"&registerId="+$("#registerId").val()+"&owner="+$("#owner").val();
 
 	  	var url;
 	  	var pathname = window.location.pathname;
@@ -18,7 +18,7 @@ $( document ).ready(function() {
 	  	}else{
 	  		url = '../../administracion/telefono';
 	  	}
-
+	  	alert(data);
 	  	if($("#phoneType").val() != ""){
 	  		if($("#phone").val() != ""){
 	  			
@@ -29,6 +29,8 @@ $( document ).ready(function() {
 				  datatype:'json',
 				  data : data
 				}).done(function(response){
+
+					console.log(response);
 					
 					$("#example").empty();
 					$("#example").append("<thead><tr><th>Tipo</th><th>Número telefónico</th><th>Acciones</th></tr></thead>");
@@ -42,7 +44,7 @@ $( document ).ready(function() {
 						for(i=0; i<response.length; i++){
 							actionDelete = '<td><a title="Eliminar" onclick="phoneDelete('+response[i].id+')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><td/>'
 							$("#example").append('<tr role="row" class="odd"><td>'+response[i].name+'</td><td>'+response[i].phone+'</td>'+actionDelete+'</tr>');
-					}
+						}
 					}
 
 					$("#phoneType").val("");
@@ -76,7 +78,7 @@ function phoneDelete ($phoneId){
 	  		operation = "create";
 	  	}
 
-	  	var data = "phoneId="+$phoneId+"&idView="+$("#idView").val()+"&operation="+operation+"&customerId="+$("#customerId").val();
+	  	var data = "phoneId="+$phoneId+"&idView="+$("#idView").val()+"&operation="+operation+"&registerId="+$("#registerId").val()+"&owner="+$("#owner").val();;
 
 		$.ajax({
 		  url: url,
