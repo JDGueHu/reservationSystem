@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\phone;
 
@@ -45,11 +46,12 @@ class phonesController extends Controller
             $phone->add_tmp = true;
             $phone->save();
 
-            $phones = phone::where('owner_id','=',$request->idView)
-                        ->orWhere('owner_id','=',$request->registerId)
-                        ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
-                        ->select('phones.id','phone_types.name','phones.phone')
-                        ->get();
+            $phones = phone::where('owner','=',$request->owner)
+                    ->where('owner_id','=',$request->registerId)
+                    ->orwhere('owner_id','=',$request->idView)
+                    ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                    ->select('phones.id','phone_types.name','phones.phone','phones.owner','phones.owner_id')
+                    ->get();
 
             return response()->json($phones);
         }
@@ -106,17 +108,20 @@ class phonesController extends Controller
             if($request->operation == "edit"){
 
             //retorna los registros de telefonos que tengan el mismo id de vista o el mismo id de cliente
-            $phones = phone::where('owner_id','=',$request->idView)
-                ->orWhere('owner_id','=',$request->registerId)
+            $phones = phone::where('owner','=',$request->owner)
+                ->where('owner_id','=',$request->registerId)
+                ->orWhere('owner_id','=',$request->idView)
                 ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
-                ->select('phones.id','phone_types.name','phones.phone')
+                ->select('phones.id','phone_types.name','phones.phone','phones.owner','phones.owner_id')
                 ->get();         
 
             }
             else{
 
-            $phones = phone::where('owner_id','=',$request->idView)
+            $phones = phone::where('owner','=',$request->owner)
+                ->where('owner_id','=',$request->idView)
                 ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+                ->select('phones.id','phone_types.name','phones.phone','phones.owner','phones.owner_id')
                 ->get();
 
             }

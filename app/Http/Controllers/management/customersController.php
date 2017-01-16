@@ -88,6 +88,7 @@ class customersController extends Controller
         $customer = customer::find($id);
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
         $phones = phone::where('owner_id','=',$customer->id)
+                    ->where('owner','=',"customer")
                     ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
                     ->get();
         $zones = DB::table('zones')
@@ -115,6 +116,7 @@ class customersController extends Controller
         $idView = phone::randomToken();
         $identificationTypes = Identification_type::orderby('name','ASC')->pluck('name','id');
         $phones = phone::where('owner_id','=',$customer->id)
+                    ->where('owner','=',"customer")
                     ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
                     ->select('phone_types.name','phones.phone','phones.id')
                     ->get();

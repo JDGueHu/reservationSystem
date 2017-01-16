@@ -18,7 +18,7 @@ class usersController extends Controller
      */
     public function index()
     {
-        $users = User::orderby('name','ASC')->get();
+        $users = User::where('erased','<>',true)->orderby('name','ASC')->get();
         return view('management.users.index')->with('users',$users);
     }
 
@@ -73,7 +73,20 @@ class usersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $roles = role::orderby('name','ASC')->pluck('name','id');
+        $customers = customer::orderby('name','ASC')->pluck('name','id');
+        $phones = phone::where('owner','=',"user")
+            ->where('owner_id','=',$user->id)            
+            ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+            ->select('phone_types.name','phones.phone','phones.id')
+            ->get();
+
+            return view('management.users.show')
+                ->with('user',$user)
+                ->with('roles',$roles)
+                ->with('customers',$customers)
+                ->with('phones',$phones);
     }
 
     /**
@@ -84,7 +97,25 @@ class usersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $idView = phone::randomToken();
+        $roles = role::orderby('name','ASC')->pluck('name','id');
+        $customers = customer::orderby('name','ASC')->pluck('name','id');
+        $phoneTypes = phoneType::orderby('name','ASC')->pluck('name','id');
+        $phones = phone::where('owner','=',"user")
+            ->where('owner_id','=',$user->id)
+            ->join('phone_types','phones.phone_type_id', '=', 'phone_types.id')
+            ->select('phone_types.name','phones.phone','phones.id')
+            ->get();
+
+        return view('management.users.edit')
+            ->with('user',$user)
+            ->with('roles',$roles)
+            ->with('customers',$customers)
+            ->with('phoneTypes',$phoneTypes)
+            ->with('phones',$phones)
+            ->with('idView',$idView);
+
     }
 
     /**
@@ -96,7 +127,19 @@ class usersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->role_id = $request->role_id;
+        $user->customer_id = $request->customer_id;
+        $user->save();
+
+        $phones = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $user->id,'add_tmp' => false]);
+
+        flash('Usuario <b>'.$user->name.'</b> se modificó exitosamente', 'warning')->important();
+        return redirect()->route('usuario.index');
+
     }
 
     /**
@@ -107,6 +150,11 @@ class usersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->erased = true ;
+        $user->save();
+
+        flash('Usuario <b>'.$user->name.'</b> se eliminó exitosamente', 'danger')->important();
+        return redirect()->route('usuario.index'); 
     }
 }

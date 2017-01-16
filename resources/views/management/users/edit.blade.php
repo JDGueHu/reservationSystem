@@ -1,48 +1,37 @@
 @extends('shared.main')
-@section('title','Administración/Usuario/Crear')
+@section('title','Administración/Usuario/Editar')
 
 @section('content')
-{!! Form::open(['route' => 'usuario.store', 'method' => 'POST']) !!}
+{!! Form::model($user,['route' => ['usuario.update',$user->id], 'method' => 'PUT']) !!}
 
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('name','Nombres')  !!}
-			{!! Form::text('name',null,['class' => 'form-control', 'required','placeholder' => 'Nombres','id'=>'name'])  !!}
+			{!! Form::text('name',$user->name,['class' => 'form-control', 'required','placeholder' => 'Nombres','id'=>'name'])  !!}
 		</div>
 		<div class="col-md-6">		
 			{!! Form::label('last_name','Apellidos')  !!}
-			{!! Form::text('last_name',null,['class' => 'form-control', 'required','placeholder' => 'Apellidos','id'=>'last_name'])  !!}
+			{!! Form::text('last_name',$user->last_name,['class' => 'form-control', 'required','placeholder' => 'Apellidos','id'=>'last_name'])  !!}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('email','Email')  !!}
-			{!! Form::email('email', null, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
+			{!! Form::email('email', $user->email, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
 		</div>
 		<div class="col-md-6">
-			{!! Form::label('password','Contraseña')  !!}
-			{{ Form::password('password', ['class' => 'form-control', 'required','placeholder' => 'Contraseña','id'=>'password']) }}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-6">		
-		</div>
-		<div class="col-md-6">
-			{!! Form::label('password2','Repetir ontraseña')  !!}
-			{{ Form::password('password2', ['class' => 'form-control', 'required','placeholder' => 'Repetir ontraseña','id'=>'password2']) }}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('role_id','Rol')  !!}
-			{!! Form::select('role_id', $roles, null, ['class' => 'form-control', 'required', 'placeholder' => 'Rol','id'=>'role_id'])  !!}	
+			{!! Form::select('role_id', $roles, $user->role_id, ['class' => 'form-control', 'required', 'placeholder' => 'Rol','id'=>'role_id'])  !!}	
 		</div>
 		<div class="col-md-6">		
 			{!! Form::label('customer_id','Cliente')  !!}
-			{!! Form::select('customer_id', $customers, null, ['class' => 'form-control', 'required', 'placeholder' => 'Cliente','id'=>'customer_id'])  !!}	
+			{!! Form::select('customer_id', $customers, $user->customer_id, ['class' => 'form-control', 'required', 'placeholder' => 'Cliente','id'=>'customer_id'])  !!}	
 		</div>
 	</div>
 
@@ -63,6 +52,17 @@
 				</tr>
 			</thead>
 			<tbody>
+ 				@foreach($phones as $phone)
+					<tr>
+						<td>{{ $phone->name }}</td>
+						<td>{{ $phone->phone }}</td>
+						<td>
+							<a title="Eliminar" onclick="phoneDelete({{ $phone->id }})" class="btn btn-danger btn-xs">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</a>
+						</td>
+					</tr>
+				@endforeach 
 			</tbody>
 		</table>
 	</div>
@@ -76,7 +76,7 @@
 
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 	<input type="hidden" name="idView" value="{{ $idView }}" id="idView">
-	<input type="hidden" name="registerId" value="-" id="registerId">
+	<input type="hidden" name="registerId" value="{{ $user->id }}" id="registerId">
 	<input type="hidden" name="owner" value="user" id="owner">
 
 {!! Form::close() !!}

@@ -26,13 +26,13 @@
 						<td>{{ $user->role_id}}</td>
 						<td>{{ $user->customer_id }}</td>
 						<td>								
-							<a title="Ver" href="{{ route('cliente.show',$user->id) }}" class="btn btn-default btn-xs">
+							<a title="Ver" href="{{ route('usuario.show',$user->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
-							<a title="Editar" href="{{ route('cliente.edit',$user->id) }}" class="btn btn-warning btn-xs">
+							<a title="Editar" href="{{ route('usuario.edit',$user->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="{{ route('cliente.destroy',$user->id) }}" class="btn btn-danger btn-xs confirm">
+							<a title="Eliminar" href="{{ route('usuario.destroy',$user->id) }}" class="btn btn-danger btn-xs confirm">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>

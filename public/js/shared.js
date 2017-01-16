@@ -13,12 +13,13 @@ $( document ).ready(function() {
 	  	var url;
 	  	var pathname = window.location.pathname;
 
+
 	  	if(pathname.substring(pathname.length - 4, pathname.length) == "edit"){
 	  		url = '../../../administracion/telefono';
 	  	}else{
 	  		url = '../../administracion/telefono';
 	  	}
-	  	alert(data);
+	  	
 	  	if($("#phoneType").val() != ""){
 	  		if($("#phone").val() != ""){
 	  			
@@ -78,8 +79,9 @@ function phoneDelete ($phoneId){
 	  		operation = "create";
 	  	}
 
-	  	var data = "phoneId="+$phoneId+"&idView="+$("#idView").val()+"&operation="+operation+"&registerId="+$("#registerId").val()+"&owner="+$("#owner").val();;
-
+	  	alert(operation);
+	  	var data = "phoneId="+$phoneId+"&idView="+$("#idView").val()+"&operation="+operation+"&registerId="+$("#registerId").val()+"&owner="+$("#owner").val();
+alert(data);
 		$.ajax({
 		  url: url,
 		  headers: {'X-CSRF-TOKEN': $('#token').val()},
@@ -87,6 +89,8 @@ function phoneDelete ($phoneId){
 		  datatype:'json',
 		  data : data
 		}).done(function(response){
+
+			console.log(response);
 
 			$("#example").empty();
 			$("#example").append("<thead><tr><th>Tipo</th><th>Número telefónico</th><th>Acciones</th></tr></thead>");
