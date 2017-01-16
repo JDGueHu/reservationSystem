@@ -19,8 +19,7 @@ class AddUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('name');
-            $table->string('last_name');
-            $table->boolean('erased')->default(false);
+            $table->string('last_name');            
 
             $table->integer('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles');

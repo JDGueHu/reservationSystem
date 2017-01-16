@@ -18,7 +18,7 @@ class usersController extends Controller
      */
     public function index()
     {
-        $users = User::where('erased','<>',true)->orderby('name','ASC')->get();
+        $users = User::orderby('name','ASC')->get();
         return view('management.users.index')->with('users',$users);
     }
 
@@ -151,8 +151,9 @@ class usersController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $user->erased = true ;
-        $user->save();
+        $user->delete();
+
+        DB::table('phones')->where('owner_id', '=', $id)->delete();
 
         flash('Usuario <b>'.$user->name.'</b> se eliminó exitosamente', 'danger')->important();
         return redirect()->route('usuario.index'); 
