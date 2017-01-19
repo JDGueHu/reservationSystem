@@ -17,4 +17,8 @@ class customer extends Model
     	return $this->belongsTo('App\Identification_type');
     }
 
+    public function users(){
+    	return $this->hasMany('App\User');
+    }
+
 }

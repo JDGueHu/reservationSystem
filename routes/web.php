@@ -62,6 +62,12 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'modulo.destroy'
 	]);
 
+	Route::resource('deporte','sportsController');
+	Route::get('deporte/{id}/destroy',[
+		'uses' => 'sportsController@destroy',
+		'as' => 'deporte.destroy'
+	]);
+
 });
 
 Route::group(['prefix'=>'administracion'],function(){
@@ -114,6 +120,12 @@ Route::group(['prefix'=>'administracion'],function(){
 	Route::get('usuario/{id}/destroy',[
 		'uses' => 'usersController@destroy',
 		'as' => 'usuario.destroy'
+	]);
+
+	Route::resource('escenario','fieldsController');
+	Route::get('escenario/{id}/destroy',[
+		'uses' => 'fieldsController@destroy',
+		'as' => 'escenario.destroy'
 	]);
 
 });

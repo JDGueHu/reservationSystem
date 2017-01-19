@@ -32,7 +32,7 @@ class usersController extends Controller
         $idView = phone::randomToken();
         $phoneTypes = phoneType::orderby('name','ASC')->pluck('name','id');
         $roles = role::orderby('name','ASC')->pluck('name','id');
-        $customers = customer::orderby('name','ASC')->pluck('name','id');
+        $customers = customer::orderby('name','ASC')->pluck('business_name','id');
 
         return view('management.users.create')
             ->with('idView',$idView)
