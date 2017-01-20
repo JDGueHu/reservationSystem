@@ -68,6 +68,13 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'deporte.destroy'
 	]);
 
+	Route::resource('dia','daysController');
+	Route::get('dia/{id}/destroy',[
+		'uses' => 'daysController@destroy',
+		'as' => 'dia.destroy'
+	]);
+
+
 });
 
 Route::group(['prefix'=>'administracion'],function(){
@@ -126,6 +133,18 @@ Route::group(['prefix'=>'administracion'],function(){
 	Route::get('escenario/{id}/destroy',[
 		'uses' => 'fieldsController@destroy',
 		'as' => 'escenario.destroy'
+	]);
+
+	Route::resource('duracionDisponibilidad','availability_timeController');
+	Route::get('duracionDisponibilidad/{id}/destroy',[
+		'uses' => 'availability_timeController@destroy',
+		'as' => 'duracionDisponibilidad.destroy'
+	]);
+
+	Route::resource('dispoibilidadEscenarios','fields_disponibilityController');
+	Route::get('dispoibilidadEscenarios/{id}/destroy',[
+		'uses' => 'fields_disponibilityController@destroy',
+		'as' => 'dispoibilidadEscenarios.destroy'
 	]);
 
 });
