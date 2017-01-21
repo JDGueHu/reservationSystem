@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFieldDisponibilityTable extends Migration
+class AddFieldsDisponibilityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -27,8 +27,25 @@ class AddFieldDisponibilityTable extends Migration
 
             $table->timestamps();
         });
-    }
 
+
+        //relacion muchos a muchos con días
+        Schema::create('field_disponibility_day', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('field_disponibility_id')->unsigned();
+            $table->foreign('field_disponibility_id')->references('id')->on('field_disponibility');
+
+            $table->integer('day_id')->unsigned();
+            $table->foreign('day_id')->references('id')->on('days');
+
+            $table->integer('price_id')->unsigned();
+            $table->foreign('price_id')->references('id')->on('prices');
+
+            $table->timestamps();
+        });
+    }
+    
     /**
      * Reverse the migrations.
      *
@@ -36,6 +53,6 @@ class AddFieldDisponibilityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('field_disponibility');
+        Schema::dropIfExists('fields_disponibility');
     }
 }

@@ -147,6 +147,12 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'dispoibilidadEscenarios.destroy'
 	]);
 
+	Route::resource('precio','pricesController');
+	Route::get('precio/{id}/destroy',[
+		'uses' => 'pricesController@destroy',
+		'as' => 'precio.destroy'
+	]);
+
 });
 
 
