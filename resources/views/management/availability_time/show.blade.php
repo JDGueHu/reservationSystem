@@ -10,8 +10,8 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::label('name','Nombre')  !!}
-		{!! Form::text('name',$duration->name,['class' => 'form-control', 'required','placeholder' => 'Nombre','id' => 'name'])  !!}
+		{!! Form::label('duration','Duración (Min)')  !!}
+		{!! Form::number('duration',$duration->duration,['class' => 'form-control', 'min' => '0' , 'required','placeholder' => 'Duración (Min)','id' => 'duration'])  !!}
 	</div>
 
 	<div class="form-group">

@@ -18,7 +18,7 @@
 				@foreach($prices as $price)
 					<tr>
 						<td>{{ $price->initials }}</td>
-						<td>{{ $price->name }}</td>
+						<td>{{ $price->price }}</td>
 						<td>
 							<a title="Ver" href="{{ route('precio.show',$price->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>

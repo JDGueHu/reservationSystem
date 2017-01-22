@@ -14,7 +14,7 @@ class availability_timeController extends Controller
      */
     public function index()
     {
-        $durations = availability_time::orderby('name','ASC')->get();
+        $durations = availability_time::orderby('duration','ASC')->get();
         return view('management.availability_time.index')->with('durations',$durations);
     }
 
@@ -38,10 +38,10 @@ class availability_timeController extends Controller
     {
         $duration = new availability_time();
         $duration->initials = $request->initials;
-        $duration->name = $request->name;
+        $duration->duration = $request->duration;
         $duration->save();
 
-        flash('Duración <b>'.$duration->name.'</b> se creó exitosamente', 'success')->important();
+        flash('Duración <b>'.$duration->initials.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('duracionDisponibilidad.index');
 
     }
@@ -81,10 +81,10 @@ class availability_timeController extends Controller
     {
         $duration = availability_time::find($id);
         $duration->initials = $request->initials;
-        $duration->name = $request->name;
+        $duration->duration = $request->duration;
         $duration->save();
 
-        flash('Duración <b>'.$duration->name.'</b> se modificó exitosamente', 'warning')->important();
+        flash('Duración <b>'.$duration->initials.'</b> se modificó exitosamente', 'warning')->important();
         return redirect()->route('duracionDisponibilidad.index');
     }
 
@@ -99,7 +99,7 @@ class availability_timeController extends Controller
         $duration = availability_time::find($id);
         $duration->delete();
 
-        flash('Duración <b>'.$duration->name.'</b> se eliminó exitosamente', 'danger')->important();
+        flash('Duración <b>'.$duration->initials.'</b> se eliminó exitosamente', 'danger')->important();
         return redirect()->route('duracionDisponibilidad.index'); 
     }
 }

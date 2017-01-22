@@ -14,7 +14,7 @@ class pricesController extends Controller
      */
     public function index()
     {
-        $prices = price::orderby('name','ASC')->get();
+        $prices = price::orderby('price','ASC')->get();
         return view('management.prices.index')->with('prices',$prices);
     }
 
@@ -38,10 +38,10 @@ class pricesController extends Controller
     {
         $price = new price();
         $price->initials = $request->initials;
-        $price->name = $request->name;
+        $price->price = $request->price;
         $price->save();
 
-        flash('Precio <b>'.$price->name.'</b> se creó exitosamente', 'success')->important();
+        flash('Precio <b>'.$price->initials.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('precio.index');
     }
 
@@ -53,7 +53,8 @@ class pricesController extends Controller
      */
     public function show($id)
     {
-        //
+        $price = price::find($id);
+        return view('management.prices.show')->with('price',$price);
     }
 
     /**
@@ -64,7 +65,8 @@ class pricesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $price = price::find($id);
+        return view('management.prices.edit')->with('price',$price);
     }
 
     /**
@@ -76,7 +78,13 @@ class pricesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $price = price::find($id);
+        $price->initials = $request->initials;
+        $price->price = $request->price;
+        $price->save();
+
+        flash('Precio <b>'.$price->initials.'</b> se modificó exitosamente', 'warning')->important();
+        return redirect()->route('precio.index');
     }
 
     /**
@@ -87,6 +95,10 @@ class pricesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $price = price::find($id);
+        $price->delete();
+
+        flash('Precio <b>'.$price->initials.'</b> se eliminó exitosamente', 'danger')->important();
+        return redirect()->route('precio.index');
     }
 }

@@ -18,7 +18,7 @@
 				@foreach($durations as $duration)
 					<tr>
 						<td>{{ $duration->initials }}</td>
-						<td>{{ $duration->name }}</td>
+						<td>{{ $duration->duration }}</td>
 						<td>
 							<a title="Ver" href="{{ route('duracionDisponibilidad.show',$duration->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
