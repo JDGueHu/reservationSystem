@@ -153,6 +153,12 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'precio.destroy'
 	]);
 
+	Route::resource('disponibilidadEscenario','availability_fieldsController');
+	Route::get('disponibilidadEscenario/{id}/destroy',[
+		'uses' => 'availability_fieldsController@destroy',
+		'as' => 'disponibilidadEscenario.destroy'
+	]);
+
 });
 
 
