@@ -27,6 +27,9 @@
 							<a title="Ver" href="{{ route('escenario.show',$field->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
+							<a title="Disponibilidad" href="{{ route('escenario.disponibility',$field->id) }}" class="btn btn-success btn-xs">
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+							</a>
 							<a title="Editar" href="{{ route('escenario.edit',$field->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>

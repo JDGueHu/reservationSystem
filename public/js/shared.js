@@ -81,7 +81,7 @@ function phoneDelete ($phoneId){
 
 	  	alert(operation);
 	  	var data = "phoneId="+$phoneId+"&idView="+$("#idView").val()+"&operation="+operation+"&registerId="+$("#registerId").val()+"&owner="+$("#owner").val();
-alert(data);
+
 		$.ajax({
 		  url: url,
 		  headers: {'X-CSRF-TOKEN': $('#token').val()},

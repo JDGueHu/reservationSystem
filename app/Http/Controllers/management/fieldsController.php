@@ -7,6 +7,7 @@ use App\field;
 use App\sport;
 use App\customer;
 use App\availability_time;
+use App\day;
 
 class fieldsController extends Controller
 {
@@ -132,4 +133,12 @@ class fieldsController extends Controller
         flash('Escenario <b>'.$field->name.'</b> se eliminó exitosamente', 'danger')->important();
         return redirect()->route('escenario.index'); 
     }
+
+    public function disponibility()
+    {
+        $days = day::orderby('created_at','ASC')->get();
+        return view('management.fields.disponibility')->with('days',$days);
+    }
+
+
 }

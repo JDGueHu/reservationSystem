@@ -134,6 +134,10 @@ Route::group(['prefix'=>'administracion'],function(){
 		'uses' => 'fieldsController@destroy',
 		'as' => 'escenario.destroy'
 	]);
+	Route::get('escenario/{id}/disponibility',[
+		'uses' => 'fieldsController@disponibility',
+		'as' => 'escenario.disponibility'
+	]);
 
 	Route::resource('duracionReserva','availability_timeController');
 	Route::get('duracionReserva/{id}/destroy',[
@@ -141,22 +145,10 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'duracionReserva.destroy'
 	]);
 
-	Route::resource('dispoibilidadEscenarios','fields_disponibilityController');
-	Route::get('dispoibilidadEscenarios/{id}/destroy',[
-		'uses' => 'fields_disponibilityController@destroy',
-		'as' => 'dispoibilidadEscenarios.destroy'
-	]);
-
 	Route::resource('precio','pricesController');
 	Route::get('precio/{id}/destroy',[
 		'uses' => 'pricesController@destroy',
 		'as' => 'precio.destroy'
-	]);
-
-	Route::resource('disponibilidadEscenario','availability_fieldsController');
-	Route::get('disponibilidadEscenario/{id}/destroy',[
-		'uses' => 'availability_fieldsController@destroy',
-		'as' => 'disponibilidadEscenario.destroy'
 	]);
 
 });

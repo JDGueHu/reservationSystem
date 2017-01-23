@@ -8,12 +8,14 @@
 	<link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/chosen/chosen.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/data_table/css/dataTables.bootstrap4.css') }}">
+	<link rel="stylesheet" href="{{ asset('plugins/clockpicker/css/bootstrap-clockpicker.min.css') }}">
 
 	<script src="{{ asset('plugins/jquery/js/jquery-3.1.1.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
 	<script src="{{ asset('plugins/data_table/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('plugins/data_table/js/dataTables.bootstrap4.js') }}"></script>
 	<script src="{{ asset('plugins/jquery_confirm/jquery.confirm.js') }}"></script>
+	<script src="{{ asset('plugins/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>
 
 </head>
 <body>

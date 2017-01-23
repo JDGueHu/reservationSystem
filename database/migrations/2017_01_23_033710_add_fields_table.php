@@ -31,6 +31,25 @@ class AddFieldsTable extends Migration
 
             $table->timestamps();
         });
+
+        //relacion muchos a muchos con days
+        Schema::create('fields_day', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('field_id')->unsigned();
+            $table->foreign('field_id')->references('id')->on('fields');
+
+            $table->integer('day_id')->unsigned();
+            $table->foreign('day_id')->references('id')->on('days');
+
+            $table->integer('price_id')->unsigned();
+            $table->foreign('price_id')->references('id')->on('prices');
+
+            $table->timeTz('ini_hour');
+            $table->timeTz('fin_hour');
+
+            $table->timestamps();
+        });
     }
 
     /**
