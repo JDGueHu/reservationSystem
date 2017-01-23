@@ -8,4 +8,8 @@ class availability_time extends Model
 {
 	protected $table = "availability_time";
     protected $fillable = ['name','initials'];
+
+    public function fields(){
+    	return $this->hasMany('App\field');
+    }
 }

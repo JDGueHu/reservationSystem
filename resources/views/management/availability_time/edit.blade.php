@@ -1,8 +1,8 @@
 @extends('shared.main')
-@section('title','Configuración/Tipo identificación/Editar')
+@section('title','Administración/Duración reserva/Editar')
 
 @section('content')
-{!! Form::model($duration,['route' => ['duracionDisponibilidad.update',$duration->id], 'method' => 'PUT']) !!}
+{!! Form::model($duration,['route' => ['duracionReserva.update',$duration->id], 'method' => 'PUT']) !!}
 
 	<div class="form-group">
 		{!! Form::label('initials','Iniciales')  !!}
@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('duracionDisponibilidad.index') }}}">
+		<a style="text-decoration: none;" href="{{{ URL::route('duracionReserva.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}

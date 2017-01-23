@@ -13,4 +13,8 @@ class field extends Model
     public function sport(){
     	return $this->belongsTo('App\sport');
     }
+
+    public function availability_time(){
+    	return $this->belongsTo('App\availability_time');
+    }
 }

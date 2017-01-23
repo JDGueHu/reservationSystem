@@ -135,10 +135,10 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'escenario.destroy'
 	]);
 
-	Route::resource('duracionDisponibilidad','availability_timeController');
-	Route::get('duracionDisponibilidad/{id}/destroy',[
+	Route::resource('duracionReserva','availability_timeController');
+	Route::get('duracionReserva/{id}/destroy',[
 		'uses' => 'availability_timeController@destroy',
-		'as' => 'duracionDisponibilidad.destroy'
+		'as' => 'duracionReserva.destroy'
 	]);
 
 	Route::resource('dispoibilidadEscenarios','fields_disponibilityController');

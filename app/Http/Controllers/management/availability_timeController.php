@@ -42,7 +42,7 @@ class availability_timeController extends Controller
         $duration->save();
 
         flash('Duración <b>'.$duration->initials.'</b> se creó exitosamente', 'success')->important();
-        return redirect()->route('duracionDisponibilidad.index');
+        return redirect()->route('duracionReserva.index');
 
     }
 
@@ -85,7 +85,7 @@ class availability_timeController extends Controller
         $duration->save();
 
         flash('Duración <b>'.$duration->initials.'</b> se modificó exitosamente', 'warning')->important();
-        return redirect()->route('duracionDisponibilidad.index');
+        return redirect()->route('duracionReserva.index');
     }
 
     /**
@@ -100,6 +100,6 @@ class availability_timeController extends Controller
         $duration->delete();
 
         flash('Duración <b>'.$duration->initials.'</b> se eliminó exitosamente', 'danger')->important();
-        return redirect()->route('duracionDisponibilidad.index'); 
+        return redirect()->route('duracionReserva.index'); 
     }
 }

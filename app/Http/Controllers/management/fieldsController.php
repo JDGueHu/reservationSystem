@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\field;
 use App\sport;
 use App\customer;
+use App\availability_time;
 
 class fieldsController extends Controller
 {
@@ -29,9 +30,11 @@ class fieldsController extends Controller
     {
         $sports = sport::orderby('name','ASC')->pluck('name','id');
         $customers = customer::orderby('name','ASC')->pluck('business_name','id');
+        $durations = availability_time::orderby('duration','ASC')->pluck('initials','id');
         return view('management.fields.create')
                 ->with('sports',$sports)
-                ->with('customers',$customers);
+                ->with('customers',$customers)
+                ->with('durations',$durations);
     }
 
     /**
@@ -47,6 +50,7 @@ class fieldsController extends Controller
         $field->initials = $request->initials;
         $field->name = $request->name;
         $field->sport_id = $request->sport_id; 
+        $field->availability_time_id = $request->availability_time_id; 
         $field->details = $request->details; 
         $field->save();
 
@@ -65,11 +69,12 @@ class fieldsController extends Controller
         $field = field::find($id);
         $sports = sport::orderby('name','ASC')->pluck('name','id');
         $customers = customer::orderby('name','ASC')->pluck('business_name','id');
-
+        $durations = availability_time::orderby('duration','ASC')->pluck('initials','id');
         return view('management.fields.show')
                 ->with('field',$field)
                 ->with('sports',$sports)
-                ->with('customers',$customers);
+                ->with('customers',$customers)
+                ->with('durations',$durations);
     }
 
     /**
@@ -83,11 +88,12 @@ class fieldsController extends Controller
         $field = field::find($id);
         $sports = sport::orderby('name','ASC')->pluck('name','id');
         $customers = customer::orderby('name','ASC')->pluck('business_name','id');
-
+        $durations = availability_time::orderby('duration','ASC')->pluck('initials','id');
         return view('management.fields.edit')
                 ->with('field',$field)
                 ->with('sports',$sports)
-                ->with('customers',$customers);
+                ->with('customers',$customers)
+                ->with('durations',$durations);
     }
 
     /**
@@ -104,6 +110,7 @@ class fieldsController extends Controller
         $field->initials = $request->initials;
         $field->name = $request->name;
         $field->sport_id = $request->sport_id; 
+        $field->availability_time_id = $request->availability_time_id; 
         $field->details = $request->details; 
         $field->save();
 

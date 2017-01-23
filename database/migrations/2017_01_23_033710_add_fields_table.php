@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddScenariosTable extends Migration
+class AddFieldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,6 +19,9 @@ class AddScenariosTable extends Migration
             $table->string('initials')->unique();
             $table->string('name');
             $table->string('details');
+
+            $table->integer('availability_time_id')->unsigned();
+            $table->foreign('availability_time_id')->references('id')->on('availability_time');
 
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers');

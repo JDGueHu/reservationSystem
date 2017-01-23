@@ -1,8 +1,8 @@
 @extends('shared.main')
-@section('title','Administración/Duración disponibilidad/Crear')
+@section('title','Administración/Duración reserva/Crear')
 
 @section('content')
-{!! Form::open(['route' => 'duracionDisponibilidad.store', 'method' => 'POST']) !!}
+{!! Form::open(['route' => 'duracionReserva.store', 'method' => 'POST']) !!}
 
 	<div class="form-group">
 		{!! Form::label('initials','Iniciales')  !!}
@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('duracionDisponibilidad.index') }}}">
+		<a style="text-decoration: none;" href="{{{ URL::route('duracionReserva.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}

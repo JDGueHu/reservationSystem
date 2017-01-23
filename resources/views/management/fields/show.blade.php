@@ -25,6 +25,11 @@
 	</div>
 
 	<div class="form-group">
+		{!! Form::label('availability_time_id','Dureación de la reserva')  !!}
+		{!! Form::select('availability_time_id', $durations, $field->availability_time_id, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Duración de la reserva','id'=>'availability_time_id'])  !!}	
+	</div>
+
+	<div class="form-group">
 		{!! Form::label('details','Detalles')  !!}
 		{!! Form::textarea('details',$field->details,['class' => 'form-control', 'required','placeholder' => 'Detalles'])  !!}
 	</div>

@@ -12,6 +12,7 @@
 		        	<th>Iniciales</th>
 					<th>Nombre</th>
 					<th>Deporte</th>
+					<th>Duración reserva</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -21,6 +22,7 @@
 						<td>{{ $field->initials }}</td>
 						<td>{{ $field->name }}</td>
 						<td>{{ $field->sport->name }}</td>
+						<td>{{ $field->availability_time->initials }}</td>
 						<td>								
 							<a title="Ver" href="{{ route('escenario.show',$field->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>

@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Tipo identificación/Ver')
+@section('title','Administración/Duración reserva/Ver')
 
 @section('content')
 {!! Form::model($duration) !!}
@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('duracionDisponibilidad.index') }}}">
+		<a style="text-decoration: none;" href="{{{ URL::route('duracionReserva.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
 	</div>
