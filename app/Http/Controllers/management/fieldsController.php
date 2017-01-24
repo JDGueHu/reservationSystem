@@ -8,6 +8,9 @@ use App\sport;
 use App\customer;
 use App\availability_time;
 use App\day;
+use App\availability_field;
+use App\availability_field_day;
+use App\price;
 
 class fieldsController extends Controller
 {
@@ -134,10 +137,39 @@ class fieldsController extends Controller
         return redirect()->route('escenario.index'); 
     }
 
-    public function disponibility()
+    public function disponibility($id)
     {
         $days = day::orderby('created_at','ASC')->get();
-        return view('management.fields.disponibility')->with('days',$days);
+        $prices = price::orderby('created_at','ASC')->pluck('price','id');
+        return view('management.fields.disponibility')
+            ->with('days',$days)
+            ->with('field_id',$id)
+            ->with('prices',$prices);
+    }
+
+    public function disponibilityStore(Request $request)
+    {
+        if($request->ajax()){
+
+        $availability_field = new availability_field();
+        $availability_field->ini_hour = $request->ini_hour;
+        $availability_field->fin_hour = $request->fin_hour;
+        $availability_field->field_id = $request->field_id;
+        $availability_field->save();        
+
+        for($i=0;$i<count($request->days_checked);$i++){
+
+            $availability_field_day = new availability_field_day();
+            $availability_field_day->availability_field_id = $availability_field->id;
+            $availability_field_day->day_id = $request->days_checked[$i];
+            $availability_field_day->price_id = $request->prices[$i];
+            $availability_field_day->save();
+
+        }
+
+        return response()->json(count($request->days_checked));
+
+        }
     }
 
 
