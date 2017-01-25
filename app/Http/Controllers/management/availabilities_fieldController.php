@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\availability_field;
+use App\day;
+use App\price;
 
 class availabilities_fieldController extends Controller
 {
@@ -12,11 +14,14 @@ class availabilities_fieldController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index($field_id)
     {
         $availabilities_field = availability_field::orderby('ini_hour','ASC')->get();
+
         return view('management.availabilities_field.index')
-            ->with('availabilities_field',$availabilities_field);
+            ->with('availabilities_field',$availabilities_field)
+            ->with('field_id',$field_id);
     }
 
     /**
@@ -24,9 +29,14 @@ class availabilities_fieldController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($field_id)
     {
-        //
+        $days = day::orderby('created_at','ASC')->get();
+        $prices = price::orderby('created_at','ASC')->pluck('price','id');
+        return view('management.availabilities_field.create')
+        ->with('days',$days)
+        ->with('prices',$prices)
+        ->with('field_id',$field_id);
     }
 
     /**

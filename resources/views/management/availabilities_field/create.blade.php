@@ -42,14 +42,13 @@
 	</div>
 
 	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('escenario.index') }}}">
+		<a style="text-decoration: none;" href="{{{ URL::route('disponibilidadEscenario.index', $field_id) }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary ajax_button'])  !!}
 
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 	<input type="hidden" name="field_id" value="{{ $field_id }}" id="field_id">
-
 	</div>
 
 @endsection

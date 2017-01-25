@@ -3,7 +3,7 @@
 
 @section('content')
 	
-	<a href="" class="btn btn-primary">Crear</a>
+	<a href="{{ route('disponibilidadEscenario.create',$field_id) }}" class="btn btn-primary">Crear</a>
 	<hr>
 	<div class="table-responsive">
 		<table id="example" class="table table-hover" cellspacing="0" width="100%">
