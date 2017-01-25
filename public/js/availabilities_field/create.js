@@ -2,15 +2,6 @@ $( document ).ready(function() {
 	
 	$(".precio").prop( "disabled", true );
 
-	$("input[name=days]").click(function(event){
-		if($("input[value="+event.target.value+"]").prop('checked')){
-			$("#"+event.target.value).prop( "disabled", false );	
-		}
-		else{
-			$("#"+event.target.value).prop( "disabled", true );	
-		}
-	});
-
 	$(".ajax_button").click(function(event){
 
 		var days = document.getElementsByName("days");
@@ -24,7 +15,7 @@ $( document ).ready(function() {
 			}
 		}
 
-		url="../disponibilityStore";
+		url="../store";
 		
 		data = "days="+days+"&permissionId="+event.target.id;
 
@@ -35,7 +26,7 @@ $( document ).ready(function() {
 		  data : {days_checked:days_checked, prices:prices, ini_hour:$('#ini_hour').val(), fin_hour:$('#fin_hour').val(), field_id:$('#field_id').val()},
 		  dataType: "json", 
 		}).done(function(response){
-			console.log(response);
+			window.location.replace('../'+$('#field_id').val()+'/index');
 		});
 
 	});

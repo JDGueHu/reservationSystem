@@ -146,7 +146,6 @@ Route::group(['prefix'=>'administracion'],function(){
 	]);
 
 
-
 	Route::get('disponibilidadEscenario/{field_id}/index',[
 		'uses' => 'availabilities_fieldController@index',
 		'as' => 'disponibilidadEscenario.index'
@@ -157,6 +156,30 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'disponibilidadEscenario.create'
 	]);
 
+	Route::post('disponibilidadEscenario/store',[
+		'uses' => 'availabilities_fieldController@store',
+		'as' => 'disponibilidadEscenario.store'
+	]);
+
+	Route::get('disponibilidadEscenario/{field_id}/{availability_field_id}/show',[
+		'uses' => 'availabilities_fieldController@show',
+		'as' => 'disponibilidadEscenario.show'
+	]);
+
+	Route::get('disponibilidadEscenario/{field_id}/{availability_field_id}/edit',[
+		'uses' => 'availabilities_fieldController@edit',
+		'as' => 'disponibilidadEscenario.edit'
+	]);
+
+	Route::post('disponibilidadEscenario/update',[
+		'uses' => 'availabilities_fieldController@update',
+		'as' => 'disponibilidadEscenario.update'
+	]);
+
+	Route::get('disponibilidadEscenario/{field_id}/{availability_field_id}/destroy',[
+		'uses' => 'availabilities_fieldController@destroy',
+		'as' => 'disponibilidadEscenario.destroy'
+	]);
 
 
 	Route::resource('duracionReserva','availability_timeController');

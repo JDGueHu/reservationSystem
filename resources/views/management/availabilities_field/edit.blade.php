@@ -8,7 +8,7 @@
  	 	<div class="col-md-6">
  	 		{!! Form::label('ini_hour','Hora inicial')  !!}
  	 		<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-	    		<input type="text" class="form-control" required id="ini_hour">
+	    		<input type="text" class="form-control" required id="ini_hour" value="{{ $availability_field->ini_hour }}">
 	   			<span class="input-group-addon">
 	        		<span class="glyphicon glyphicon-time"></span>
 	    		</span>
@@ -17,7 +17,7 @@
   		<div class="col-md-6">
   			{!! Form::label('fin_hour','Hora final')  !!}
  	 		<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-	    		<input type="text" class="form-control" required id="fin_hour">
+	    		<input type="text" class="form-control" required id="fin_hour" value="{{ $availability_field->fin_hour }}">
 	   			<span class="input-group-addon">
 	        		<span class="glyphicon glyphicon-time"></span>
 	    		</span>
@@ -48,6 +48,10 @@
 
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 	<input type="hidden" name="field_id" value="{{ $field_id }}" id="field_id">
+	<input type="hidden" name="availability_field_id" value="{{ $availability_field->id }}" id="availability_field_id">
+	<input type="hidden" name="days_availabilities_per_field" value="{{ $days_availabilities_per_field }}" id="days_availabilities_per_field">
+	<input type="hidden" name="prices_availabilities_per_field" value="{{ $prices_availabilities_per_field }}" id="prices_availabilities_per_field">
+	
 	</div>
 
 @endsection
@@ -62,6 +66,5 @@ $('.clockpicker').clockpicker({
 </script>
 
 <script src="{{ asset('js/availabilities_field/ajax.js') }}"></script>
-<script src="{{ asset('js/availabilities_field/create.js') }}"></script>
-
+<script src="{{ asset('js/availabilities_field/edit.js') }}"></script>
 @endsection

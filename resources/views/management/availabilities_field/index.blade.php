@@ -22,13 +22,13 @@
 						<td>{{ $availability_field->fin_hour }}</td>
 						<td></td>
 						<td>
-							<a title="Ver" href="" class="btn btn-default btn-xs">
+							<a title="Ver" href="{{ route('disponibilidadEscenario.show',[$field_id,$availability_field->id]) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
-							<a title="Editar" href="" class="btn btn-warning btn-xs">
+							<a title="Editar" href="{{ route('disponibilidadEscenario.edit',[$field_id,$availability_field->id]) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="" class="btn btn-danger btn-xs confirm">
+							<a title="Eliminar" href="{{ route('disponibilidadEscenario.destroy',[$field_id,$availability_field->id]) }}" class="btn btn-danger btn-xs confirm">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>
