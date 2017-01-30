@@ -74,6 +74,17 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'dia.destroy'
 	]);
 
+	Route::resource('configuracion','configurationsController');
+	Route::get('configuracion/{id}/destroy',[
+		'uses' => 'configurationsController@destroy',
+		'as' => 'configuracion.destroy'
+	]);
+
+	Route::resource('estadoDisponibilidad','availability_statusController');
+	Route::get('estadoDisponibilidad/{id}/destroy',[
+		'uses' => 'availability_statusController@destroy',
+		'as' => 'estadoDisponibilidad.destroy'
+	]);
 
 });
 
