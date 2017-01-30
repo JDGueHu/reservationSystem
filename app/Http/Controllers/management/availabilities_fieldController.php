@@ -19,7 +19,7 @@ class availabilities_fieldController extends Controller
 
     public function index($field_id)
     {
-        $availabilities_field = availability_field::orderby('ini_hour','ASC')->get();
+        $availabilities_field = availability_field::where('field_id','=',$field_id)->orderby('ini_hour','ASC')->get();
 
         return view('management.availabilities_field.index')
             ->with('availabilities_field',$availabilities_field)

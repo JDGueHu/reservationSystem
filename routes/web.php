@@ -205,6 +205,22 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'precio.destroy'
 	]);
 
+	Route::resource('disponibilidad','availabilitiesController');
+	Route::get('disponibilidad/{id}/destroy',[
+		'uses' => 'availabilitiesController@destroy',
+		'as' => 'disponibilidad.destroy'
+	]);
+
+	Route::post('disponibilidad/showFields',[
+		'uses' => 'availabilitiesController@showFields',
+		'as' => 'disponibilidad.showFields'
+	]);
+
+	Route::post('disponibilidad/showAvailabilities',[
+		'uses' => 'availabilitiesController@showAvailabilities',
+		'as' => 'disponibilidad.showAvailabilities'
+	]);
+
 });
 
 

@@ -23,6 +23,7 @@
 	<div class="container">
 			@include('flash::message')
 			<h4>@yield('title')</h4>
+			@yield('warning') 
 			@yield('content') 
 			@yield('js') 
 	</div>
