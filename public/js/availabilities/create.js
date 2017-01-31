@@ -14,32 +14,29 @@ $( document ).ready(function() {
 
 			$("#contenedor").empty();
 
-			for($i=0;$i<response.length;$i++){
+			for(var i=0;i<response.length;i++){
 				$("#contenedor").append(
-				'<h4 class="separador_short"><span class="label label-primary"><input type="checkbox" name="fields[]"checked/>'+' '+response[$i].name+'</span></h4><div class="form-group" id="'+response[$i].id+'"></div>'
+				'<h4 class="separador_short"><span class="label label-primary"><input type="checkbox" name="fields" value="'+response[i].id+' "checked/>'+' '+response[i].name+'</span></h4><div class="form-group"><table id="example" class="table table-hover '+response[i].id+'" cellspacing="0" width="100%"><thead><tr><th>Día</th><th>Franja horaria</th><th>Precio</th></tr></thead><tbody></tbody></table></div>'
 				);
 
-				id_fields.push(response[$i].id);
+				id_fields.push(response[i].id);
 			}
 
-			for($k=0;$k<id_fields.length;$k++){
+			for(var k=0;k<id_fields.length;k++){
 				
 				$.ajax({
 				  url: "../disponibilidad/showAvailabilities",
 				  headers: {'X-CSRF-TOKEN': $('#token').val()},
 				  type: 'POST',
-				  data : "field_id="+id_fields[$k],
+				  data : "field_id="+id_fields[k],
 				  dataType: "json", 
-				}).done(function(response){
-					console.log(response);
+				}).done(function(response){					
 
-					for($l=0;$l<response.length;$l++){
-						$('#'+response[$l].field_id).append("<thead><tr><th>Tipo</th><th>Número telefónico</th><th>Acciones</th></tr></thead>");
-						$('#'+response[$l].field_id).append("<tbody></tbody>");
+					for(var l=0;l<response.length;l++){
 
-				}
+						$('.'+response[l].field_id).append('<tr><td>'+response[l].name+'</td><td>'+response[l].ini_hour+' a '+response[l].fin_hour+'</td><td>'+response[l].price+'</td><tr>');					
 
-
+					}
 
 				});
 
@@ -48,4 +45,29 @@ $( document ).ready(function() {
 
 	});
 
+	$( "#storeButton" ).click(function(){
+
+		var fields = document.getElementsByName("fields");
+		var fields_checked = [];
+
+		for(var i=0;i<fields.length;i++){
+			if(fields[i].checked){
+				fields_checked.push(fields[i].value);
+			}		
+		}
+
+		$.ajax({
+		  url: "../disponibilidad",
+		  headers: {'X-CSRF-TOKEN': $('#token').val()},
+		  type: 'POST',
+		  data : {fields_checked:fields_checked},
+		  dataType: "json", 
+		}).done(function(response){
+			console.log(response);
+		});
+
+		
+	});
+
 });
+

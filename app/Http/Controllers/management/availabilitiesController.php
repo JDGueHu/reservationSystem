@@ -42,7 +42,26 @@ class availabilitiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       if($request->ajax()){
+
+            for($i=0;$i>count($request->fields_checked);$i++){
+
+            }
+        $availability_time = DB::table('fields')
+        ->join('availability_time','fields.availability_time_id','=','availability_time.id')
+        ->where('fields.id','=',$request->fields_checked[0])->get();
+
+        $availabilities = DB::table('availabilities_field')
+        ->join('availability_field_day', 'availabilities_field.id', '=', 'availability_field_day.availability_field_id')
+        ->join('days', 'availability_field_day.day_id', '=', 'days.id')
+        ->join('prices', 'availability_field_day.price_id', '=', 'prices.id')
+        ->select('availabilities_field.field_id','availabilities_field.ini_hour','availabilities_field.fin_hour','days.name','prices.price')
+        ->where('availabilities_field.field_id','=',$request->fields_checked[0])
+        ->orderby('availabilities_field.ini_hour','ASC')->get();
+
+            return response()->json($availability_time);
+
+        }
     }
 
     /**
@@ -110,7 +129,9 @@ class availabilitiesController extends Controller
                 ->join('days', 'availability_field_day.day_id', '=', 'days.id')
                 ->join('prices', 'availability_field_day.price_id', '=', 'prices.id')
                 ->select('availabilities_field.field_id','availabilities_field.ini_hour','availabilities_field.fin_hour','days.name','prices.price')
-                ->where('availabilities_field.field_id','=',$request->field_id)->get();
+                ->where('availabilities_field.field_id','=',$request->field_id)
+                ->orderby('availabilities_field.ini_hour','ASC')->get();
+
 
             return response()->json($availabilities);
         }
