@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\availability;
 use App\customer;
 use App\field;
-
+use App\configuration;
+use Carbon\Carbon;
+ 
 class availabilitiesController extends Controller
 {
     /**
@@ -34,32 +36,72 @@ class availabilitiesController extends Controller
             ->with('customers',$customers);
     }
 
+    public function nameDays(){
+
+        switch (date("N")) {
+            case '1': return "Lunes";break;
+            case '2': return "Martes";break;
+            case '3': return "Miercoles";break;
+            case '4': return "Jueves";break;
+            case '5': return "Viernes";break;
+            case '6': return "Sabado";break;
+            case '7': return "Domingo";break;         
+            default:break;
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
        if($request->ajax()){
 
-            for($i=0;$i>count($request->fields_checked);$i++){
+            $today_name = $this->nameDays();
+            //Obtener la cantidad de dias a los que se va a generar la reserva
+            $booking_days = configuration::where('configuration','=','booking_days')
+                            ->select('value')
+                            ->get();
+            //Casteo del resultado de string a int
+            $booking_days = (integer) $booking_days[0]->value;
+
+            for($i=0;$i<count($request->fields_checked);$i++){
+                
+                // Se obtiene la duracion de la reserva del escenario
+                $availability_time = DB::table('fields')
+                ->join('availability_time','fields.availability_time_id','=','availability_time.id')
+                ->select('availability_time.duration')
+                ->where('fields.id','=',$request->fields_checked[$i])->get();
+
+                //Se obtienen las disponibilidades del escenario
+                $availabilities = DB::table('availabilities_field')
+                ->join('availability_field_day', 'availabilities_field.id', '=', 'availability_field_day.availability_field_id')
+                ->join('days', 'availability_field_day.day_id', '=', 'days.id')
+                ->join('prices', 'availability_field_day.price_id', '=', 'prices.id')
+                ->select('availabilities_field.field_id','availabilities_field.ini_hour','availabilities_field.fin_hour','days.name as day','prices.price')
+                ->where('availabilities_field.field_id','=',$request->fields_checked[$i])
+                ->orderby('availabilities_field.ini_hour','ASC')->get();
+
+                $days_disponibilityes;
+
+                //generar disponibilidades hasta el limite de dias definido en la configuracion
+                for($j=0;$j<=$booking_days;$j++){
+
+                    //Buscar los dias en la disponibilidad del escenario que correspondan al dia de la fecha
+                    for($k=0;$k<=$availabilities;$j++){
+
+
+                    }
+
+                }
 
             }
-        $availability_time = DB::table('fields')
-        ->join('availability_time','fields.availability_time_id','=','availability_time.id')
-        ->where('fields.id','=',$request->fields_checked[0])->get();
 
-        $availabilities = DB::table('availabilities_field')
-        ->join('availability_field_day', 'availabilities_field.id', '=', 'availability_field_day.availability_field_id')
-        ->join('days', 'availability_field_day.day_id', '=', 'days.id')
-        ->join('prices', 'availability_field_day.price_id', '=', 'prices.id')
-        ->select('availabilities_field.field_id','availabilities_field.ini_hour','availabilities_field.fin_hour','days.name','prices.price')
-        ->where('availabilities_field.field_id','=',$request->fields_checked[0])
-        ->orderby('availabilities_field.ini_hour','ASC')->get();
-
-            return response()->json($availability_time);
+            return response()->json($today_date->addDay());
 
         }
     }

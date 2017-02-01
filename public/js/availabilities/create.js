@@ -31,7 +31,7 @@ $( document ).ready(function() {
 				  data : "field_id="+id_fields[k],
 				  dataType: "json", 
 				}).done(function(response){					
-
+					console.log(response);
 					for(var l=0;l<response.length;l++){
 
 						$('.'+response[l].field_id).append('<tr><td>'+response[l].name+'</td><td>'+response[l].ini_hour+' a '+response[l].fin_hour+'</td><td>'+response[l].price+'</td><tr>');					
