@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\availability_field;
 use App\availability_field_day;
 use App\day;
 use App\price;
 use App\field;
+use App\availability_field_day_duration;
 
 class availabilities_fieldController extends Controller
 {
@@ -55,7 +57,13 @@ class availabilities_fieldController extends Controller
             $availability_field->ini_hour = $request->ini_hour;
             $availability_field->fin_hour = $request->fin_hour;
             $availability_field->field_id = $request->field_id;
-            $availability_field->save();        
+            $availability_field->save();  
+
+            // Se obtiene la duracion de reserva del escenario
+            $availability_time = DB::table('fields')
+            ->join('availability_time','fields.availability_time_id','=','availability_time.id')
+            ->select('availability_time.duration')
+            ->where('fields.id','=',$request->field_id)->get();      
 
             for($i=0;$i<count($request->days_checked);$i++){
 
@@ -65,9 +73,29 @@ class availabilities_fieldController extends Controller
                 $availability_field_day->price_id = $request->prices[$i];
                 $availability_field_day->save();
 
+                //Variable para controlar el rango horario de cada disponibilidad
+                //Se convierte el date en numero para procesarlo
+                $time = date("H:i:s", ($request->ini_hour + 0)*60*60);
+
+
+                for($j=0;$j <(($request->fin_hour - $request->ini_hour)*$availability_time[0]->duration);$j=$j+$availability_time[0]->duration){
+
+                //     $availability_per_duration = new availability_field_day_duration();
+                //     $availability_per_duration->ini_hour = $time;
+                //     $availability_per_duration->fin_hour = date("H:i", ($time + ($availability_time[0]->duration/60))*60*60) ;
+                //     $availability_per_duration->availability_field_id = $availability_field->id;
+                //     $availability_per_duration->day_id = $request->days_checked[$i];
+                //     $availability_per_duration->price_id = $request->prices[$i];
+                //     $availability_per_duration->save();
+                    
+                    $times[] = (($time + 0)*60*60 + ($availability_time[0]->duration/60)*60*60);
+                    $time = date("H:i:s" , (($time + 0)*60*60 + ($availability_time[0]->duration/60)*60*60));
+
+                }
+
             }
 
-            return response()->json("Disponibilidad almacenada");
+            return response()->json(date("H:i:s", 30600));
         }
 
     }
@@ -162,7 +190,11 @@ class availabilities_fieldController extends Controller
      */
     public function destroy($field_id,$availability_field_id)
     {
+        //Eliminar dias de la disponibilidad
         $availability_field_day = availability_field_day::where('availability_field_id','=',$availability_field_id)->delete();
+
+        //Eliminar duraciones de las disponibilidades
+        $availability_field_day_duration = availability_field_day_duration::where('availability_field_id','=',$availability_field_id)->delete();
 
         $availability_field = availability_field::find($availability_field_id);
         $availability_field->delete();

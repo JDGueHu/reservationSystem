@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAvailabilitiesTable extends Migration
+class AddTableAvailabilityFieldDayDuration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,21 @@ class AddAvailabilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('availabilities', function (Blueprint $table) {
+        Schema::create('availability_field_day_duration', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->date('date');
-            $table->string('ini_hour');
-            $table->date('fin_hour');
-
-            $table->integer('field_id')->unsigned();
-            $table->foreign('field_id')->references('id')->on('fields');
-
+            $table->timeTz('ini_hour');
+            $table->timeTz('fin_hour');
+            
             $table->integer('availability_field_id')->unsigned();
             $table->foreign('availability_field_id')->references('id')->on('availabilities_field');
 
-            $table->integer('availability_status_id')->unsigned();
-            $table->foreign('availability_status_id')->references('id')->on('availability_status');
+            $table->integer('day_id')->unsigned();
+            $table->foreign('day_id')->references('id')->on('days');
+
+            $table->integer('price_id')->unsigned();
+            $table->foreign('price_id')->references('id')->on('prices');
+
 
             $table->timestamps();
         });
@@ -40,6 +40,6 @@ class AddAvailabilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('availabilities');
+        Schema::dropIfExists('availability_field_day_duration');
     }
 }
