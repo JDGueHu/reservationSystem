@@ -26,8 +26,8 @@ $( document ).ready(function() {
 		  data : {days_checked:days_checked, prices:prices, ini_hour:$('#ini_hour').val(), fin_hour:$('#fin_hour').val(), field_id:$('#field_id').val()},
 		  dataType: "json", 
 		}).done(function(response){
-			console.log(response);
-			//window.location.replace('../'+$('#field_id').val()+'/index');
+			//console.log(response);
+			window.location.replace('../'+$('#field_id').val()+'/index');
 		});
 
 	});
