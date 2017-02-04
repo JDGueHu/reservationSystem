@@ -221,6 +221,12 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'disponibilidad.showAvailabilities'
 	]);
 
+	Route::resource('generarDisponibilidad','generate_availabilitiesController');
+	Route::get('generarDisponibilidad/{id}/destroy',[
+		'uses' => 'generate_availabilitiesController@destroy',
+		'as' => 'generarDisponibilidad.destroy'
+	]);
+
 });
 
 

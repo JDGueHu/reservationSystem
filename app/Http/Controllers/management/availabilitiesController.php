@@ -62,10 +62,11 @@ class availabilitiesController extends Controller
        if($request->ajax()){
 
             $today_name = $this->nameDays();
+
             //Obtener la cantidad de dias a los que se va a generar la reserva
             $booking_days = configuration::where('configuration','=','booking_days')
                             ->select('value')
-                            ->get();
+                            ->get();                            
             //Casteo del resultado de string a int
             $booking_days = (integer) $booking_days[0]->value;
 
@@ -86,22 +87,10 @@ class availabilitiesController extends Controller
                 ->where('availabilities_field.field_id','=',$request->fields_checked[$i])
                 ->orderby('availabilities_field.ini_hour','ASC')->get();
 
-                $days_disponibilityes;
-
-                //generar disponibilidades hasta el limite de dias definido en la configuracion
-                for($j=0;$j<=$booking_days;$j++){
-
-                    //Buscar los dias en la disponibilidad del escenario que correspondan al dia de la fecha
-                    for($k=0;$k<=$availabilities;$j++){
-
-
-                    }
-
-                }
 
             }
 
-            return response()->json($today_date->addDay());
+            return response()->json($availabilities);
 
         }
     }
