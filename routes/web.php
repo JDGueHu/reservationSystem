@@ -211,20 +211,21 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'disponibilidad.destroy'
 	]);
 
-	Route::post('disponibilidad/showFields',[
-		'uses' => 'availabilitiesController@showFields',
-		'as' => 'disponibilidad.showFields'
-	]);
-
-	Route::post('disponibilidad/showAvailabilities',[
-		'uses' => 'availabilitiesController@showAvailabilities',
-		'as' => 'disponibilidad.showAvailabilities'
-	]);
 
 	Route::resource('generarDisponibilidad','generate_availabilitiesController');
 	Route::get('generarDisponibilidad/{id}/destroy',[
 		'uses' => 'generate_availabilitiesController@destroy',
 		'as' => 'generarDisponibilidad.destroy'
+	]);
+
+		Route::post('generarDisponibilidad/showFields',[
+		'uses' => 'generate_availabilitiesController@showFields',
+		'as' => 'generarDisponibilidad.showFields'
+	]);
+
+	Route::post('generarDisponibilidad/showAvailabilities',[
+		'uses' => 'generate_availabilitiesController@showAvailabilities',
+		'as' => 'generarDisponibilidad.showAvailabilities'
 	]);
 
 });

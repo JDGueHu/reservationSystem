@@ -5,7 +5,7 @@ $( document ).ready(function() {
 		var id_fields = [];
 
 		$.ajax({
-		  url: "../disponibilidad/showFields",
+		  url: "../generarDisponibilidad/showFields",
 		  headers: {'X-CSRF-TOKEN': $('#token').val()},
 		  type: 'POST',
 		  data : "customer_id="+$('#customer_id').val(),
@@ -25,7 +25,7 @@ $( document ).ready(function() {
 			for(var k=0;k<id_fields.length;k++){
 				
 				$.ajax({
-				  url: "../disponibilidad/showAvailabilities",
+				  url: "../generarDisponibilidad/showAvailabilities",
 				  headers: {'X-CSRF-TOKEN': $('#token').val()},
 				  type: 'POST',
 				  data : "field_id="+id_fields[k],

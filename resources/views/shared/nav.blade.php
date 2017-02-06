@@ -42,7 +42,7 @@
             <li><a href="{{ route('escenario.index') }}">Escenarios</a></li>
             <li><a href="{{ route('duracionReserva.index') }}">Duración reserva</a></li>
             <li><a href="{{ route('precio.index') }}">Precios</a></li>
-            <li><a href="{{ route('disponibilidad.index') }}">Generar reservas</a></li>
+            <li><a href="{{ route('generarDisponibilidad.index') }}">Generar reservas</a></li>
 
             <!--li role="separator" class="divider"></li-->                
           </ul>
