@@ -57,10 +57,10 @@ $( document ).ready(function() {
 		}
 
 		$.ajax({
-		  url: "../disponibilidad",
+		  url: "../generarDisponibilidad",
 		  headers: {'X-CSRF-TOKEN': $('#token').val()},
 		  type: 'POST',
-		  data : {fields_checked:fields_checked},
+		  data : {fields_checked:fields_checked, customer_id:$('#customer_id').val() },
 		  dataType: "json", 
 		}).done(function(response){
 			console.log(response);

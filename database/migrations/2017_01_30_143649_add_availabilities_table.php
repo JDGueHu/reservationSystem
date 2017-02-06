@@ -17,16 +17,13 @@ class AddAvailabilitiesTable extends Migration
             $table->increments('id');
 
             $table->date('date');
-            $table->string('ini_hour');
-            $table->date('fin_hour');
+            $table->timeTz('ini_hour');
+            $table->timeTz('fin_hour');
 
             $table->integer('field_id')->unsigned();
             $table->foreign('field_id')->references('id')->on('fields');
 
-            $table->integer('availability_field_id')->unsigned();
-            $table->foreign('availability_field_id')->references('id')->on('availabilities_field');
-
-            $table->integer('availability_status_id')->unsigned();
+            $table->integer('availability_status_id')->unsigned()->nullable();
             $table->foreign('availability_status_id')->references('id')->on('availability_status');
 
             $table->timestamps();

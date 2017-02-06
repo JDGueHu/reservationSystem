@@ -82,6 +82,7 @@ class availabilities_fieldController extends Controller
                     $availability_per_duration = new availability_field_day_duration();
                     $availability_per_duration->ini_hour = date("H:i:s", $time);
                     $availability_per_duration->fin_hour = date("H:i", $time + ($availability_time[0]->duration)*60);
+                    $availability_per_duration->field_id = $request->field_id;
                     $availability_per_duration->availability_field_id = $availability_field->id;
                     $availability_per_duration->day_id = $request->days_checked[$i];
                     $availability_per_duration->price_id = $request->prices[$i];
@@ -193,6 +194,7 @@ class availabilities_fieldController extends Controller
                     $availability_per_duration->ini_hour = date("H:i:s", $time);
                     $availability_per_duration->fin_hour = date("H:i", $time + ($availability_time[0]->duration)*60);
                     $availability_per_duration->availability_field_id = $availability_field->id;
+                    $availability_per_duration->field_id = $request->field_id;
                     $availability_per_duration->day_id = $request->days_checked[$i];
                     $availability_per_duration->price_id = $request->prices[$i];
                     $availability_per_duration->save();

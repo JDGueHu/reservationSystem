@@ -22,6 +22,9 @@ class AddAvailabilityFieldDayPerDuration extends Migration
             $table->integer('availability_field_id')->unsigned();
             $table->foreign('availability_field_id')->references('id')->on('availabilities_field');
 
+            $table->integer('field_id')->unsigned();
+            $table->foreign('field_id')->references('id')->on('fields');
+
             $table->integer('day_id')->unsigned();
             $table->foreign('day_id')->references('id')->on('days');
 
