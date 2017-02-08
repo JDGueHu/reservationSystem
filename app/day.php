@@ -14,6 +14,7 @@ class day extends Model
         return $this->belongsToMany('App\availability_field','availability_field_day')->withTimestamps();
     }
 
+
     public static function day_names($numberDayOfWeek){
 
         switch ($numberDayOfWeek) {

@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Administración/Generar disponibilidad/Crear')
+@section('title','Administración/Reservables/Crear')
 
 @section('warning')
 		<div class="alert alert-danger text-center" role="alert" style="padding: 0%">

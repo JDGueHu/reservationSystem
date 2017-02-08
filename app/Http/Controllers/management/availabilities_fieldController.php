@@ -75,7 +75,8 @@ class availabilities_fieldController extends Controller
 
                 //Variable para controlar el rango horario de cada disponibilidad
                 //Se convierte el date en numero para procesarlo
-                $time = ($request->ini_hour + 0)*60*60;
+                //Se suman 5 horas por ajuste de zona horaria
+                $time = ($request->ini_hour + 0)*60*60 + 18000;
 
                 for($j=0;$j <(($request->fin_hour - $request->ini_hour)*60);$j=$j+$availability_time[0]->duration){
 

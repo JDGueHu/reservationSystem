@@ -16,7 +16,7 @@ $( document ).ready(function() {
 
 			for(var i=0;i<response.length;i++){
 				$("#contenedor").append(
-				'<h4 class="separador_short"><span class="label label-primary"><input type="checkbox" name="fields" value="'+response[i].id+' "checked/>'+' '+response[i].name+'</span></h4><div class="form-group"><table id="example" class="table table-hover '+response[i].id+'" cellspacing="0" width="100%"><thead><tr><th>Día</th><th>Franja horaria</th><th>Precio</th></tr></thead><tbody></tbody></table></div>'
+				'<h4 class="separador_short"><span class="label label-primary"><input type="checkbox" name="fields" value="'+response[i].id+'" checked/>'+' '+response[i].name+'</span></h4><div class="form-group"><table id="example" class="table table-hover '+response[i].id+'" cellspacing="0" width="100%"><thead><tr><th>Día</th><th>Franja horaria</th><th>Precio</th></tr></thead><tbody></tbody></table></div>'
 				);
 
 				id_fields.push(response[i].id);
@@ -63,7 +63,8 @@ $( document ).ready(function() {
 		  data : {fields_checked:fields_checked, customer_id:$('#customer_id').val() },
 		  dataType: "json", 
 		}).done(function(response){
-			console.log(response);
+			//console.log(response);
+			window.location.replace('../generarDisponibilidad');
 		});
 
 		
