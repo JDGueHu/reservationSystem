@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Estado disponibilidad/Crear')
+@section('title','Configuración/Estado reservable/Crear')
 
 @section('content')
 {!! Form::open(['route' => 'estadoDisponibilidad.store', 'method' => 'POST']) !!}

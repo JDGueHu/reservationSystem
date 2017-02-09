@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Estados disponibilidad')
+@section('title','Configuración/Estados reservable')
 
 @section('content')
 	

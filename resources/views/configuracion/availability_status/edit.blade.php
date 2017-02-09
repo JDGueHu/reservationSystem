@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('estadoDisponibilidad.index') }}}">
+		<a style="text-decoration: none;" href="{{ URL::route('estadoDisponibilidad.index') }}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}
