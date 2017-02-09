@@ -218,7 +218,12 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'generarDisponibilidad.destroy'
 	]);
 
-		Route::post('generarDisponibilidad/showFields',[
+	Route::post('generarDisponibilidad/update',[
+		'uses' => 'generate_availabilitiesController@update',
+		'as' => 'generarDisponibilidad.update'
+	]);
+
+	Route::post('generarDisponibilidad/showFields',[
 		'uses' => 'generate_availabilitiesController@showFields',
 		'as' => 'generarDisponibilidad.showFields'
 	]);

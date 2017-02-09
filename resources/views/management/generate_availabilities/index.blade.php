@@ -21,10 +21,10 @@
 							<a title="Ver" href="{{ route('generarDisponibilidad.show',$availability->id) }}" class="btn btn-default btn-xs">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
-							<a title="Editar" href="" class="btn btn-warning btn-xs">
+							<a title="Editar" href="{{ route('generarDisponibilidad.edit',$availability->id) }}" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>
-							<a title="Eliminar" href="" class="btn btn-danger btn-xs confirm">
+							<a title="Eliminar" href="{{ route('generarDisponibilidad.destroy',$availability->id) }}" class="btn btn-danger btn-xs confirm">
 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</a>
 						</td>

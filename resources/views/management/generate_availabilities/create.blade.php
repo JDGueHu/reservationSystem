@@ -2,9 +2,9 @@
 @section('title','Administración/Reservables/Crear')
 
 @section('warning')
-		<div class="alert alert-danger text-center" role="alert" style="padding: 0%">
-			<p>Por favor <b>REVISE DETENIDAMENTE</b> la configuración de las disponibilidades de los escenarios antes de generar las reservas</p>
-		</div>
+	<div class="alert alert-danger text-center" role="alert" style="padding: 0%">
+		<p>Por favor <b>REVISE DETENIDAMENTE</b> la configuración de las disponibilidades de los escenarios antes de generar las reservas</p>
+	</div>
 @endsection
 
 @section('content')
@@ -30,6 +30,5 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('js/table.js') }}"></script>
 <script src="{{ asset('js/generate_availabilities/create.js') }}"></script>
 @endsection

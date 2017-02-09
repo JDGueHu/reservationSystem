@@ -10,6 +10,7 @@ use App\availability_field_day;
 use App\availability_status;
 use App\customer;
 use App\field;
+use App\day;
 use App\configuration;
 use App\availability_field_day_duration;
 use Carbon\Carbon;
@@ -69,8 +70,8 @@ class generate_availabilitiesController extends Controller
             $reservable_day = (Integer)$reservable_day[0]->value;
 
             //id estados de la reserva
-            $idStatusNoDisponible = availability_status::idStatus("No disponible");
-            $idStatusDisponible = availability_status::idStatus("Disponible");
+            //$idStatusNoDisponible = availability_status::idStatus("No disponible");
+            //$idStatusDisponible = availability_status::idStatus("Disponible");
 
             //Ciclar sobre los escenarios seleccionados para le generacion de reservas
             for($i=0;$i<count($request->fields_checked);$i++){
@@ -124,8 +125,8 @@ class generate_availabilitiesController extends Controller
         //Todos los escenarios del cliente presentes en los reservables
         $fields_checked = availability::select('field_id')->distinct()
             ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-            ->select('fields.id','fields.name')
-            ->get();
+            ->select('fields.id')
+            ->pluck('id');
 
         for($i=0;$i<count($fields_customer);$i++){
             $field_availabilities[] = DB::table('availabilities_field')
@@ -157,7 +158,38 @@ class generate_availabilitiesController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Clientes para la lista desplegable
+        $customers = customer::orderby('business_name','ASC')->pluck('business_name','id');
+        //Registro de generacion de resservable
+        $generate_availability = generate_availability::find($id);
+        //Todos los escenarios del cliente
+        $fields_customer = field::where('customer_id','=',$generate_availability->customer_id)->get();
+        //Todos los escenarios del cliente presentes en los reservables
+        $fields_checked = availability::select('field_id')->distinct()
+            ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+            ->select('fields.id')
+            ->pluck('id');
+
+        for($i=0;$i<count($fields_customer);$i++){
+            $field_availabilities[] = DB::table('availabilities_field')
+                ->join('availability_field_day', 'availability_field_day.availability_field_id', '=', 'availabilities_field.id')
+                ->join('days', 'availability_field_day.day_id', '=', 'days.id')
+                ->join('prices', 'availability_field_day.price_id', '=', 'prices.id')
+                ->where('availabilities_field.field_id','=',$fields_customer[$i]->id)
+                ->select('availabilities_field.field_id','days.name','prices.price','availabilities_field.ini_hour','availabilities_field.fin_hour')
+                ->get();
+        }
+
+        $availabilities_num = count($field_availabilities);
+
+        return view('management.generate_availabilities.edit')
+            ->with('customers',$customers)
+            ->with('generate_availability',$generate_availability)
+            ->with('fields_customer',$fields_customer)
+            ->with('fields_checked',$fields_checked)
+            ->with('availabilities_num',$availabilities_num)
+            ->with('field_availabilities',$field_availabilities)
+            ->with('generate_availability_id',$id); 
     }
 
     /**
@@ -167,9 +199,55 @@ class generate_availabilitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if($request->ajax()){
+
+            //Se eliminan los resevables del registro de generacion de reservables entregado para edicion
+            $availabilities = availability::where('generate_availability_id','=',$request->generate_availability_id)->delete();
+
+            //Se consulta configuracion para obtener cantidad de dias reservables
+            $reservable_day = configuration::where('configuration','=','booking_days')->get();
+            $reservable_day = (Integer)$reservable_day[0]->value;
+
+            //id estados de la reserva
+            //$idStatusNoDisponible = availability_status::idStatus("No disponible");
+            //$idStatusDisponible = availability_status::idStatus("Disponible");
+
+            //Ciclar sobre los escenarios seleccionados para le generacion de reservas
+            for($i=0;$i<count($request->fields_checked);$i++){
+
+                //Ciclo sobre los dias reservables
+                for($k=0;$k<=$reservable_day;$k++){
+
+                    $date = Carbon::now();
+                    $date->addDays($k);
+
+                    //id del día segun base de datos
+                    $code_day = day::day_code(day::day_names($date->dayOfWeek));
+
+
+
+                    //Disponibilidades por duracion de reserva para cada escenario
+                    $availabilities = availability_field_day_duration::where('field_id','=',$request->fields_checked[$i])->where('day_id','=',$code_day)->get();
+                    
+                    // //Ciclo sobre disponibilidades por duracion de reserva para cada escenario
+                    foreach($availabilities as $availability){
+
+                        $reservable = new availability(); 
+                        $reservable->date =  $date->toDateString();
+                        $reservable->ini_hour =  $availability->ini_hour;
+                        $reservable->fin_hour =  $availability->fin_hour;
+                        $reservable->field_id =  $request->fields_checked[$i];
+                        $reservable->generate_availability_id = $request->generate_availability_id;
+                        $reservable->save();
+
+                    }
+                }         
+            }
+
+            return response()->json();
+        }
     }
 
     /**
@@ -180,7 +258,13 @@ class generate_availabilitiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Se eliminan los resevables del registro de generacion de reservables entregado para edicion
+        $availabilities = availability::where('generate_availability_id','=',$id)->delete();
+        $generate_availability = generate_availability::find($id);
+        $generate_availability->delete();
+
+        flash('La generación de reservables se eliminó exitosamente', 'danger')->important();
+        return redirect()->route('generarDisponibilidad.index'); 
     }
 
     public function showFields(Request $request)
