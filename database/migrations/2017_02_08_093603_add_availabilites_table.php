@@ -29,6 +29,8 @@ class AddAvailabilitesTable extends Migration
             $table->integer('availability_status_id')->unsigned()->nullable();
             $table->foreign('availability_status_id')->references('id')->on('availability_status');
 
+            $table->boolean('enable')->default(true);
+
             $table->timestamps();        });
     }
 

@@ -71,7 +71,7 @@ class generate_availabilitiesController extends Controller
 
             //id estados de la reserva
             //$idStatusNoDisponible = availability_status::idStatus("No disponible");
-            //$idStatusDisponible = availability_status::idStatus("Disponible");
+            $idStatusDisponible = availability_status::idStatus("Disponible");
 
             //Ciclar sobre los escenarios seleccionados para le generacion de reservas
             for($i=0;$i<count($request->fields_checked);$i++){
@@ -96,6 +96,7 @@ class generate_availabilitiesController extends Controller
                         $reservable->ini_hour =  $availability->ini_hour;
                         $reservable->fin_hour =  $availability->fin_hour;
                         $reservable->field_id =  $request->fields_checked[$i];
+                        $reservable->availability_status_id =  $idStatusDisponible;
                         $reservable->generate_availability_id = $generate_availability->id;
                         $reservable->save();
 
@@ -212,7 +213,7 @@ class generate_availabilitiesController extends Controller
 
             //id estados de la reserva
             //$idStatusNoDisponible = availability_status::idStatus("No disponible");
-            //$idStatusDisponible = availability_status::idStatus("Disponible");
+            $idStatusDisponible = availability_status::idStatus("Disponible");
 
             //Ciclar sobre los escenarios seleccionados para le generacion de reservas
             for($i=0;$i<count($request->fields_checked);$i++){
@@ -239,6 +240,7 @@ class generate_availabilitiesController extends Controller
                         $reservable->ini_hour =  $availability->ini_hour;
                         $reservable->fin_hour =  $availability->fin_hour;
                         $reservable->field_id =  $request->fields_checked[$i];
+                        $reservable->availability_status_id =  $idStatusDisponible;
                         $reservable->generate_availability_id = $request->generate_availability_id;
                         $reservable->save();
 
