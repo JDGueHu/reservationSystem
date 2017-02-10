@@ -235,4 +235,10 @@ Route::group(['prefix'=>'administracion'],function(){
 
 });
 
+Route::group(['prefix'=>'reservas'],function(){
+
+
+
+});
+
 

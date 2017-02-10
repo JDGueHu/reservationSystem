@@ -26,7 +26,7 @@
             <li><a href="{{ route('deporte.index') }}">Deportes</a></li>
             <li><a href="{{ route('dia.index') }}">Días</a></li>
             <li><a href="{{ route('configuracion.index') }}">Configuración</a></li>
-            <li><a href="{{ route('estadoDisponibilidad.index') }}">Estados disponibilidad</a></li>
+            <li><a href="{{ route('estadoDisponibilidad.index') }}">Estados reservable</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>
