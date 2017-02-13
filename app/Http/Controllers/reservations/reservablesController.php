@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\availability;
 use App\customer;
+use App\field;
 
 class reservablesController extends Controller
 {
@@ -16,15 +17,21 @@ class reservablesController extends Controller
      */
     public function index(Request $request)
     {
-        $customer_id_selected = "";
+
         $customers = customer::orderby('business_name','ASC')->pluck('business_name','id');
+        $fields = field::where('customer_id','=',$request->customer_id)->pluck('name','id');
+       
         $availabilities = DB::table('availabilities')
             ->select('date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
 
+       //dd($request->date);
         return view('reservations.reservable.index')
             ->with('customers',$customers)
-            ->with('availabilities',$availabilities)
-            ->with('customer_id_selected',$customer_id_selected);
+            ->with('fields',$fields)
+            ->with('customerSelected',$request->customer_id)
+            ->with('fieldSelected',$request->field_id)
+            ->with('dateSelected',$request->date)
+            ->with('availabilities',$availabilities);
     }
 
     /**
@@ -91,5 +98,17 @@ class reservablesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showFields(Request $request){
+
+        if($request->ajax()){
+
+            $fields = field::where('customer_id','=',$request->customer_id)
+                ->select('name','id')->get();
+            return response()->json($fields);
+
+        }
+
     }
 }

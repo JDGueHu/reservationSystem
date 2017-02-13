@@ -3,25 +3,27 @@
 
 @section('content')
 
-	<div class="row">
-	  <div class="col-md-4">
-		{!! Form::label('customer_id','Cliente')  !!}
-		{!! Form::select('customer_id', $customers, $customer_id_selected, ['class' => 'form-control', 'required', 'placeholder' => 'Seleccione cliente','id'=>'customer_id'])  !!}	
-	  </div>
-	  <div class="col-md-4">
-		{!! Form::label('field_id','Escenario')  !!}
-		{!! Form::select('field_id', [1], null, ['class' => 'form-control', 'required', 'placeholder' => 'Seleccione cliente','id'=>'field_id'])  !!}	
-	  </div>
-  	  <div class="col-md-4">
-  	  	{!! Form::label('date','Fecha')  !!}
-		<div class="input-group date" >
-		    <input type="text" class="form-control datepicker" placeholder="YYYY-MM-DD">
-		    <div class="input-group-addon">
-		        <span class="glyphicon glyphicon-th"></span>
-		    </div>
+	{!! Form::open(['route' => 'reservable.index', 'method' => 'GET', 'id' => 'reservableForm']) !!}
+		<div class="row">
+		  <div class="col-md-4">
+			{!! Form::label('customer_id','Cliente')  !!}
+			{!! Form::select('customer_id', $customers, $customerSelected, ['class' => 'form-control', 'required', 'placeholder' => 'Seleccione cliente','id'=>'customer_id'])  !!}	
+		  </div>
+		  <div class="col-md-4">
+			{!! Form::label('field_id','Escenario')  !!}
+			{!! Form::select('field_id', $fields, $fieldSelected, ['class' => 'form-control', 'required', 'placeholder' => 'Seleccione cliente','id'=>'field_id'])  !!}	
+		  </div>
+	  	  <div class="col-md-4">
+	  	  	{!! Form::label('date','Fecha')  !!}
+			<div class="input-group date" >
+			    <input type="text" class="form-control datepicker" name="date" id="date" value="{{ $dateSelected }}" placeholder="YYYY-MM-DD">
+			    <div class="input-group-addon">
+			        <span class="glyphicon glyphicon-th"></span>
+			    </div>
+			</div>
+		  </div>
 		</div>
-	  </div>
-	</div>
+	{!! Form::close() !!}
 	<hr>
 
 	<div class="table-responsive">
@@ -70,6 +72,9 @@
 			</tbody>
 		</table>
 	</div>
+
+	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+
 @endsection
 
 @section('js')

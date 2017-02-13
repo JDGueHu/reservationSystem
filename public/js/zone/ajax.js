@@ -6,6 +6,8 @@ $( document ).ready(function() {
 		var sub_url = url.substring(url.length,url.length - 6);
 
 		var zone_type_id = event.target.value;
+		if(zone_type_id == "" || zone_type_id== null)zone_type_id=0;
+
 		var zone_id = $('#zone_id_edit').val();
 
 		if(zone_id=="" || zone_id==null) zone_id =0;

@@ -126,8 +126,11 @@ class ZonesController extends Controller
 
     public function getTypeZones(Request $request,$zone_id,$zone_type_id){
         if($request->ajax()){
-            $zone = Zone_type::find($zone_type_id);
-            $zones = Zone::getTypeZones($zone_id,$zone->priority);
+            if($zone_type_id == 0){$zones=[];}
+            else{
+             $zone = Zone_type::find($zone_type_id);
+             $zones = Zone::getTypeZones($zone_id,$zone->priority);
+            }
             return response()->json($zones);
         }
     }
