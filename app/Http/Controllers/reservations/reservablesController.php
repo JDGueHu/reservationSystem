@@ -20,11 +20,23 @@ class reservablesController extends Controller
 
         $customers = customer::orderby('business_name','ASC')->pluck('business_name','id');
         $fields = field::where('customer_id','=',$request->customer_id)->pluck('name','id');
-       
-        $availabilities = DB::table('availabilities')
-            ->select('date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
 
-       //dd($request->date);
+        $consult;
+
+        if($request->customer_id != "" || $request->customer_id !=null){
+            $availabilities = DB::select( DB::raw('SELECT * FROM availabilities') );
+        }
+
+        // $availabilities = DB::table('availabilities')
+        //     ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+        //     ->where('fields.customer_id','=',$request->customer_id)
+        //     ->where('availabilities.field_id','=',$request->field_id)
+        //     ->where('availabilities.date','=',$request->date)
+        //     ->select('date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+
+
+
+       //dd($asdf);
         return view('reservations.reservable.index')
             ->with('customers',$customers)
             ->with('fields',$fields)
