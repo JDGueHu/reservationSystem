@@ -239,9 +239,19 @@ Route::group(['prefix'=>'reservas'],function(){
 
 	Route::resource('reservable','reservablesController');
 
-	Route::post('reservable/showFields',[
-		'uses' => 'reservablesController@showFields',
-		'as' => 'reservable.showFields'
+	Route::post('reservable/enable_disable',[
+		'uses' => 'reservablesController@enable_disable',
+		'as' => 'reservable.enable_disable'
+	]);
+
+	Route::post('reservable/{id}/reserva',[
+		'uses' => 'reservablesController@reserva',
+		'as' => 'reservable.reserva'
+	]);
+
+	Route::post('reservable/reservaStore',[
+		'uses' => 'reservablesController@reservaStore',
+		'as' => 'reservable.reservaStore'
 	]);
 
 });

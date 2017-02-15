@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\availability;
 use App\customer;
 use App\field;
+use App\user;
 
 class reservablesController extends Controller
 {
@@ -19,29 +20,51 @@ class reservablesController extends Controller
     {
 
         $customers = customer::orderby('business_name','ASC')->pluck('business_name','id');
-        $fields = field::where('customer_id','=',$request->customer_id)->pluck('name','id');
 
-        $consult;
+        //Si todos los campos del filtro están vacios
+        if(($request->customer_id == "" || $request->customer_id == null) && ($request->date == "" || $request->date == null)){
+            
+            $availabilities = DB::table('availabilities')
+            ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+            ->where('fields.customer_id','=','X')
+            ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
 
-        if($request->customer_id != "" || $request->customer_id !=null){
-            $availabilities = DB::select( DB::raw('SELECT * FROM availabilities') );
+        }else{
+
+            //Si está seleccionado el cliente
+            if(($request->customer_id != "" || $request->customer_id != null) && ($request->date == "" || $request->date == null)){
+
+                $availabilities = DB::table('availabilities')
+                ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                ->where('fields.customer_id','=',$request->customer_id)
+                ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+
+            }else{
+
+                //Si está seleccionado el cliente y el Escenario
+                if(($request->customer_id != "" || $request->customer_id != null) && ($request->date != "" || $request->date != null)){
+
+                    $availabilities = DB::table('availabilities')
+                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                    ->where('fields.customer_id','=',$request->customer_id)
+                    ->where('availabilities.date','=',$request->date)
+                    ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+                    
+                }else{
+
+                    $availabilities = DB::table('availabilities')
+                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                    ->where('availabilities.date','=',$request->date)
+                    ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+
+                }
+            }
+
         }
 
-        // $availabilities = DB::table('availabilities')
-        //     ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-        //     ->where('fields.customer_id','=',$request->customer_id)
-        //     ->where('availabilities.field_id','=',$request->field_id)
-        //     ->where('availabilities.date','=',$request->date)
-        //     ->select('date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
-
-
-
-       //dd($asdf);
         return view('reservations.reservable.index')
             ->with('customers',$customers)
-            ->with('fields',$fields)
             ->with('customerSelected',$request->customer_id)
-            ->with('fieldSelected',$request->field_id)
             ->with('dateSelected',$request->date)
             ->with('availabilities',$availabilities);
     }
@@ -112,15 +135,36 @@ class reservablesController extends Controller
         //
     }
 
-    public function showFields(Request $request){
+    public function enable_disable(Request $request){
 
         if($request->ajax()){
 
-            $fields = field::where('customer_id','=',$request->customer_id)
-                ->select('name','id')->get();
-            return response()->json($fields);
+            $availability = availability::find($request->availability_id);
+            $availability->enable = !$availability->enable;
+            $availability->save();
+
+            return response()->json($request->availability_id);
 
         }
 
     }
+
+
+    public function reserva(Request $request,$availability_id){
+
+        $users = user::orderby('last_name','ASC')->pluck('email','id');
+
+        return view('reservations.reservable.reserva')
+            ->with('users',$users);
+
+    }
+
+    public function reservaStore(Request $request){
+
+
+
+    }
+
+
+
 }

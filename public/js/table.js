@@ -12,9 +12,9 @@ $(document).ready(function() {
             previous:   "Anterior",
             next:       "Siguiente",
             last:       "Última"
-        	},
-
-        }
+        	}
+        },
+        "pageLength": 9
     });
 
 } );

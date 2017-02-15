@@ -9,10 +9,6 @@
 			{!! Form::label('customer_id','Cliente')  !!}
 			{!! Form::select('customer_id', $customers, $customerSelected, ['class' => 'form-control', 'required', 'placeholder' => 'Seleccione cliente','id'=>'customer_id'])  !!}	
 		  </div>
-		  <div class="col-md-4">
-			{!! Form::label('field_id','Escenario')  !!}
-			{!! Form::select('field_id', $fields, $fieldSelected, ['class' => 'form-control', 'required', 'placeholder' => 'Seleccione cliente','id'=>'field_id'])  !!}	
-		  </div>
 	  	  <div class="col-md-4">
 	  	  	{!! Form::label('date','Fecha')  !!}
 			<div class="input-group date" >
@@ -41,13 +37,14 @@
 			<tbody>
 				@foreach($availabilities as $availability)
 					<tr>
+						<input type="hidden" class="{{ $availability->id }}" value="{{ $availability->id }}">
 						<td>{{ $availability->date }}</td>
 						<td>{{ $availability->ini_hour }}</td>
 						<td>{{ $availability->fin_hour }}</td>
 						<td>{{ $availability->field_id }}</td>
 						<td>{{ $availability->availability_status_id }}</td>
 						<td>
-							<a title="Reservar" data-toggle="tooltip" href="" class="btn btn-success btn-xs">
+							<a title="Reservar" data-toggle="tooltip" href="{{ route('reservable.reserva',$availability->id) }}" class="btn btn-success btn-xs">
 								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 							</a>
 							<a title="Confirmar reserva" data-toggle="tooltip" href="" class="btn btn-warning btn-xs">
@@ -61,9 +58,9 @@
 							</a>
 							<a title="Habilitar / Inhabilitar disponibilidad" data-toggle="tooltip" href="" class="">
 								@if($availability->enable == true)
-									<input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-size="mini">
+									<input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-size="mini" class="enable" value="1" id="{{ $availability->id }}">
 								@else
-									<input type="checkbox" data-toggle="toggle" data-onstyle="primary" data-size="mini">
+									<input type="checkbox" data-toggle="toggle" data-onstyle="primary" data-size="mini" value="0" class="enable" id="{{ $availability->id }}">
 								@endif
 							</a>
 						</td>
