@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Estado disponibilidad/Editar')
+@section('title','Configuración/Estados disponibilidad/Editar')
 
 @section('content')
 {!! Form::model($availability_status,['route' => ['estadoDisponibilidad.update',$availability_status->id], 'method' => 'PUT']) !!}

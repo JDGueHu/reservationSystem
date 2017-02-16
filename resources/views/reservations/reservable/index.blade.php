@@ -44,8 +44,8 @@
 						<td>{{ $availability->field_id }}</td>
 						<td>{{ $availability->availability_status_id }}</td>
 						<td>
-							<a title="Reservar" data-toggle="tooltip" href="{{ route('reservable.reserva',$availability->id) }}" class="btn btn-success btn-xs">
-								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							<a data-toggle="tooltip" href="{{ route('reservable.reserva',$availability->id) }}" class="btn btn-primary btn-xs">
+								Reservar
 							</a>
 							<a title="Confirmar reserva" data-toggle="tooltip" href="" class="btn btn-warning btn-xs">
 								<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
@@ -55,13 +55,6 @@
 							</a>
 							<a title="Confirmar pago" data-toggle="tooltip" href="" class="btn btn-info btn-xs">
 								<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-							</a>
-							<a title="Habilitar / Inhabilitar disponibilidad" data-toggle="tooltip" href="" class="">
-								@if($availability->enable == true)
-									<input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-size="mini" class="enable" value="1" id="{{ $availability->id }}">
-								@else
-									<input type="checkbox" data-toggle="toggle" data-onstyle="primary" data-size="mini" value="0" class="enable" id="{{ $availability->id }}">
-								@endif
 							</a>
 						</td>
 					</tr>

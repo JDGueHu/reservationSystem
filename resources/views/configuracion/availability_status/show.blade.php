@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Configuración/Estado disponibilidad/Ver')
+@section('title','Configuración/Estados disponibilidad/Ver')
 
 @section('content')
 {!! Form::model($availability_status) !!}

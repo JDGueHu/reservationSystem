@@ -42,7 +42,7 @@ class availability_statusController extends Controller
         $availability_status->status = $request->status;
         $availability_status->save();
 
-        flash('Estado <b>'.$availability_status->status.'</b> se creó exitosamente', 'success')->important();
+        flash('Estado disponibilidad <b>'.$availability_status->status.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('estadoDisponibilidad.index');
     }
 
@@ -84,7 +84,7 @@ class availability_statusController extends Controller
         $availability_status->status = $request->status;
         $availability_status->save();
 
-        flash('Estado <b>'.$availability_status->status.'</b> se modificó exitosamente', 'warning')->important();
+        flash('Estado disponibilidad <b>'.$availability_status->status.'</b> se modificó exitosamente', 'warning')->important();
         return redirect()->route('estadoDisponibilidad.index');
     }
 
@@ -99,7 +99,7 @@ class availability_statusController extends Controller
         $availability_status = availability_status::find($id);
         $availability_status->delete();
 
-        flash('Estado <b>'.$availability_status->status.'</b> se eliminó exitosamente', 'danger')->important();
+        flash('Estado disponibilidad <b>'.$availability_status->status.'</b> se eliminó exitosamente', 'danger')->important();
         return redirect()->route('estadoDisponibilidad.index'); 
     }
 }

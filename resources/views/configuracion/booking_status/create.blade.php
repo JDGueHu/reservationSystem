@@ -1,8 +1,8 @@
 @extends('shared.main')
-@section('title','Configuración/Estados reservable/Crear')
+@section('title','Configuración/Estados reserva/Crear')
 
 @section('content')
-{!! Form::open(['route' => 'estadoDisponibilidad.store', 'method' => 'POST']) !!}
+{!! Form::open(['route' => 'estadoReserva.store', 'method' => 'POST']) !!}
 
 	<div class="form-group">
 		{!! Form::label('initials','Iniciales')  !!}
@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="form-group">
-		<a style="text-decoration: none;" href="{{{ URL::route('estadoDisponibilidad.index') }}}">
+		<a style="text-decoration: none;" href="{{{ URL::route('estadoReserva.index') }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
 		{!! Form::submit('Guardar',['class' => 'btn btn-primary'])  !!}

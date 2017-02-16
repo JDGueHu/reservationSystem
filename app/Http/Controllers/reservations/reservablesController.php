@@ -8,6 +8,8 @@ use App\availability;
 use App\customer;
 use App\field;
 use App\user;
+use App\sport;
+use App\booking_rule;
 
 class reservablesController extends Controller
 {
@@ -146,17 +148,24 @@ class reservablesController extends Controller
             return response()->json($request->availability_id);
 
         }
-
+        
     }
 
 
     public function reserva(Request $request,$availability_id){
 
         $users = user::orderby('last_name','ASC')->pluck('email','id');
-        $availability = availability::find($availability_id)->get();
+        $availability = availability::find($availability_id);
+        $field = field::find($availability->field_id);
+        $sport = sport::find($field->sport_id);
+        $rules = booking_rule::orderby('priority','ASC')->get();
+
 
         return view('reservations.reservable.reserva')
             ->with('availability',$availability)
+            ->with('field',$field)
+            ->with('sport',$sport)
+            ->with('rules',$rules)
             ->with('users',$users);
 
     }

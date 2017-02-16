@@ -89,9 +89,12 @@ class booking_rulesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('booking_rules')->increment('priority');
-
+       
         $booking_rule = booking_rule::find($id);
+
+        if($booking_rule->priority != $request->priority)
+            DB::table('booking_rules')->increment('priority');
+
         $booking_rule->rule = $request->rule;
         $booking_rule->priority = $request->priority;
         $booking_rule->save();

@@ -22,6 +22,11 @@ class AddUserBookingTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->string("identificador")->unique();
+
+            $table->integer('booking_state_id')->unsigned()->nullable();
+            $table->foreign('booking_state_id')->references('id')->on('booking_status');       
+
             $table->timestamps();
         });
     }

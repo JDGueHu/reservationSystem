@@ -26,7 +26,8 @@
             <li><a href="{{ route('deporte.index') }}">Deportes</a></li>
             <li><a href="{{ route('dia.index') }}">Días</a></li>
             <li><a href="{{ route('configuracion.index') }}">Configuración</a></li>
-            <li><a href="{{ route('estadoDisponibilidad.index') }}">Estados reservable</a></li>
+            <li><a href="{{ route('estadoDisponibilidad.index') }}">Estados disponibilidad</a></li>
+            <li><a href="{{ route('estadoReserva.index') }}">Estados reserva</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>
@@ -53,7 +54,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reservas <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <!--li role="separator" class="divider"></li-->
-            <li><a href="{{ route('reservable.index') }}">Reservables</a></li>
+            <li><a href="{{ route('reservable.index') }}">Disponibilidades</a></li>
+            <li><a href="{{ route('reservable.index') }}">Reservas</a></li>
             <!--li role="separator" class="divider"></li-->                
           </ul>
         </li>

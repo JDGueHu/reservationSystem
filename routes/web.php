@@ -86,6 +86,12 @@ Route::group(['prefix'=>'configuracion'],function(){
 		'as' => 'estadoDisponibilidad.destroy'
 	]);
 
+	Route::resource('estadoReserva','booking_statusController');
+	Route::get('estadoReserva/{id}/destroy',[
+		'uses' => 'booking_statusController@destroy',
+		'as' => 'estadoReserva.destroy'
+	]);
+
 });
 
 Route::group(['prefix'=>'administracion'],function(){

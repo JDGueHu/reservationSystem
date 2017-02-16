@@ -6,15 +6,31 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 .separador{
-  margin-top: 2%;
+  margin-top: 3%;
 }
 
 .separador_short{
   margin-top: 1%;
 }
 
+.sin_margin{
+  margin: 0%;
+}
+
+.border_white{
+  border: 0.5px solid white;
+}
+
+.font_booking{
+  font-size: 18px;
+}
+
 .hidden{
   display: none;
+}
+
+.text_danger{
+  color:red;
 }
 
 html {
