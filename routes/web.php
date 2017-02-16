@@ -233,6 +233,12 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'generarDisponibilidad.showAvailabilities'
 	]);
 
+	Route::resource('politicasReserva','booking_rulesController');
+	Route::get('politicasReserva/{id}/destroy',[
+		'uses' => 'booking_rulesController@destroy',
+		'as' => 'politicasReserva.destroy'
+	]);
+
 });
 
 Route::group(['prefix'=>'reservas'],function(){
@@ -244,7 +250,7 @@ Route::group(['prefix'=>'reservas'],function(){
 		'as' => 'reservable.enable_disable'
 	]);
 
-	Route::post('reservable/{id}/reserva',[
+	Route::get('reservable/{id}/reserva',[
 		'uses' => 'reservablesController@reserva',
 		'as' => 'reservable.reserva'
 	]);

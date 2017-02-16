@@ -153,8 +153,10 @@ class reservablesController extends Controller
     public function reserva(Request $request,$availability_id){
 
         $users = user::orderby('last_name','ASC')->pluck('email','id');
+        $availability = availability::find($availability_id)->get();
 
         return view('reservations.reservable.reserva')
+            ->with('availability',$availability)
             ->with('users',$users);
 
     }

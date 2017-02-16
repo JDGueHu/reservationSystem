@@ -40,6 +40,7 @@
             <li><a href="{{ route('rol.index') }}">Roles</a></li>
             <li><a href="{{ route('usuario.index') }}">Usuarios</a></li>
             <li><a href="{{ route('escenario.index') }}">Escenarios</a></li>
+            <li><a href="{{ route('politicasReserva.index') }}">Políticas reserva</a></li>
             <li><a href="{{ route('duracionReserva.index') }}">Duración reserva</a></li>
             <li><a href="{{ route('precio.index') }}">Precios</a></li>
             <li><a href="{{ route('generarDisponibilidad.index') }}">Generar reservas</a></li>
