@@ -6,8 +6,8 @@
 {!! Form::open(['route' => 'reservable.reservaStore', 'method' => 'POST']) !!}
 
 	<div class="form-group">
-		{!! Form::label('usuario_id','Usuario')  !!}
-		{!! Form::select('usuario_id', $users, null, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione usuario','id'=>'usuario_id'])  !!}	
+		{!! Form::label('user_id','Usuario')  !!}
+		{!! Form::select('user_id', $users, null, ['class' => 'form-control select_category', 'required', 'placeholder' => 'Seleccione usuario','id'=>'user_id'])  !!}	
 	</div>
 
 	<hr>
@@ -83,6 +83,8 @@
 		</a>
 		{!! Form::submit('Reservar',['class' => 'btn btn-primary'])  !!}
 	</div>
+
+	<input type="hidden" name="availability_id" value="{{ $availability->id }}" id="availability_id">
 
 {!! Form::close() !!}
 

@@ -10,6 +10,10 @@ use App\field;
 use App\user;
 use App\sport;
 use App\booking_rule;
+use Carbon\Carbon;
+use App\user_booking;
+use App\booking_state;
+use Mail;
 
 class reservablesController extends Controller
 {
@@ -172,7 +176,27 @@ class reservablesController extends Controller
 
     public function reservaStore(Request $request){
 
+        $booking_id = Carbon::now()->toDateString()."_".uniqid();
 
+        $booking_state_id = booking_state::where('status','=',"Por confirmar")->get();
+        $booking_state_id = $booking_state_id[0]->id;
+
+        Mail::send('reservations.reservable.reserva',$request->all(), function($msj){
+            $msj->subject("Correo desde sistema de reservas");
+            $msj->to("jdguehu@gmail.com");
+        });
+
+        dd($booking_id);
+
+        // $user_booking = new user_booking();
+        // $user_booking->availability_id = $request->availability_id;
+        // $user_booking->user_id = $request->user_id;
+        // $user_booking->booking_id = $booking_id;
+        // $user_booking->booking_state_id = $booking_state_id;
+        // $user_booking->save();
+
+        // flash('La reserva se realizó exitosamente. El código de la reserva es: <b>'.$booking_id.'</b>', 'success')->important();
+        // return redirect()->route('reservable.index');
 
     }
 

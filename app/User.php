@@ -25,4 +25,10 @@ class User extends Authenticatable
     public function customer(){
     	return $this->belongsTo('App\customer');
     }
+
+    public function availabilities()
+    {
+        return $this->belongsToMany('App\availability','user_booking')->withTimestamps();
+    }
+
 }
