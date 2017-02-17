@@ -13,7 +13,9 @@ use App\booking_rule;
 use Carbon\Carbon;
 use App\user_booking;
 use App\booking_state;
+
 use Mail;
+use App\Mail\email;
 
 class reservablesController extends Controller
 {
@@ -181,10 +183,15 @@ class reservablesController extends Controller
         $booking_state_id = booking_state::where('status','=',"Por confirmar")->get();
         $booking_state_id = $booking_state_id[0]->id;
 
-        Mail::send('reservations.reservable.reserva',$request->all(), function($msj){
-            $msj->subject("Correo desde sistema de reservas");
-            $msj->to("jdguehu@gmail.com");
-        });
+        $user = user::find($request->user_id);
+        $rules = booking_rule::orderby('priority','ASC')->get();
+
+        $sport = $request->sport;
+        $field_name = $request->field_name;
+
+        Mail::to($user->email)
+            ->cc("amorenoe@pullmantours.lalianxa.net")
+            ->send(new email($sport,$field_name));
 
         dd($booking_id);
 

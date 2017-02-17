@@ -85,6 +85,14 @@
 	</div>
 
 	<input type="hidden" name="availability_id" value="{{ $availability->id }}" id="availability_id">
+	
+	<input type="hidden" name="sport" value="{{ $sport->name }}" id="sport_name">
+	<input type="hidden" name="field_name" value="{{ $field->name }}" id="field_name">
+	<input type="hidden" name="field_details" value="{{ $field->details }}" id="field_details">
+	<input type="hidden" name="availability_date" value="{{ $availability->date }}" id="availability_date">
+	<input type="hidden" name="availability_ini_hour" value="{{ $availability->ini_hour }}" id="availability_ini_hour">
+	<input type="hidden" name="availability_fin_hour" value="{{ $availability->fin_hour }}" id="availability_fin_hour">
+
 
 {!! Form::close() !!}
 
