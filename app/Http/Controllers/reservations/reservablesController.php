@@ -13,6 +13,7 @@ use App\booking_rule;
 use Carbon\Carbon;
 use App\user_booking;
 use App\booking_state;
+use App\availability_status;
 
 use Mail;
 use App\Mail\email;
@@ -178,7 +179,7 @@ class reservablesController extends Controller
 
     public function reservaStore(Request $request){
 
-        $booking_id = Carbon::now()->toDateString()."_".uniqid();
+        $booking_id = uniqid();
 
         $booking_state_id = booking_state::where('status','=',"Por confirmar")->get();
         $booking_state_id = $booking_state_id[0]->id;
@@ -186,24 +187,34 @@ class reservablesController extends Controller
         $user = user::find($request->user_id);
         $rules = booking_rule::orderby('priority','ASC')->get();
 
-        $sport = $request->sport;
-        $field_name = $request->field_name;
+        //Modificar estado de la disponibilidad
+        $no_disponible = availability_status::where('status','No disponible')->get();        
+        $availability = availability::find($request->availability_id);
+        $availability->availability_status_id = $no_disponible[0]->id;
+        $availability->save();
 
+        //Envio de email
         Mail::to($user->email)
-            ->cc("amorenoe@pullmantours.lalianxa.net")
-            ->send(new email($sport,$field_name));
+            ->send(new email(
+                $booking_id, 
+                $request->sport,
+                $request->field_name, 
+                $request->field_details, 
+                $request->availability_date, 
+                $request->availability_ini_hour, 
+                $request->availability_fin_hour,
+                $rules));
 
-        dd($booking_id);
+        //Relacionar disponibilidad con usuario
+        $user_booking = new user_booking();
+        $user_booking->availability_id = $request->availability_id;
+        $user_booking->user_id = $request->user_id;
+        $user_booking->booking_id = $booking_id;
+        $user_booking->booking_state_id = $booking_state_id;
+        $user_booking->save();
 
-        // $user_booking = new user_booking();
-        // $user_booking->availability_id = $request->availability_id;
-        // $user_booking->user_id = $request->user_id;
-        // $user_booking->booking_id = $booking_id;
-        // $user_booking->booking_state_id = $booking_state_id;
-        // $user_booking->save();
-
-        // flash('La reserva se realizó exitosamente. El código de la reserva es: <b>'.$booking_id.'</b>', 'success')->important();
-        // return redirect()->route('reservable.index');
+        flash('La reserva se realizó exitosamente. El código de la reserva es: <b>'.$booking_id.'</b>', 'success')->important();
+        return redirect()->route('reservable.index');
 
     }
 
