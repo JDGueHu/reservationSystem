@@ -266,6 +266,8 @@ Route::group(['prefix'=>'reservas'],function(){
 		'as' => 'reservable.reservaStore'
 	]);
 
+	Route::resource('reserva','bookingController');
+
 });
 
 

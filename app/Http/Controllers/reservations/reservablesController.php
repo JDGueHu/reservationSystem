@@ -184,6 +184,13 @@ class reservablesController extends Controller
         $booking_state_id = booking_state::where('status','=',"Por confirmar")->get();
         $booking_state_id = $booking_state_id[0]->id;
 
+        $customer_id = DB::table('availabilities')
+                    ->join('generate_availabilities', 'availabilities.generate_availability_id', '=', 'generate_availabilities.id')
+                    ->where('availabilities.id','=',$request->availability_id)
+                    ->get();
+        $customer_id = $customer_id[0]->customer_id;
+
+        $customer = customer::find($customer_id);
         $user = user::find($request->user_id);
         $rules = booking_rule::orderby('priority','ASC')->get();
 
@@ -195,8 +202,11 @@ class reservablesController extends Controller
 
         //Envio de email
         Mail::to($user->email)
-            ->send(new email(
+            ->cc('Jhancastano@utp.edu.co')
+            ->send(new email(                
                 $booking_id, 
+                $customer->business_name,
+                $user->name,
                 $request->sport,
                 $request->field_name, 
                 $request->field_details, 

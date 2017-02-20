@@ -84,8 +84,7 @@
 		{!! Form::submit('Reservar',['class' => 'btn btn-primary'])  !!}
 	</div>
 
-	<input type="hidden" name="availability_id" value="{{ $availability->id }}" id="availability_id">
-	
+	<input type="hidden" name="availability_id" value="{{ $availability->id }}" id="availability_id">	
 	<input type="hidden" name="sport" value="{{ $sport->name }}" id="sport_name">
 	<input type="hidden" name="field_name" value="{{ $field->name }}" id="field_name">
 	<input type="hidden" name="field_details" value="{{ $field->details }}" id="field_details">

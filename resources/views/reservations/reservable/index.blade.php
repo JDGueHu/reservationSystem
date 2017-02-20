@@ -1,5 +1,5 @@
 @extends('shared.main')
-@section('title','Administración/Reservable')
+@section('title','Administración/Disponibilidades')
 
 @section('content')
 
@@ -44,17 +44,8 @@
 						<td>{{ $availability->field_id }}</td>
 						<td>{{ $availability->availability_status_id }}</td>
 						<td>
-							<a data-toggle="tooltip" href="{{ route('reservable.reserva',$availability->id) }}" class="btn btn-primary btn-xs">
+							<a title="Reservar" data-toggle="tooltip" href="{{ route('reservable.reserva',$availability->id) }}" class="btn btn-primary btn-xs">
 								Reservar
-							</a>
-							<a title="Confirmar reserva" data-toggle="tooltip" href="" class="btn btn-warning btn-xs">
-								<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-							</a>
-							<a title="Cancelar reserva" data-toggle="tooltip" href="" class="btn btn-danger btn-xs">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							</a>
-							<a title="Confirmar pago" data-toggle="tooltip" href="" class="btn btn-info btn-xs">
-								<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
 							</a>
 						</td>
 					</tr>

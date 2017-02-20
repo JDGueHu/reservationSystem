@@ -17,6 +17,8 @@ class email extends Mailable
      * @return void
      */
     public $booking_id;
+    public $customer_business_name;
+    public $user_name;
     public $sport;
     public $field_name;
     public $field_details;
@@ -25,9 +27,11 @@ class email extends Mailable
     public $availability_fin_hour;
     public $rules;
 
-    public function __construct($booking_id, $sport, $field_name, $field_details, $availability_date, $availability_ini_hour, $availability_fin_hour, $rules)
+    public function __construct($booking_id, $customer_business_name, $user_name, $sport, $field_name, $field_details, $availability_date, $availability_ini_hour, $availability_fin_hour, $rules)
     {
         $this->booking_id = $booking_id;
+        $this->customer_business_name = $customer_business_name;
+        $this->user_name = $user_name;
         $this->sport = $sport;
         $this->field_name = $field_name;
         $this->field_details = $field_details;
@@ -49,6 +53,8 @@ class email extends Mailable
             ->subject('Reserva Cancha sintética')
             ->view('email.email')
                 ->with('booking_id',$this->booking_id)
+                ->with('customer_business_name',$this->customer_business_name)
+                ->with('user_name',$this->user_name)
                 ->with('sport',$this->sport)
                 ->with('field_name',$this->field_name)
                 ->with('field_details',$this->field_details)
