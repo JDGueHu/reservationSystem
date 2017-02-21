@@ -13,4 +13,15 @@ class availability extends Model
     {
         return $this->belongsToMany('App\users','user_booking')->withTimestamps();
     }
+
+    public function field()
+    {
+        return $this->belongsTo('App\field');
+    }
+
+    public function availability_status()
+    {
+        return $this->belongsTo('App\availability_status');
+    }
+
 }

@@ -41,8 +41,16 @@
 						<td>{{ $availability->date }}</td>
 						<td>{{ $availability->ini_hour }}</td>
 						<td>{{ $availability->fin_hour }}</td>
-						<td>{{ $availability->field_id }}</td>
-						<td>{{ $availability->availability_status_id }}</td>
+						<td>{{ $availability->field->name }}</td>
+						@if($availability->availability_status->status == 'No disponible')
+							<td><span class="label label-warning">{{ $availability->availability_status->status }}</span></td>
+						@else
+							@if($availability->availability_status->status == 'Vencida')
+								<td><span class="label label-danger">{{ $availability->availability_status->status }}</span></td>
+							@else
+								<td><span class="label label-success">{{ $availability->availability_status->status }}</span></td>
+							@endif
+						@endif
 						<td>
 							<a title="Reservar" data-toggle="tooltip" href="{{ route('reservable.reserva',$availability->id) }}" class="btn btn-primary btn-xs">
 								Reservar

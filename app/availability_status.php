@@ -17,4 +17,10 @@ class availability_status extends Model
 
     }
 
+	public function availabilities()
+    {
+        return $this->hasMany('App\availability');
+    }
+
+
 }

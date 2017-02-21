@@ -33,38 +33,34 @@ class reservablesController extends Controller
         //Si todos los campos del filtro están vacios
         if(($request->customer_id == "" || $request->customer_id == null) && ($request->date == "" || $request->date == null)){
             
-            $availabilities = DB::table('availabilities')
-            ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-            ->where('fields.customer_id','=','X')
-            ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+            $availabilities = availability::where('fields.customer_id','=','X')
+                ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                ->get();
 
         }else{
 
             //Si está seleccionado el cliente
             if(($request->customer_id != "" || $request->customer_id != null) && ($request->date == "" || $request->date == null)){
 
-                $availabilities = DB::table('availabilities')
-                ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                ->where('fields.customer_id','=',$request->customer_id)
-                ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+                $availabilities = availability::where('fields.customer_id','=',$request->customer_id)
+                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                    ->get();
 
             }else{
 
                 //Si está seleccionado el cliente y el Escenario
                 if(($request->customer_id != "" || $request->customer_id != null) && ($request->date != "" || $request->date != null)){
 
-                    $availabilities = DB::table('availabilities')
-                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                    ->where('fields.customer_id','=',$request->customer_id)
-                    ->where('availabilities.date','=',$request->date)
-                    ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+                    $availabilities = availability::where('fields.customer_id','=',$request->customer_id)
+                        ->where('availabilities.date','=',$request->date)
+                        ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                        ->get();
                     
                 }else{
 
-                    $availabilities = DB::table('availabilities')
-                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                    ->where('availabilities.date','=',$request->date)
-                    ->select('availabilities.id','date','ini_hour','fin_hour','field_id','availability_status_id','enable')->get();
+                    $availabilities = availability::where('availabilities.date','=',$request->date)
+                        ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                        ->get();
 
                 }
             }

@@ -8,4 +8,9 @@ class booking_state extends Model
 {
 	protected $table = "booking_status";
     protected $fillable = ['initials','status'];
+
+	public function bookings()
+    {
+        return $this->hasMany('App\booking');
+    }
 }

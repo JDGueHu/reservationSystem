@@ -1,9 +1,9 @@
 @extends('shared.main')
-@section('title','Reservas/Confirmar reserva')
+@section('title','Reservas/Cancelar reserva')
 
 @section('content')
 
-{!! Form::open(['route' => 'reserva.confirmarReservaStore', 'method' => 'POST']) !!}
+{!! Form::open(['route' => 'reserva.cancelarReservaStore', 'method' => 'POST']) !!}
 
 	<div class="form-group">
 		{!! Form::label('user_id','Usuario')  !!}
@@ -12,7 +12,7 @@
 
 	<hr>
 
-	<h2 class="text-center"><strong>Va a confirmar</strong></h2>
+	<h2 class="text-center"><strong>Va a cancelar</strong></h2>
 
 	<div class="row">
 	  <div class="col-md-4 bg-primary border_white">
@@ -81,7 +81,7 @@
 		<a style="text-decoration: none;" href="{{{ URL::route('reserva.index',[]) }}}">
 			{!! Form::button('Regresar',['class' => 'btn btn-default'])  !!}
 		</a>
-		{!! Form::submit('Confirmar reserva',['class' => 'btn btn-primary'])  !!}
+		{!! Form::submit('Cancelar reserva',['class' => 'btn btn-primary'])  !!}
 	</div>
 
 	<input type="hidden" name="booking_id" value="{{ $booking->id }}" id="booking_id">	

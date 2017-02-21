@@ -8,4 +8,10 @@ class booking extends Model
 {
 	protected $table = "user_booking";
     protected $fillable = ['identificaction','name','address','email','business_name','identification_type_id','zone_id'];
+
+    public function booking_state()
+    {
+        return $this->belongsTo('App\booking_state');
+    }
+
 }

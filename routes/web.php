@@ -268,7 +268,32 @@ Route::group(['prefix'=>'reservas'],function(){
 
 	Route::resource('reserva','bookingController');
 
+	Route::get('reserva/{id}/confirmarReserva',[
+		'uses' => 'bookingController@confirmarReserva',
+		'as' => 'reserva.confirmarReserva'
+	]);
+
+	Route::post('reserva/confirmarReservaStore',[
+		'uses' => 'bookingController@confirmarReservaStore',
+		'as' => 'reserva.confirmarReservaStore'
+	]);
+
+	Route::get('reserva/{id}/cancelarReserva',[
+		'uses' => 'bookingController@cancelarReserva',
+		'as' => 'reserva.cancelarReserva'
+	]);
+
+	Route::post('reserva/cancelarReservaStore',[
+		'uses' => 'bookingController@cancelarReservaStore',
+		'as' => 'reserva.cancelarReservaStore'
+	]);
+
+
 });
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

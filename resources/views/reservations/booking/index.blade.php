@@ -3,22 +3,6 @@
 
 @section('content')
 
-	{!! Form::open(['route' => 'reserva.index', 'method' => 'GET', 'id' => 'reservableForm']) !!}
-		<div class="row">
-		  <div class="col-md-4">
-  			{!! Form::label('user_email','Email usuario')  !!}
-			{!! Form::select('user_email', $users, $user_id, ['class' => 'form-control', 'placeholder' => 'Seleccione usuario','id'=>'user_email'])  !!}
-		  </div>
-	  	  <div class="col-md-4">
-			{!! Form::label('booking_id','Código reserva')  !!}
-			{!! Form::text('booking_id',$booking_id,['class' => 'form-control','placeholder' => 'Código reserva','id'=>'booking_id'])  !!}
-		  </div>
-  	  	  <div class="col-md-4">
-  	  	  	<label style="width: 100%;color:#ffffff">Filtrar</label>
-			{!! Form::submit('Filtrar',['class' => 'btn btn-primary'])  !!}
-		  </div>
-		</div>
-	{!! Form::close() !!}
 	<hr>
 
 	<div class="table-responsive">
@@ -31,6 +15,7 @@
 					<th>Hora inicio</th>
 					<th>Hora fin</th>
 					<th>Escenario</th>
+					<th>Estado</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
@@ -43,15 +28,21 @@
 						<td>{{ $booking->ini_hour }}</td>
 						<td>{{ $booking->fin_hour }}</td>
 						<td>{{ $booking->name }}</td>
+						@if($booking->booking_state->status == 'Confirmada')
+							<td><span class="label label-success">{{ $booking->booking_state->status }}</span></td>
+						@else
+							@if($booking->booking_state->status == 'Cancelada')
+								<td><span class="label label-danger">{{ $booking->booking_state->status }}</span></td>
+							@else
+								<td><span class="label label-warning">{{ $booking->booking_state->status }}</span></td>
+							@endif
+						@endif
 						<td>
-							<a title="Confirmar reserva" data-toggle="tooltip" href="" class="btn btn-success btn-xs">
-								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							<a title="Confirmar reserva" data-toggle="tooltip" href="{{ route('reserva.confirmarReserva', $booking->id) }}" class="btn btn-primary btn-xs">
+								Confirmar</span>
 							</a>
-							<a title="Cancelar reserva" data-toggle="tooltip" href="" class="btn btn-danger btn-xs">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							</a>
-							<a title="Registrar pago" data-toggle="tooltip" href="" class="btn btn-primary btn-xs">
-								<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+							<a title="Cancelar reserva" data-toggle="tooltip" href="{{ route('reserva.cancelarReserva', $booking->id) }}" class="btn btn-default btn-xs">
+								Canelar </span>
 							</a>
 						</td>
 					</tr>

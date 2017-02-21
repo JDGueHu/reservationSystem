@@ -25,7 +25,7 @@
 
 </head>
 <body>
-	@include('shared.nav')
+	
 	<div class="container">
 			@include('flash::message')
 			<h4>@yield('title')</h4>

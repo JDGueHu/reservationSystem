@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\booking;
 use App\user;
+use App\booking_rule;
+use App\availability;
+use App\sport;
+use App\field;
+use App\booking_state;
+use App\availability_status;
 
 class bookingController extends Controller
 {
@@ -17,62 +23,12 @@ class bookingController extends Controller
     public function index(Request $request)
     {
         $users = user::orderby('email','DES')->pluck('email','id');
-
-        //Si todos los campos del filtro están vacios
-        if(($request->user_email == "" || $request->user_email == null) && ($request->booking_id == "" || $request->booking_id == null)){
             
-            $bookings = DB::table('user_booking')
-            ->join('availabilities', 'user_booking.availability_id', '=', 'availabilities.id')
-            ->join('users', 'user_booking.user_id', '=', 'users.id')
-            ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-            ->select('user_booking.created_at','user_booking.booking_id','users.email','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name')
-            ->orderby('user_booking.created_at','DES')
-            ->get();
-
-        }else{
-
-            //Si está seleccionado el usuario
-            if(($request->user_email != "" || $request->user_email != null) && ($request->booking_id == "" || $request->booking_id == null)){
-
-            $bookings = DB::table('user_booking')
-            ->join('availabilities', 'user_booking.availability_id', '=', 'availabilities.id')
-            ->join('users', 'user_booking.user_id', '=', 'users.id')
-            ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-            ->where('users.id','=',$request->user_email)
-            ->select('user_booking.created_at','user_booking.booking_id','users.email','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name')
-            ->orderby('user_booking.created_at','DES')
-            ->get();
-
-            }else{
-
-                if(($request->user_email != "" || $request->user_email != null) && ($request->booking_id != "" || $request->booking_id != null)){
-
-                    $bookings = DB::table('user_booking')
-                    ->join('availabilities', 'user_booking.availability_id', '=', 'availabilities.id')
-                    ->join('users', 'user_booking.user_id', '=', 'users.id')
-                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                    ->where('users.id','=',$request->user_email)
-                    ->where('user_booking.booking_id','like',$request->booking_id.'%')
-                    ->select('user_booking.created_at','user_booking.booking_id','users.email','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name')
-                    ->orderby('user_booking.created_at','DES')
-                    ->get();
-                    
-                }else{
-
-                    $bookings = DB::table('user_booking')
-                    ->join('availabilities', 'user_booking.availability_id', '=', 'availabilities.id')
-                    ->join('users', 'user_booking.user_id', '=', 'users.id')
-                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                    ->where('user_booking.booking_id','like',$request->booking_id.'%')
-                    ->select('user_booking.created_at','user_booking.booking_id','users.email','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name')
-                    ->orderby('user_booking.created_at','DES')
-                    ->get();
-
-                }
-
-            }
-        }
-
+        $bookings = booking::orderby('user_booking.created_at','DES')
+        ->join('availabilities', 'user_booking.availability_id', '=', 'availabilities.id')
+        ->join('users', 'user_booking.user_id', '=', 'users.id')
+        ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+        ->get();
 
 
         //dd($bookings);
@@ -148,4 +104,71 @@ class bookingController extends Controller
     {
         //
     }
+
+    public function confirmarReserva($id){
+
+        $users = user::orderby('email','DES')->pluck('email','id');
+        $booking = booking::where('id','=',$id)->first();
+        $rules = booking_rule::orderby('priority','ASC')->get();
+        $availability = availability::find($booking->availability_id);
+        $field = field::find($availability->field_id);
+        $sport = sport::find($field->sport_id);
+
+        //dd($booking);
+        return view('reservations.booking.confirm')
+            ->with('users',$users)
+            ->with('availability',$availability)
+            ->with('booking',$booking)
+            ->with('rules',$rules)
+            ->with('field',$field)
+            ->with('sport',$sport);
+
+    }
+
+    public function confirmarReservaStore(Request $request){
+
+        $booking_state_id = booking_state::where('status','=',"Confirmada")->first();
+        $booking = booking::find($request->booking_id);
+        $booking->booking_state_id = $booking_state_id->id;
+        $booking->save();
+
+        flash('La reserva se confirmó exitosamente. El código de la reserva es: <b>'.$booking->booking_id.'</b>', 'success')->important();
+        return redirect()->route('reserva.index');
+    }
+
+    public function cancelarReserva($id){
+
+        $users = user::orderby('email','DES')->pluck('email','id');
+        $booking = booking::where('id','=',$id)->first();
+        $rules = booking_rule::orderby('priority','ASC')->get();
+        $availability = availability::find($booking->availability_id);
+        $field = field::find($availability->field_id);
+        $sport = sport::find($field->sport_id);
+
+        //dd($booking);
+        return view('reservations.booking.cancel')
+            ->with('users',$users)
+            ->with('availability',$availability)
+            ->with('booking',$booking)
+            ->with('rules',$rules)
+            ->with('field',$field)
+            ->with('sport',$sport);
+    }
+
+    public function cancelarReservaStore(Request $request){
+
+        $booking_state_id = booking_state::where('status','=',"Cancelada")->first();
+        $booking = booking::find($request->booking_id);
+        $booking->booking_state_id = $booking_state_id->id;
+        $booking->save();
+
+        $availability_status_id = availability_status::where('status','Disponible')->first(); 
+        $availability = availability::find($booking->availability_id);
+        $availability->availability_status_id = $availability_status_id->id;
+        $availability->save();
+
+        flash('La reserva <b>'.$booking->booking_id.'</b> se canceló exitosamente', 'danger')->important();
+        return redirect()->route('reserva.index');
+    }
+
 }

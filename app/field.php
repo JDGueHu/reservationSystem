@@ -17,4 +17,10 @@ class field extends Model
     public function availability_time(){
     	return $this->belongsTo('App\availability_time');
     }
+
+	public function availabilities()
+    {
+        return $this->hasMany('App\availability');
+    }
+
 }
