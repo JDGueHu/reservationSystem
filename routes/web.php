@@ -12,11 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('prueba',function(){
-	echo "Esta es la ruta de prueba";
+    return view('auth.login');
 });
 
 Route::group(['prefix'=>'configuracion'],function(){
@@ -211,13 +207,6 @@ Route::group(['prefix'=>'administracion'],function(){
 		'as' => 'precio.destroy'
 	]);
 
-	Route::resource('disponibilidad','availabilitiesController');
-	Route::get('disponibilidad/{id}/destroy',[
-		'uses' => 'availabilitiesController@destroy',
-		'as' => 'disponibilidad.destroy'
-	]);
-
-
 	Route::resource('generarDisponibilidad','generate_availabilitiesController');
 	Route::get('generarDisponibilidad/{id}/destroy',[
 		'uses' => 'generate_availabilitiesController@destroy',
@@ -291,9 +280,7 @@ Route::group(['prefix'=>'reservas'],function(){
 
 });
 
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
+	Route::get('/registrarUsuario',[
+		'uses' => 'Auth\registrationController@register',
+		'as' => 'registrarUsuario'
+	]);

@@ -33,40 +33,57 @@ class reservablesController extends Controller
         //Si todos los campos del filtro están vacios
         if(($request->customer_id == "" || $request->customer_id == null) && ($request->date == "" || $request->date == null)){
             
-            $availabilities = availability::where('fields.customer_id','=','X')
-                ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                ->get();
+            $availabilities =  DB::table('availabilities')
+            ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+            ->join('availability_status','availabilities.availability_status_id','=','availability_status.id')
+            ->where('fields.customer_id','=','X')
+            ->get();
 
         }else{
 
             //Si está seleccionado el cliente
             if(($request->customer_id != "" || $request->customer_id != null) && ($request->date == "" || $request->date == null)){
 
-                $availabilities = availability::where('fields.customer_id','=',$request->customer_id)
-                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                    ->get();
+                $availabilities =  DB::table('availabilities')
+                ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                ->join('availability_status','availabilities.availability_status_id','=','availability_status.id')
+                ->where('fields.customer_id','=',$request->customer_id)
+                ->select('availabilities.id','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name','availability_status.status')
+                ->orderby('availabilities.date','asc')
+                ->orderby('availabilities.ini_hour','asc')
+                ->get();
 
             }else{
 
                 //Si está seleccionado el cliente y el Escenario
                 if(($request->customer_id != "" || $request->customer_id != null) && ($request->date != "" || $request->date != null)){
 
-                    $availabilities = availability::where('fields.customer_id','=',$request->customer_id)
-                        ->where('availabilities.date','=',$request->date)
-                        ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                        ->get();
-                    
+                    $availabilities =  DB::table('availabilities')
+                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                    ->join('availability_status','availabilities.availability_status_id','=','availability_status.id')
+                    ->where('fields.customer_id','=',$request->customer_id)
+                    ->where('availabilities.date','=',$request->date)
+                    ->select('availabilities.id','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name','availability_status.status')
+                    ->orderby('availabilities.date','asc')
+                    ->orderby('availabilities.ini_hour','asc')
+                    ->get();
+                        
                 }else{
 
-                    $availabilities = availability::where('availabilities.date','=',$request->date)
-                        ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-                        ->get();
-
+                    $availabilities =  DB::table('availabilities')
+                    ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+                    ->join('availability_status','availabilities.availability_status_id','=','availability_status.id')
+                    ->where('availabilities.date','=',$request->date)
+                    ->select('availabilities.id','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name','availability_status.status')
+                    ->orderby('availabilities.date','asc')
+                    ->orderby('availabilities.ini_hour','asc')
+                    ->get();
                 }
             }
 
         }
 
+        //dd($availabilities);
         return view('reservations.reservable.index')
             ->with('customers',$customers)
             ->with('customerSelected',$request->customer_id)
@@ -198,7 +215,7 @@ class reservablesController extends Controller
 
         //Envio de email
         Mail::to($user->email)
-            ->cc('Jhancastano@utp.edu.co')
+            ->cc('juanguehu@hotmail.com')
             ->send(new email(                
                 $booking_id, 
                 $customer->business_name,

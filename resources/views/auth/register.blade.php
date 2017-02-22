@@ -1,76 +1,100 @@
-@extends('layouts.app')
+@extends('shared.main')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
+{!! Form::open() !!}
+ 
+<div class="row">
+	 <div class="col-md-6 col-md-offset-3">	
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title bold"><b>Registro de usuario</b></h3>
+		  </div>
+		  <div class="panel-body">
+		  	{!! Form::open() !!}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+				<div class="row">
+					<div class="col-md-4"><label for="name">Nombres</label></div>
+					<div class="col-md-8">		  			
+					  	<div class="input-group">				  
+					  		<span for="name" class="input-group-addon" id="basic-addon1">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					  		</span>
+					  		<input type="text" name="name" id="name" class="form-control" placeholder="Nombres" aria-describedby="basic-addon1">
+						</div>
+					</div>		  
+				</div>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+				<div class="row">
+					<div class="col-md-4"><label for="last_name">Apellidos</label></div>
+					<div class="col-md-8">		  			
+					  	<div class="input-group">				  
+					  		<span class="input-group-addon" id="basic-addon1">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					  		</span>
+					  		<input type="text" name="last_name" id="last_name" class="form-control" placeholder="Apellidos" aria-describedby="basic-addon1">
+						</div>
+					</div>		  
+				</div>
 
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+				<div class="row">
+					<div class="col-md-4"><label for="email">Email</label></div>
+					<div class="col-md-8">		  			
+					  	<div class="input-group">				  
+					  		<span class="input-group-addon" id="basic-addon1">
+								<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+					  		</span>
+					  		<input type="email" name="email" id="email" class="form-control" placeholder="ejemplo@ejemplo.com" aria-describedby="basic-addon1">
+						</div>
+					</div>		  
+				</div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+				<div class="row">
+					<div class="col-md-4"><label for="password">Contraseña</label></div>
+					<div class="col-md-8">		  			
+					  	<div class="input-group">				  
+					  		<span class="input-group-addon" id="basic-addon1">
+								<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+					  		</span>
+					  		<input type="text" name="password" id="password" class="form-control" placeholder="********" aria-describedby="basic-addon1">
+						</div>
+					</div>		  
+				</div>
+			
+				<div class="row">
+					<div class="col-md-4"><label for="password2">Repetir Contraseña</label></div>
+					<div class="col-md-8">		  			
+					  	<div class="input-group">				  
+					  		<span class="input-group-addon" id="basic-addon1">
+								<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+					  		</span>
+					  		<input type="text" name="password2" id="password2" class="form-control" placeholder="********" aria-describedby="basic-addon1">
+						</div>
+					</div>		  
+				</div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+				<div class="row">
+					<div class="col-md-4"><label for="password2">Captcha</label></div>
+					<div class="col-md-8">		  			
+					  	<div class="input-group">				  
+					  		<span class="input-group-addon" id="basic-addon1">
+								<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+					  		</span>
+					  		<input type="text" name="password2" id="password2" class="form-control" placeholder="********" aria-describedby="basic-addon1">
+						</div>
+					</div>		  
+				</div>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+				<div class="form-group">
+					{!! Form::submit('Registrar',['class' => 'btn btn-primary'])  !!}
+				</div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+		  	{!! Form::close() !!}
+		  </div>
+		</div>
+	</div>
 </div>
+
+{!! Form::close() !!}
 @endsection
+
+

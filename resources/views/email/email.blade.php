@@ -9,9 +9,9 @@
 	</head>
 	<body >
 
-		<div style="margin: auto; width: 700px; height: 460px; border: 1px solid #337ab7; padding-bottom: 7%;">
+		<div style="margin: auto;padding-bottom: 7%;">
 		
-			<table style="margin: auto; width: 650px">
+			<table style="margin: auto;">
 				<thead>
 					<tr>
 						<th colspan="4" style="margin:auto; color:#337ab7; text-align: center;">
@@ -91,7 +91,7 @@
 					<tr>
 						<td colspan="4">
 							<p style="text-align: center; font-size: 11px;">Contacto: 57 2 3333333 Cel 313 3333333 email contacto@email.com </p>
-							<p style="text-align: center; font-size: 11px; margin: 0px">DeyappCo@ Todos los derechos reservados.</p>
+							<p style="text-align: center; font-size: 11px; margin: 0px">@ Todos los derechos reservados.</p>
 						</td>
 					</tr>					
 				</tbody>

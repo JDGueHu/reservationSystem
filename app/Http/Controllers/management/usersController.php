@@ -53,7 +53,7 @@ class usersController extends Controller
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->name);
+        $user->password = bcrypt($request->password);
         $user->role_id = $request->role_id;
         $user->customer_id = $request->customer_id;
         $user->save();
@@ -131,6 +131,7 @@ class usersController extends Controller
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
+        $user->password = bcrypt($request->password);
         $user->role_id = $request->role_id;
         $user->customer_id = $request->customer_id;
         $user->save();

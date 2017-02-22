@@ -24,11 +24,14 @@ class bookingController extends Controller
     {
         $users = user::orderby('email','DES')->pluck('email','id');
             
-        $bookings = booking::orderby('user_booking.created_at','DES')
-        ->join('availabilities', 'user_booking.availability_id', '=', 'availabilities.id')
-        ->join('users', 'user_booking.user_id', '=', 'users.id')
-        ->join('fields', 'availabilities.field_id', '=', 'fields.id')
-        ->get();
+        $bookings = DB::table('user_booking')
+            ->join('users', 'user_booking.user_id', '=', 'users.id')
+            ->join('availabilities', 'user_booking.availability_id', '=', 'availabilities.id')
+            ->join('fields', 'availabilities.field_id', '=', 'fields.id')
+            ->join('booking_status', 'user_booking.booking_state_id', '=', 'booking_status.id')
+            ->select('user_booking.created_at','user_booking.id','user_booking.booking_id','users.email','availabilities.date','availabilities.ini_hour','availabilities.fin_hour','fields.name','booking_status.status')
+            ->orderby('user_booking.created_at','asc')
+            ->get();
 
 
         //dd($bookings);

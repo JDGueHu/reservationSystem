@@ -9,6 +9,7 @@
 		<table id="example" class="table table-hover" cellspacing="0" width="100%">
 			<thead>
 				<tr>
+					<th>Fecha/Hora reservación</th>
 					<th>Id reserva</th>
 					<th>Usuario</th>
 					<th>Fecha reserva</th>
@@ -22,19 +23,20 @@
 			<tbody>
 				@foreach($bookings as $booking)
 					<tr>
+						<td>{{ $booking->created_at }}</td>
 						<td>{{ $booking->booking_id }}</td>
 						<td>{{ $booking->email }}</td>
 						<td>{{ $booking->date }}</td>
 						<td>{{ $booking->ini_hour }}</td>
 						<td>{{ $booking->fin_hour }}</td>
 						<td>{{ $booking->name }}</td>
-						@if($booking->booking_state->status == 'Confirmada')
-							<td><span class="label label-success">{{ $booking->booking_state->status }}</span></td>
+						@if($booking->status == 'Confirmada')
+							<td><span class="label label-success">{{ $booking->status }}</span></td>
 						@else
-							@if($booking->booking_state->status == 'Cancelada')
-								<td><span class="label label-danger">{{ $booking->booking_state->status }}</span></td>
+							@if($booking->status == 'Cancelada')
+								<td><span class="label label-danger">{{ $booking->status }}</span></td>
 							@else
-								<td><span class="label label-warning">{{ $booking->booking_state->status }}</span></td>
+								<td><span class="label label-warning">{{ $booking->status }}</span></td>
 							@endif
 						@endif
 						<td>

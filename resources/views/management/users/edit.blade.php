@@ -21,9 +21,20 @@
 			{!! Form::email('email', $user->email, ['class' => 'form-control','required','placeholder' => 'Email','id'=>'email' ]) !!}
 		</div>
 		<div class="col-md-6">
+			{!! Form::label('password','Contraseña')  !!}
+			{{ Form::password('password', ['class' => 'form-control', 'required','placeholder' => 'Contraseña','id'=>'password']) }}
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md-6">		
+		</div>
+		<div class="col-md-6">
+			{!! Form::label('password2','Repetir ontraseña')  !!}
+			{{ Form::password('password2', ['class' => 'form-control', 'required','placeholder' => 'Repetir ontraseña','id'=>'password2']) }}
+		</div>
+	</div>
+	
 	<div class="row">
 		<div class="col-md-6">		
 			{!! Form::label('role_id','Rol')  !!}

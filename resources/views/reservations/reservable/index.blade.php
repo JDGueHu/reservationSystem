@@ -41,14 +41,14 @@
 						<td>{{ $availability->date }}</td>
 						<td>{{ $availability->ini_hour }}</td>
 						<td>{{ $availability->fin_hour }}</td>
-						<td>{{ $availability->field->name }}</td>
-						@if($availability->availability_status->status == 'No disponible')
-							<td><span class="label label-warning">{{ $availability->availability_status->status }}</span></td>
+						<td>{{ $availability->name }}</td>
+						@if($availability->status == 'No disponible')
+							<td><span class="label label-warning">{{ $availability->status }}</span></td>
 						@else
-							@if($availability->availability_status->status == 'Vencida')
-								<td><span class="label label-danger">{{ $availability->availability_status->status }}</span></td>
+							@if($availability->status == 'Vencida')
+								<td><span class="label label-danger">{{ $availability->status }}</span></td>
 							@else
-								<td><span class="label label-success">{{ $availability->availability_status->status }}</span></td>
+								<td><span class="label label-success">{{ $availability->status }}</span></td>
 							@endif
 						@endif
 						<td>
