@@ -280,7 +280,11 @@ Route::group(['prefix'=>'reservas'],function(){
 
 });
 
-	Route::get('/registrarUsuario',[
-		'uses' => 'Auth\registrationController@register',
-		'as' => 'registrarUsuario'
-	]);
+	// Route::get('/registrarUsuario',[
+	// 	'uses' => 'Auth\registrationController@register',
+	// 	'as' => 'registrarUsuario'
+	// ]);
+	
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
