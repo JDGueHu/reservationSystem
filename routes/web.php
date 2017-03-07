@@ -280,10 +280,15 @@ Route::group(['prefix'=>'reservas'],function(){
 
 });
 
-	// Route::get('/registrarUsuario',[
-	// 	'uses' => 'Auth\registrationController@register',
-	// 	'as' => 'registrarUsuario'
-	// ]);
+Route::get('registrarse',[
+	'uses' => 'Auth\RegisterController@showRegistrationForm',
+	'as' => 'registrarse'
+]);
+
+Route::post('registrarseStore',[
+	'uses' => 'Auth\RegisterController@registrarseStore',
+	'as' => 'registrarseStore'
+]);
 	
 Auth::routes();
 

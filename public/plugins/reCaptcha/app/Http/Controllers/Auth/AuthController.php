@@ -2,43 +2,42 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\User;
+use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use GuzzleHttp\Client;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class RegisterController extends Controller
+class AuthController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Register Controller
+    | Registration & Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
+    | This controller handles the registration of new users, as well as the
+    | authentication of existing users. By default, this controller uses
+    | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
 
-    use RegistersUsers;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Where to redirect users after registration.
+     * Where to redirect users after login / registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
-     * Create a new controller instance.
+     * Create a new authentication controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
     /**
@@ -69,23 +68,5 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
-
-
-    protected function registrarseStore(Request $request)
-    {
-        //dd();
-
-        $token = $request->input('g-recaptcha-response');
-
-        $client = new Client();
-        $response = $client->request('POST','https://www.google.com/recaptcha/api/siteverify',[
-            'form_params' => [
-                'secret ' => '6LcfFhcUAAAAAJXLULs4lL4r12WDd2CXYycVNrKZ',
-                'response' => $token
-            ]
-        ]);
-
-        dd($response);
     }
 }

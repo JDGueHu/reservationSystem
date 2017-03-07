@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::open() !!}
+{!! Form::open(['route' => 'registrarseStore', 'method' => 'POST']) !!}
  
 <div class="row">
      <div class="col-md-6 col-md-offset-3"> 
@@ -10,7 +10,6 @@
             <h3 class="panel-title bold"><b>Registro de usuario</b></h3>
           </div>
           <div class="panel-body">
-            {!! Form::open() !!}
 
                 <div class="row">
                     <div class="col-md-4"><label for="name">Nombres</label></div>
@@ -19,7 +18,7 @@
                             <span for="name" class="input-group-addon" id="basic-addon1">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             </span>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombres" aria-describedby="basic-addon1">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombres" aria-describedby="basic-addon1" required="required">
                         </div>
                     </div>        
                 </div>
@@ -31,7 +30,7 @@
                             <span class="input-group-addon" id="basic-addon1">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             </span>
-                            <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Apellidos" aria-describedby="basic-addon1">
+                            <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Apellidos" aria-describedby="basic-addon1" required="required">
                         </div>
                     </div>        
                 </div>
@@ -43,7 +42,7 @@
                             <span class="input-group-addon" id="basic-addon1">
                                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                             </span>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="ejemplo@ejemplo.com" aria-describedby="basic-addon1">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="ejemplo@ejemplo.com" aria-describedby="basic-addon1" required="required">
                         </div>
                     </div>        
                 </div>
@@ -55,7 +54,7 @@
                             <span class="input-group-addon" id="basic-addon1">
                                 <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                             </span>
-                            <input type="text" name="password" id="password" class="form-control" placeholder="********" aria-describedby="basic-addon1">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="********" aria-describedby="basic-addon1" required="required">
                         </div>
                     </div>        
                 </div>
@@ -67,19 +66,16 @@
                             <span class="input-group-addon" id="basic-addon1">
                                 <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                             </span>
-                            <input type="text" name="password2" id="password2" class="form-control" placeholder="********" aria-describedby="basic-addon1">
+                            <input type="password" name="password2" id="password2" class="form-control" placeholder="********" aria-describedby="basic-addon1" required="required">
                         </div>
                     </div>        
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4"><label for="Captcha">Captcha</label></div>
+                    <div class="col-md-4"></div>
                     <div class="col-md-8">                  
                         <div class="input-group">                 
-                            <span class="input-group-addon" id="basic-addon1">
-                                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-                            </span>
-                            <input type="text" name="Captcha" id="Captcha" class="form-control" placeholder="********" aria-describedby="basic-addon1">
+                            <div class="g-recaptcha" data-sitekey="6LcfFhcUAAAAACXEyM5NnQcHBsyTItK7BHbO8IEr"></div>
                         </div>
                     </div>        
                 </div>
@@ -90,8 +86,7 @@
                         </a>
                     {!! Form::submit('Registrarse',['class' => 'btn btn-primary'])  !!}
                 </div>
-
-            {!! Form::close() !!}
+            
           </div>
         </div>
     </div>
