@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 {!! Form::open(['route' => 'registrarseStore', 'method' => 'POST']) !!}
  
 <div class="row">
@@ -72,7 +74,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><label>Captcha</label></div>
                     <div class="col-md-8">                  
                         <div class="input-group">                 
                             <div class="g-recaptcha" data-sitekey="6LcfFhcUAAAAACXEyM5NnQcHBsyTItK7BHbO8IEr"></div>

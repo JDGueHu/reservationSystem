@@ -79,13 +79,23 @@ class RegisterController extends Controller
         $token = $request->input('g-recaptcha-response');
 
         $client = new Client();
-        $response = $client->request('POST','https://www.google.com/recaptcha/api/siteverify',[
-            'form_params' => [
-                'secret ' => '6LcfFhcUAAAAAJXLULs4lL4r12WDd2CXYycVNrKZ',
+        $response = $client->post('https://www.google.com/recaptcha/api/siteverify',[
+            'body' => [
+                'secret' => '6LcfFhcUAAAAAJXLULs4lL4r12WDd2CXYycVNrKZ',
                 'response' => $token
             ]
         ]);
 
-        dd($response);
+        $response = json_decode($response->getBody());
+
+        if($response->success == true){
+            flash('Usuario <b>'.$request->email.'</b> registrado correctamente', 'success')->important();
+            return redirect()->route('login');
+        }else{
+            flash('El <b>Captcha</b> no es válido. Por favor intente registrarse nuevamente', 'danger')->important();
+            return redirect()->route('registrarse');
+        }
+
+
     }
 }
