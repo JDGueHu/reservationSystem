@@ -3,7 +3,23 @@
 @section('content')
 
 
-{!! Form::open(['route' => 'registrarseStore', 'method' => 'POST']) !!}
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $("#formRegister").validate({
+        rules: {
+            name: { required: true, minlength: 2},
+            password: { required: true, minlength: 6 },
+            password2: { required: true, minlength: 6, equalTo: "#password" }
+        },
+        messages: {
+            name: "Debe introducir su nombre.",
+        }
+    });
+});
+</script>
+
+{!! Form::open(['route' => 'registrarseStore', 'method' => 'POST', 'id' => 'formRegister']) !!}
  
 <div class="row">
      <div class="col-md-6 col-md-offset-3"> 

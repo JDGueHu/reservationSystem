@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\role;
+use App\customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -88,12 +90,30 @@ class RegisterController extends Controller
 
         $response = json_decode($response->getBody());
 
+        $role = role::where('name','=',"User")->first();
+
+        $url=$_SERVER['HTTP_HOST'];
+        $customer = customer::where('domain','=',$url)->first();        
+
         if($response->success == true){
+
+            $user = new user();
+            $user->name = $request->name;
+            $user->last_name = $request->last_name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->role_id = $role->id;
+            $user->customer_id = $customer->id;
+            $user->save();
+
             flash('Usuario <b>'.$request->email.'</b> registrado correctamente', 'success')->important();
             return redirect()->route('login');
+
         }else{
+
             flash('El <b>Captcha</b> no es válido. Por favor intente registrarse nuevamente', 'danger')->important();
             return redirect()->route('registrarse');
+
         }
 
 

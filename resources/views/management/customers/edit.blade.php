@@ -138,5 +138,6 @@
 
 @section('js')
 	<script src="{{ asset('js/onlyTable.js') }}"></script>
+	<script src="{{ asset('js/customers/edit.js') }}"></script>
 	<script src="{{ asset('js/shared.js') }}"></script>
 @endsection

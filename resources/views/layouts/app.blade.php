@@ -19,6 +19,13 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+        <!-- Scripts -->
+    <script src="../public/js/app.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="{{ asset('plugins/jquery/js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery_validation/js/jquery.validate.js') }}"></script>
+    
 </head>
 <body>
     <div id="app">
@@ -85,8 +92,6 @@
 
     </div>
 
-    <!-- Scripts -->
-    <script src="../public/js/app.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+
 </body>
 </html>

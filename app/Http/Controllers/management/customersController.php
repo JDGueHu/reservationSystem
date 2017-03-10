@@ -41,12 +41,14 @@ class customersController extends Controller
                     ->select('zones.name','zones.id')
                     ->where('zone_types.name','=','CIUDAD')
                         ->pluck('name','id');
+        $dominio=$_SERVER['HTTP_HOST'];
 
         return view('management.customers.create')
             ->with('identificationTypes',$identificationTypes)
             ->with('zones',$zones)
             ->with('phoneTypes',$phoneTypes)
-            ->with('idView',$idView);
+            ->with('idView',$idView)
+            ->with('dominio',$dominio);
     }
 
     /**
@@ -74,7 +76,6 @@ class customersController extends Controller
 
         flash('Cliente <b>'.$customer->name.'</b> se creó exitosamente', 'success')->important();
         return redirect()->route('cliente.index');
-
     }
 
     /**
@@ -153,6 +154,7 @@ class customersController extends Controller
         $customer->zone_id = $request->zone_id;
         $customer->address = $request->address;
         $customer->email = $request->email;
+        $customer->domain = $request->domain;
         $customer->save();
 
         $phones = phone::where('owner_id','=',$request->idView)->update(['owner_id' => $customer->id,'add_tmp' => false]);

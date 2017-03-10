@@ -44,7 +44,7 @@
 		</div>
 		<div class="col-md-6">		
 			{!! Form::label('domain','Dominio')  !!}
-			{!! Form::text('domain', null, ['class' => 'form-control','required','placeholder' => 'Dominio','id'=>'domain' ]) !!}
+			{!! Form::text('domain', $dominio, ['class' => 'form-control','required','placeholder' => 'Dominio','id'=>'domain' ]) !!}
 		</div>	
 	</div>
 
@@ -127,5 +127,6 @@
 
 @section('js')
 	<script src="{{ asset('js/onlyTable.js') }}"></script>
+	<script src="{{ asset('js/customers/create.js') }}"></script>
 	<script src="{{ asset('js/shared.js') }}"></script>
 @endsection

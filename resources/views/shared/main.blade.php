@@ -22,6 +22,7 @@
 	<script src="{{ asset('plugins/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>
 	<script src="{{ asset('plugins/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap_toggle/js/bootstrap-toggle.min.js') }}"></script>
+	<script src="{{ asset('plugins/jquery_validation/js/jquery.validate.js') }}"></script>
 
 </head>
 <body>
